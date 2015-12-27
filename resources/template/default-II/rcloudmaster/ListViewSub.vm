@@ -1,0 +1,61 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/public/include/default.jsp" %>
+
+#set($formInfo = ${viewInfo.getFormInfo()})
+#set($entity = ${viewInfo.getlowerFirstEntityName()})
+#set($detailEntity = ${viewInfo.getMasterEntityName()})
+#set($dot="$")
+#set($colon = "：")
+#set($prefix="param.search_")
+#set($pkId=${viewInfo.getPkName()})
+<html>
+<head>
+	<title>$viewInfo.listTitle</title>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#add").bind("click",function(){
+				window.location.href = "${ctx}/${entity}/toAddPage/"+$("#${pkId}").val();
+			});
+			$("#cancel").bind("click",function(){
+				window.location.href = "${ctx}/${detailEntity}/toManagerPage";
+			});
+			$('#dg').datagrid({
+				url:'${ctx}/${entity}/list',
+				queryParams:{search_${pkId}:$("#${pkId}").val()}
+			});
+		});
+		function format_manager(value,row,index){
+			if (value){
+				return '<a href="${ctx}/${entity}/toUpdatePage/'+value+'">修改</a>&nbsp;&nbsp;<a href="${ctx}/${entity}/delete/'+value+'">删除</a>';
+			} else {
+				return value;
+			}
+		}
+	</script>
+</head>
+
+<body class="easyui-layout">
+	<div data-options="region:'north',border:false" style="padding:3px;height:30px">
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'west',border:false" style="width:200px">
+       			<a id="add" href="javascript:void(0)" class="easyui-linkbutton">增加</a>
+				<a id="cancel" href="javascript:void(0)" class="easyui-linkbutton">返回</a>
+       		</div>
+       		<div data-options="region:'center',border:false" align="right">
+       		</div>
+		</div>
+	</div>
+	<div data-options="region:'center',border:false"  style="padding:3px">
+	    <table id="dg" class="easyui-datagrid" title="$viewInfo.listTitle" style="height:auto;width:auto" data-options='singleSelect:true,collapsible:false,pagination:true,fitColumns:true,url:"${ctx}/${entity}/list?ads=" + Date.parse(new Date()),method:"get"'>
+	        <thead>
+	            <tr>
+#foreach( $field in $formInfo.getNotPkFields())
+	                <th data-options="field:'${viewInfo.getFieldName($field)}',width:80">$formInfo.getFieldDisplayName($field)</th>
+#end
+	                <th data-options="field:'${pkId}',width:80,formatter:format_manager">管理</th>
+	            </tr>
+	        </thead>
+		</table>
+    </div>
+</body>
+</html>

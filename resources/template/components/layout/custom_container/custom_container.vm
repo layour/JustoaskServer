@@ -1,0 +1,13 @@
+#foreach ( $r in [1..$row] )
+#set( $quotient = $width / $column )
+#set( $cssLength = $quotient)
+#set( $temp = $column - 1 )
+#if( $temp > 0 )  
+#foreach ( $i in [1..$temp] )
+<div class="dl$cssLength">&nbsp;</div>
+#end
+#end
+<div class="fluid">&nbsp;</div> 
+<div class="clear" />
+
+#end

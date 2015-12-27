@@ -1,0 +1,39 @@
+package ${javaInfo.getServicePackageName()};
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+#foreach( $type in ${javaInfo.getImportTypes()})
+import $type;
+#end
+
+@Service
+@Transactional
+public class ${javaInfo.getUpperServicename()} {
+
+	@Autowired
+	private ${javaInfo.getDaoFirstUpperName()} ${javaInfo.getDaoFirstLowerName()};
+	
+	/**
+	 * 按条件分页查询记录
+	 * @param searchParams ：查询条件
+	 * @return List<${javaInfo.getPoFirstUpperName()}> ：查询结果集
+	 */
+	public List<${javaInfo.getPoFirstUpperName()}> searchByPage(Map<String,Object> searchParams) {
+		return (List<${javaInfo.getPoFirstUpperName()}>) ${javaInfo.getDaoFirstLowerName()}.searchByPage(searchParams);
+	}
+	
+	/**
+	 * 通过${javaInfo.getPoPKName()}获取一条记录
+	 * @param ${javaInfo.getPoPKFirstLowerName()} ：记录主键
+	 * @return ${javaInfo.getPoFirstUpperName()} ：记录对象实体
+	 */
+	public ${javaInfo.getPoFirstUpperName()} findById(String ${javaInfo.getPoPKFirstLowerName()}) {
+		return ${javaInfo.getDaoFirstLowerName()}.findById(${javaInfo.getPoPKFirstLowerName()});
+	}
+	
+}

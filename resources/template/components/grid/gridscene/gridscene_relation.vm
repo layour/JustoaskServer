@@ -1,0 +1,46 @@
+#set($dot = "$")#set($cols = 3)#set($colon = "：")
+
+	<div class="barTitle">
+        <div class="content">
+        	<a href="javascript:;" onfocus="this.blur();"></a> 
+        	<span>${viewInfo.title}</span>
+        	<a id="displayHidden" class="displayHidden" onfocus="this.blur();" href= "javascript:;"><fmt:message key='query.hideCondition'/></a>
+        </div>
+	</div>
+	<hr class="barTitleHr"></hr>
+	<div id="conditions" class="ui-table ui-widget ui-corner-all ui-margin" style="display:block">
+		<form id="${viewInfo.formId}" ${viewInfo.getFormEncType()}>
+			<div class="equal"> 
+				<div class="row"> 
+#foreach( $queryField in $viewInfo.getQueryFields())
+					<div class="cell">
+						<div class="labelcell">${viewInfo.getQueryFieldDisplayName($queryField)}${colon}</div>
+						<div class="valuecell">$viewInfo.getFieldTagHtml($queryField)</div>
+					</div>
+#end
+					<div class="querycell">
+						<button id="query_button" type="button" onclick="query();">${viewInfo.getSearchTitle()}</button>
+                    </div>
+				</div>
+			</div>
+		</form>
+	</div>
+    <div class="ui-table ui-widget ui-corner-all ui-margin">
+        	   <div class="nav">
+#if(${viewInfo.hasAddOrEdit()})
+        		   <button id="addBtn" onclick="add();">${viewInfo.getAddTitle()}</button>
+        		   <button id="editBtn" onclick="edit();">${viewInfo.getEditTitle()}</button>
+#end
+#if(${viewInfo.hasShow()})
+        		   <button id="viewBtn" onclick="view();">${viewInfo.getViewTitle()}</button>
+#end
+#if(${viewInfo.hasAddOrEdit()})
+        		   <button id="deleteBtn" onclick="batchDelete();">${viewInfo.getDeleteTitle()}</button>
+#end
+#if(${viewInfo.hasExport()})
+        		   <button id="exportBtn" onclick="excelExport();">${viewInfo.getExportTitle()}</button>
+#end
+        	   </div>
+        	   <table id="${viewInfo.getEntityName(true)}Table"></table>
+        		<div id="${viewInfo.getEntityName(true)}Pager"></div>
+	</div>

@@ -1,0 +1,16 @@
+	<div id="header" class="dl80" >
+		<!--#welcome 此为欢迎信息-->
+	</div>
+	<div class="clear"></div>
+	<div id="content" class="dl80"> 
+		<div id="content-left" class="dl40">
+			<!--#content-left 此为导航栏内容-->
+		</div>
+		<div id="content-right" class="dl40">
+			<!--#content-right 此为页面内容-->
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer" class="dl80">
+		<!--#footer 此为页面脚内容-->
+	</div>

@@ -1,0 +1,47 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/public/include/default.jsp" %>
+
+#set($entity = $viewInfo.getlowerFirstEntityName())
+#set($colon = "：")
+#set($pkId=${viewInfo.getPkName()})
+<html>
+<head>
+	<title>$viewInfo.formTitle</title>
+	<script type="text/javascript">
+		$(document).ready(function(){
+	        $('input.easyui-validatebox').validatebox("disableValidation");
+			$("#add").bind("click",function(){
+    	        $('input.easyui-validatebox').validatebox("enableValidation");
+    	        if($("#inputForm").form("validate")){
+    		        $('#inputForm').submit();
+    	        }
+			});
+			$("#cancel").bind("click",function(){
+				history.back();
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<form id="inputForm" action="${ctx}/${entity}/save" method="post">
+		<div class="easyui-panel" title="$viewInfo.formTitle" align="center">
+			<table>
+#foreach( $field in $viewInfo.getNotPkFields())
+#set($fieldName=${viewInfo.getFieldName($field)})
+    			<tr class="control-group">
+    				<td>$viewInfo.getFieldDisplayName($field)${colon}</td>
+    				<td>$viewInfo.getFieldTagHtmlNoValueAttr($field)</td>
+    			</tr>
+#end
+    			<tr class="form-actions">
+					<td colspan="2" align="center">
+						<a id="add" href="javascript:void(0)" class="easyui-linkbutton">增加</a>
+						<a id="cancel" href="javascript:void(0)" class="easyui-linkbutton">返回</a>
+					</td>
+    			</tr>
+			</table>
+		</div>
+	</form>
+</body>
+</html>

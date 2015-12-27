@@ -1,0 +1,11 @@
+<form id="$id" method="$method" action="$action"#if($name) name="$name"#end#if($title) title="$title"#end#if($onsubmit) onsubmit=$onsubmit#end>
+	<table width="${width}" height="${height}" border="${border}" cellspacing="${cellspacing}" cellpadding="${cellpadding}">
+#foreach($i in [1..${rows}])
+		<tr>
+#foreach($j in [1..${cols}])
+			<td></td>
+#end
+		</tr>
+#end
+	</table>
+</form>

@@ -1,0 +1,386 @@
+<%@ page language="java" pageEncoding="${viewInfo.pageEncoding}" contentType="text/html; charset=${viewInfo.pageEncoding}" %>
+<%@ include file="/pages/inc/taglibs.jsp" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>$viewInfo.listTitle</title>
+<%@ include file="/pages/inc/header.jsp" %>
+</head>
+#set($dot = "$")#set($cols = 3)#set($colon ="：")
+<body>
+<%@ include file="/pages/inc/common.jsp" %>
+<div class="main">
+	<div class="barTitle">
+        <div class="content">
+			<a href="javascript:;" onfocus="this.blur();"></a>
+			<span>$viewInfo.listTitle</span>
+			<a id="displayHidden" class="displayHidden" onclick="this.blur();" href= "javascript:;"><fmt:message key='query.hideCondition'/></a></div>
+	</div>
+	<hr class="barTitleHr"></hr>
+	<div id="conditions" class="ui-table ui-widget ui-corner-all ui-margin"  style="display:block">
+		<form id="${viewInfo.formId}" ${viewInfo.getFormEncType()}>
+			<div class="equal"> 
+				<div class="row"> 
+#foreach( $queryField in $viewInfo.getQueryFields())
+					<div class="cell">
+						<div class="labelcell">${viewInfo.getQueryFieldDisplayName($queryField)}${colon}</div>
+						<div class="valuecell">$viewInfo.getFieldTagHtmlNoValueAttr($queryField)</div>
+					</div>
+#end
+					<div class="querycell">
+						<button id="query_button" type="button" onclick="query();">${viewInfo.getSearchTitle()}</button>
+                    </div>
+				</div>
+			</div>
+		</form>
+	</div>
+    <div class="ui-table ui-widget ui-corner-all ui-margin" >
+        	   <div class="nav">
+#if(${viewInfo.hasAddOrEdit()})
+        		   <button id="addBtn" onclick="add();">${viewInfo.getAddTitle()}</button>
+        		   <button id="editBtn" onclick="edit();">${viewInfo.getEditTitle()}</button>
+#end
+#if(${viewInfo.hasShow()})
+        		   <button id="viewBtn" onclick="view();">${viewInfo.getViewTitle()}</button>
+#end
+        		   <button id="deleteBtn" onclick="batchDelete();">${viewInfo.getDeleteTitle()}</button>
+#if(${viewInfo.hasExport()})
+        		   <button id="exportBtn" onclick="excelExport();">${viewInfo.getExportTitle()}</button>
+#end
+        	   </div>
+        	   <table id="${viewInfo.getEntityName(true)}Table"></table>
+        		<div id="${viewInfo.getEntityName(true)}Pager"></div>
+	</div>
+</div>
+<%@ include file="/pages/inc/footer.jsp" %>
+
+#set($dot="$")#set($cols = 2)
+#set($formInfo = ${viewInfo.getFormInfo()})
+#set($showInfo = ${viewInfo.getShowInfo()})
+#if(${viewInfo.hasAddOrEdit()})
+<div id="editDialog">
+	<form id="${viewInfo.formId}Edit" ${formInfo.getFormEncType()}>
+    <div class="ui-table ui-widget ui-corner-all ui-border" >
+#foreach($pkField in ${formInfo.getHidePKFields()})
+		${formInfo.buildHideFieldHtml($pkField)}
+#end
+		<table class="table">
+#set($index=1)#set($colspan = $cols*2 - ($formInfo.fieldsLength*2 % ($cols*2)) + 1)
+#if(($formInfo.fieldsLength*2 % ($cols*2)) == 0)#set($colspan = 0)#end
+    #foreach( $field in $formInfo.getFields())
+        #if( $index % $cols == 1)
+        			<tr>
+        #end
+    				<td class="inputLabelTd">$formInfo.getFieldDisplayName($field)${colon}</td>
+    				<td class="inputTd"#if($index == $formInfo.fieldsLength) colspan="${colspan}"#end>
+    					${formInfo.getEditFieldTagHtml($field)}
+    				</td>
+    
+        #if( $index % $cols == 0 || $index == $formInfo.fieldsLength)
+        			</tr>
+        #end
+    #set( $index=$index+1)
+    #end
+		</table>
+        </div>
+	</form>
+</div>
+#end
+#if(${viewInfo.hasShow()})
+<div id="showDialog"></div>
+#end
+<div id="errorDialog"></div>
+
+</body>
+</html>
+<script type="text/javascript">
+	new biz.button({id:"#query_button", icons: {primary:"ui-icon-search"}});
+#if(${viewInfo.hasAddOrEdit()})
+	new biz.button({id:"#addBtn", icons: {primary:'ui-icon-plus'}});
+	new biz.button({id:"#editBtn", icons: {primary:'ui-icon-pencil'}});
+#end
+#if(${viewInfo.hasShow()})
+	new biz.button({id:"#viewBtn", icons: {primary:'ui-icon-document'}});
+#end
+	new biz.button({id:"#deleteBtn", icons: {primary:'ui-icon-trash'}});
+#if(${viewInfo.hasExport()})
+	new biz.button({id:"#exportBtn", icons: {primary:'ui-icon-disk'}});
+#end
+	
+	//显示或隐藏查询条件
+    $(document).ready(function(){
+		$("#displayHidden").click(function(){
+		       var conditionsDiv = document.getElementById("conditions");
+		       var displayHidden = document.getElementById("displayHidden");
+		       if(conditionsDiv.style["display"]=="block"){
+		          conditionsDiv.style["display"]="none";
+		          displayHidden.innerHTML="<fmt:message key='query.ExpandCondition'/>";
+		       }else if(conditionsDiv.style["display"]=="none"){
+		          conditionsDiv.style["display"]="block";
+		          displayHidden.innerHTML="<fmt:message key='query.hideCondition'/>";
+		       }
+		});
+	});
+	
+	var ${viewInfo.getEntityName(true)}Grid;
+    window.onload = function(){
+    	${viewInfo.getEntityName(true)}Grid = new biz.grid({
+    		id : "#${viewInfo.getEntityName(true)}Table",
+    		url : "${viewInfo.getEntityName(true)}/list${viewInfo.getEntityName(false)}",
+			rowNum : ${viewInfo.pageSize},
+			width:"auto",
+			multiselect:${viewInfo.multiSelect()},
+    		pager : "#${viewInfo.getEntityName(true)}Pager",
+    		prmNames : {page:"pageNo",rows:"pageSize",sort:"orderFields",order:"order"},
+    		sortname : "${viewInfo.orderFields}",
+    		sortorder : "${viewInfo.orders}",
+    		colModel : [
+    			{name : "$viewInfo.pkName", hidden:true,key:true}, 
+#set($index = 1)
+#foreach($resutlField in ${viewInfo.getResultFields()})
+				{name : "$resutlField.fieldName"#if($index == 1 && ${viewInfo.hasShow()}),formatter:"showlink",formatoptions:{baseLinkUrl:"#",click:view}#end,label:"${viewInfo.getResultFieldDisplayName($resutlField)}"}#if($index < ${viewInfo.resultFieldsLength}),#end
+
+#set($index = $index + 1)
+#end
+    		],
+#if(${viewInfo.hasExport()})
+    		exportParams:{//Excel导出参数配置
+        		url : "${viewInfo.getEntityName(true)}/exportExcel",
+                customHeader : {
+                	title : "${viewInfo.listTitle}"
+                },
+                queryColumns :[
+#set($index = 1)
+#foreach( $queryField in $viewInfo.getQueryFields())
+					{name : "${queryField.getFieldName()}", label : "${queryField.getDisplayName()}"}#if($index < ${viewInfo.queryFieldsLength}),#end
+
+#set($index = $index + 1)
+#end
+                ],
+                columns : [//导出哪些列，可以自己酌情增删
+#set($index = 1)
+#foreach($resutlField in ${viewInfo.getResultFields()})
+					{name : "$resutlField.fieldName",label:"${viewInfo.getResultFieldDisplayName($resutlField)}"}#if($index < ${viewInfo.resultFieldsLength}),#end
+
+#set($index = $index + 1)
+#end
+                ]
+            },
+#end
+    		serializeGridData:function(postData){//添加查询条件值
+				var obj = biz.utils.serializeObject("#${viewInfo.formId}");//示例中心搜索"biz.utils方法详解"查看方法说明
+    			${dot}.extend(true,obj,postData);//合并查询条件值与grid的默认传递参数
+    			return obj;
+    		}
+    	});
+    }
+    
+	function query(){
+		${viewInfo.getEntityName(true)}Grid.setGridParam({"page":"1"});
+		${viewInfo.getEntityName(true)}Grid.trigger('reloadGrid');
+	}
+
+#if(${viewInfo.hasExport()})	
+	//导出Excel
+	function excelExport(){
+		${viewInfo.getEntityName(true)}Grid.excelExport(biz.utils.serializeObject("#${viewInfo.formId}"));
+	}
+#end
+#if(${viewInfo.hasAddOrEdit()})
+	var isEdit = true;//true:当前对话框为编辑操作  false：当前对话框为新增操作
+	var editDialog = new biz.dialog({
+		id:"#editDialog",
+		autoOpen:false,
+		title:"$viewInfo.formTitle",
+		width:"80%",
+		modal:true,
+		buttons: [
+			{
+				text: I18N.save,
+				click: function() {
+					if(isEdit){
+						update();
+					}else{
+						save(); 
+					}
+				}
+			 },
+			{text: I18N.cancel,click: function() { editDialog.close();}}
+		]
+	});
+#end
+#if(${viewInfo.hasShow()})
+	var showDialog;
+	var showDialogOption = {
+		id:"#showDialog",
+		autoOpen:false,
+		title:"$viewInfo.showTitle",
+		width:"80%",
+		modal:true,
+		buttons: [
+			{
+				text: I18N.close,
+				click: function() { 
+					showDialog.close();
+					showDialog.destroy();
+				}
+			}
+		]
+	};
+#end
+#if(${viewInfo.hasAddOrEdit()})
+	function add(){
+		isEdit = false;
+		biz.utils.resetForm("#${viewInfo.formId}Edit");
+		editDialog.open();
+	}
+
+	function save(){
+		if(!biz.validate("valid","#${formInfo.formId}Edit")){
+			showWarn("<fmt:message key='validation.object'/>",3000);
+			return;
+		}
+		new biz.ajaxsubmit({
+        	id:"#${viewInfo.formId}Edit",
+       		method:"POST",
+       		dataType:"json",
+        	url: "<c:url value='/${viewInfo.getEntityName(true)}/save'/>",
+        	success: function(data, textStatus, jqXHR){
+				editDialog.close();
+				query();
+				showInfo("<fmt:message key='add.success'/>",3000);
+			},
+			error:biz.utils.loadError
+   		});
+	}
+	
+	function edit(rowid){
+		isEdit = true;
+		biz.utils.clearForm("#${viewInfo.formId}Edit");
+		rowid = ${viewInfo.getEntityName(true)}Grid.getGridParam("selarrrow");
+		if(rowid == null || rowid.length == 0){
+			showInfo("<fmt:message key='grid.edit.chooseColAlert'/>",3000);
+			return ;
+		}else if(rowid.length > 1){
+			showInfo("<fmt:message key='grid.edit.onlyOne'/>",3000);
+			return ;
+		}
+		var id = ${viewInfo.getEntityName(true)}Grid.getCell(rowid,"$viewInfo.pkName");
+		var dataUrl = "${viewInfo.getEntityName(true)}/edit/" + id;
+		${dot}.ajax({
+			url: dataUrl,
+			dataType:"json",
+			cache:false,
+			success: function(data, textStatus, jqXHR){
+#foreach( ${field} in ${viewInfo.getEditFieldInOrder()})
+				biz.utils.val("edit_${field.getFieldName()}",data["${field.getFieldName()}"]);
+#end
+#foreach($pkField in ${formInfo.getHidePKFields()})
+				biz.utils.val("edit_${pkField.getName()}",data["${pkField.getName()}"]);
+#end
+				editDialog.open();
+			},
+			error:biz.utils.loadError
+		});	
+	}
+	
+	function update(){
+		if(!biz.validate("valid","#${formInfo.formId}Edit")){
+			showWarn("<fmt:message key='validation.object'/>",3000);
+			return;
+		}
+		rowid = ${viewInfo.getEntityName(true)}Grid.getGridParam("selrow");
+		new biz.ajaxsubmit({
+			id:"#${viewInfo.formId}Edit",
+			method:"POST",
+			dataType:"json",
+			url: "<c:url value='/${viewInfo.getEntityName(true)}/update'/>",
+			success: function(data, textStatus, jqXHR){
+				rowid = ${viewInfo.getEntityName(true)}Grid.getGridParam("selrow");
+				${viewInfo.getEntityName(true)}Grid.setRowData(rowid,data);
+				editDialog.close();
+				showInfo("<fmt:message key='add.success'/>",3000);
+			},
+			error:biz.utils.loadError
+		});
+	}
+#end
+#if(${viewInfo.hasShow()})
+	function view(rowid){
+		if(rowid == null){
+			var rows = ${viewInfo.getEntityName(true)}Grid.getGridParam("selarrrow");
+    		if(rows == null || rows.length == 0){
+    			showInfo("<fmt:message key='grid.view.chooseColAlert'/>",3000);
+    			return ;
+    		}else if(rows.length > 1){
+    			showInfo("<fmt:message key='grid.view.onlyOne'/>",3000);
+    			return ;
+    		}
+			rowid = rows[0];
+		}
+		var id = ${viewInfo.getEntityName(true)}Grid.getCell(rowid,'$viewInfo.pkName');
+		var dataUrl = "${viewInfo.getEntityName(true)}/show?id=" + id;
+		${dot}.ajax({
+			url: dataUrl,
+			cache:false,
+			success: function(data, textStatus, jqXHR){
+				showDialog = new biz.dialog(showDialogOption);
+				$(showDialog.id).html(data)
+				showDialog.open();
+			},
+			error:biz.utils.loadError
+		});
+	}
+#end		
+	function batchDelete(rowid){
+		var rowid = ${viewInfo.getEntityName(true)}Grid.getGridParam('selarrrow');
+		if(rowid == null || rowid.length == 0){
+			showInfo("<fmt:message key='grid.delete.chooseColAlert'/>",3000);
+			return ;
+		}
+		new biz.alert({type:"confirm",message:I18N.msg_del_confirm,
+			title:I18N.promp,callback:function(result){
+	    		if (!result) {
+	    			return;
+	    		}
+	    		var ids="";
+	    		for(var i=0; i < rowid.length;i++){
+	    			var id = ${viewInfo.getEntityName(true)}Grid.getCell(rowid[i],"$viewInfo.pkName");
+	    			if(i>0){
+	    				ids +=',';
+	    			}
+	    			ids += id;
+	    		}
+	    		var dataUrl = "${viewInfo.getEntityName(true)}/delete/" + ids;
+				${dot}.ajax({
+					url: dataUrl,
+					cache:false,
+					success: function(data, textStatus, jqXHR){
+						query();
+						showInfo("<fmt:message key='delete.success'/>",3000);
+					},
+					error:biz.utils.loadError
+				});
+			}
+		});
+	}
+
+#foreach( $queryField in $viewInfo.getQueryFields())
+#set($fieldJS = $viewInfo.getFieldTagScriptNoValueAttr($queryField))
+#if($fieldJS != "")
+${fieldJS}
+#end
+#end
+
+#if(${viewInfo.hasAddOrEdit()})
+#if(${formInfo.showType} == "tab")
+	${dot}("#${formInfo.getEntityName(true)}Tabs").tabs({});
+#end
+#foreach( $queryField in $formInfo.getFields())
+#set($fieldJS = $formInfo.getEditFieldTagScript($queryField))
+#if($fieldJS != "")
+${fieldJS}
+#end
+#end
+#end
+</script>

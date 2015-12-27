@@ -1,0 +1,23 @@
+	<div id="header" class="dp100" >
+		<!--#header 此为欢迎信息-->
+	</div>
+	<div class="clear"></div>
+	<div id="menu" class="dp100"> 
+		<!--#menu 此为菜单栏信息-->
+	</div>
+	<div class="clear"></div>
+	<div id="contain" class="dp100"> 
+		<div id="nav" class="dp20">
+			<!--#nav 此为导航栏内容-->
+		</div>
+		<div id="content" class="dp60">
+			<!--#content 此为页面内容-->
+		</div>
+		<div id="promo" class="dp20">
+			<!--#promo 此为右边页面内容-->
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer" class="dp100">
+		<!--#footer 此为页面脚内容-->
+	</div>

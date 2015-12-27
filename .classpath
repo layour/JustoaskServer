@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/studio"/>
+	<classpathentry excluding="template/" kind="src" output="WebApp/WEB-INF/classes" path="resources"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/aspectjrt-1.7.4.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/aspectjweaver-1.7.4.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/classmate-1.0.0.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/commons-lang3-3.2.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/ehcache-core-2.6.8.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/guava-16.0.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/hibernate-validator-5.0.3.Final.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jackson-annotations-2.3.0.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jackson-core-2.3.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jackson-databind-2.3.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jackson-module-jaxb-annotations-2.3.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jandex-1.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/javassist-3.18.1-GA.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/javax.servlet-api-3.0.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jboss-logging-3.1.3.GA.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jboss-logging-annotations-1.2.0.Beta1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jcl-over-slf4j-1.7.6.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jstl-1.2.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/jul-to-slf4j-1.7.6.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/log4j-over-slf4j-1.7.6.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/log4jdbc-1.2.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/logback-classic-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/logback-core-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/mybatis-3.2.5.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/mybatis-spring-1.2.2.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/mysql-connector-java-5.1.29-bin.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/rcloud-app-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/rcloud-login-core-1.0.0.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/servlet-api-2.4.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/shiro-core-1.2.2.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/shiro-ehcache-1.2.2.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/shiro-spring-1.2.2.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/shiro-web-1.2.2.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/sitemesh-2.4.2.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/slf4j-api-1.7.6.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-aop-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-aspects-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-beans-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-context-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-context-support-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-core-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-data-commons-1.6.4.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-expression-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-framework-bom-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-instrument-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-instrument-tomcat-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-jdbc-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-jms-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-orm-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-oxm-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-struts-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-test-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-tx-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-web-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-webmvc-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/spring-webmvc-portlet-3.2.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/springside-core-4.2.2.GA.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/tomcat-jdbc-7.0.52.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/tomcat-juli-7.0.52.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/validation-api-1.1.0.Final.jar"/>
+	<classpathentry kind="lib" path="WebApp/WEB-INF/lib/xml-apis-1.0.b2.jar"/>
+	<classpathentry kind="src" output="WebApp/WEB-INF/classes" path="modules/register/java"/>
+	<classpathentry kind="src" output="testcase/test-classes" path="testcase/test-java/register/java"/>
+	<classpathentry kind="src" output="WebApp/WEB-INF/classes" path="modules/favorite/java"/>
+	<classpathentry kind="src" output="testcase/test-classes" path="testcase/test-java/favorite/java"/>
+	<classpathentry kind="src" output="WebApp/WEB-INF/classes" path="modules/mainask/java"/>
+	<classpathentry kind="src" output="testcase/test-classes" path="testcase/test-java/mainask/java"/>
+	<classpathentry kind="output" path="WebApp/WEB-INF/classes"/>
+</classpath>

@@ -1,0 +1,43 @@
+package ${PACKAGE_NAME};
+
+
+import com.chinasofti.ro.bizframework.core.Globals;
+import com.chinasofti.ro.bizframework.core.test.service.BaseTest;
+
+#foreach( $type in $CLASS_IMPORT_TYPES)
+import $type;
+#end
+
+/**
+ * <p>Service Test</p>
+ * 
+ * @author BizFoundation
+ * @version 1.0
+ * @since 1.0
+ */
+public class ${CLASS_FIRST_UPPER_NAME} extends BaseTest {
+	
+	/**
+	 * 注入 ${IMPORT_CLASS_FIRST_UPPER_NAME}
+	 */
+	private ${IMPORT_CLASS_FIRST_UPPER_NAME} ${IMPORT_CLASS_FIRST_LOWER_NAME};
+	public void set${IMPORT_CLASS_FIRST_UPPER_NAME}(${IMPORT_CLASS_FIRST_UPPER_NAME} ${IMPORT_CLASS_FIRST_LOWER_NAME}) {
+		this.${IMPORT_CLASS_FIRST_LOWER_NAME} = ${IMPORT_CLASS_FIRST_LOWER_NAME};
+	}
+	
+	/**
+	 * 初始化
+	 */
+	protected void onSetUp(){
+		init(Globals.DATABASE_TYPE_H2);
+	}
+	
+	/**
+	 * 测试保存的方法
+	 */
+	public void testSave() {
+		${PO_FIRST_UPPER_NAME} ${PO_FIRST_LOWER_NAME} = new ${PO_FIRST_UPPER_NAME}();
+		${IMPORT_CLASS_FIRST_LOWER_NAME}.save(${PO_FIRST_LOWER_NAME});
+	}
+	
+}

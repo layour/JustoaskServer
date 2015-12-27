@@ -1,0 +1,78 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/public/include/default.jsp" %>
+
+#set($formInfo = ${viewInfo.getFormInfo()})
+#set($entity = ${viewInfo.getlowerFirstEntityName()})
+#set($dot="$")
+#set($colon = "：")
+#set($pkId=$viewInfo.getPkName())
+<html>
+<head>
+	<title>${viewInfo.title}</title>
+	<script type="text/javascript">
+		$(document).ready(function(){
+    		$("#view").bind("click", function() {
+    			var row = $("#dg").datagrid('getSelected');
+    			if(row){
+    				window.location.href = "${ctx}/${entity}/toDetailPage/" + row.${pkId};
+    			}else{
+    				${dot}.messager.alert('提示','请选择数据','info');
+    			}
+    		});
+			$("#query").bind("click",function(){
+				$('#dg').datagrid('load',{
+#foreach( $queryField in $viewInfo.getQueryFields())
+#set($fieldName=${viewInfo.getFieldName($queryField)})
+					search_${fieldName}:$("#${fieldName}").val(),
+#end
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div class="easyui-panel" title="${viewInfo.title}" data-options="fit:true">
+		<div class="easyui-layout" data-options="fit:true">
+			<div data-options="region:'north',border:false" style="padding: 5 5 0 5; height: 50px;">
+				<div class="easyui-panel form_panel" align="center" style="padding: 2px;" data-options="border:false">
+					<table class="search_table">
+						<tr>
+#foreach( $queryField in $viewInfo.getQueryFields())
+#set($fieldName=${viewInfo.getFieldName($queryField)})
+							<td>
+								<label>${viewInfo.getQueryFieldDisplayName($queryField)}${colon}</label>
+								<input id="${fieldName}" name="${fieldName}" type="text" class="easyui-textbox textbox"/>
+							</td>
+#end
+							<td><a class="easyui-linkbutton" id="query" href="javascript:void(0)">查询</a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div data-options="region:'center',border:false" style="padding: 0 5 0 5;">
+				<div class="easyui-panel form_panel" data-options="fit:true">
+					<div class="easyui-layout" data-options="fit:true">
+						<div data-options="region:'north',border:false" style="height: 30px;">
+							<div class="easyui-panel" align="left" style="padding: 2px;" data-options="border:false">
+								<a id="view" href="javascript:void(0)" class="easyui-linkbutton">查看</a>
+							</div>
+						</div>
+						<div data-options="region:'center',border:false" style="padding: 0 2 2 2;">
+							<table id="dg" class="easyui-datagrid" data-options='singleSelect:true,selectOnCheck:false,checkOnSelect:true,pagination:true,pageSize:$viewInfo.getPageSize(),pageList:[10,15,20,25,50,100],fit:true,fitColumns:true,url:"${ctx}/${entity}/list?ads=" + Date.parse(new Date()),method:"get"'>
+								<thead>
+									<tr>
+#foreach( $field in $viewInfo.getResultFields())
+										<th data-options="field:'${viewInfo.getFieldName($field)}',width:80">$formInfo.getFieldDisplayName($field)</th>
+#end
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

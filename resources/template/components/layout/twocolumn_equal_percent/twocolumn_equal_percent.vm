@@ -1,0 +1,16 @@
+	<div id="header" class="dp100" >
+		<!--#header 此为欢迎信息-->
+	</div>
+	<div class="clear"></div>
+	<div id="content" class="dp100"> 
+		<div id="content-left" class="dp50">
+			<!--#content-left 此为导航栏内容-->
+		</div>
+		<div id="content-right" class="dp50">
+			<!--#content-right 此为页面内容-->
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div id="footer" class="dp100">
+		<!--#footer 此为页面脚内容-->
+	</div>

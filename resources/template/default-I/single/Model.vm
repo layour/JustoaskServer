@@ -1,0 +1,73 @@
+package ${PACKAGE_NAME};
+
+import com.chinasofti.ro.bizframework.core.data.validation.IValidator;
+import com.chinasofti.ro.bizframework.core.orm.entity.Model;
+#if(${PO_IS_COMPOSITE_PK})
+import com.chinasofti.ro.bizframework.core.data.bind.CompositeKeyUtil;
+#end
+
+#foreach( $type in $CLASS_IMPORT_TYPES)
+import $type;
+#end
+
+/**
+ * <p>model</p>
+ * 
+ * @author BizFoundation
+ * @version 5.0
+ * @since 1.0
+ */
+public class ${CLASS_FIRST_UPPER_NAME} extends Model implements IValidator {
+	// Fields    
+#set($count=0)#foreach( $fieldName in $PO_FIELD_NAMES )
+	private $PO_FIELD_ROBASE_SIMPLE_TYPES.get($count) $fieldName; 
+#set($count=$count+1)#end
+	
+	// QueryOnlyFields
+#set($count1=0)#foreach( $fieldName in $PO_QUERY_EXT_FIELD_NAMES )
+	private $PO_QUERY_EXT_FIELD_TYPES.get($count1) $fieldName; 
+#set($count1=$count1+1)#end
+	
+	//default constructor
+    public ${CLASS_FIRST_UPPER_NAME}() {
+    	super();
+    }
+    
+    // Property accessors
+#set($index=0)#foreach( $fieldName in $PO_FIELD_NAMES )
+	public $PO_FIELD_ROBASE_SIMPLE_TYPES.get($index) get$VmVarInfo.getJavaBeanFieldName($fieldName)() {
+        return this.$fieldName;
+    }
+    
+    public void set$VmVarInfo.getJavaBeanFieldName($fieldName)($PO_FIELD_ROBASE_SIMPLE_TYPES.get($index) $PO_FIELD_NAMES.get($index)) {
+    	#if($fieldName != $PO_PK_FIRST_LOWER_NAME && $PO_FIELD_IS_PERSISTS.get($index) == true)this.firePropertyChange("$fieldName", this.$fieldName, $fieldName);
+    	#end
+this.$fieldName = $fieldName;
+    }
+    
+#set($index=$index+1)#end
+	
+	// QueryOnlyProperty accessors
+#set($index1=0)#foreach( $fieldName in $PO_QUERY_EXT_FIELD_NAMES )
+	public $PO_QUERY_EXT_FIELD_TYPES.get($index1) get$VmVarInfo.getJavaBeanFieldName($fieldName)() {
+        return this.$fieldName;
+    }
+    
+    public void set$VmVarInfo.getJavaBeanFieldName($fieldName)($PO_QUERY_EXT_FIELD_TYPES.get($index1) $PO_QUERY_EXT_FIELD_NAMES.get($index1)) {
+		this.$fieldName = $fieldName;
+    }
+    
+#set($index1=$index1+1)#end
+    
+#if(${PO_IS_COMPOSITE_PK})
+    public String getCompositeKeyStr() throws Exception{
+    	return CompositeKeyUtil.getCompositeKey(get$VmVarInfo.getJavaBeanFieldName($PO_FIELD_NAMES.get(0))());
+    }
+#end
+    
+   	public boolean validate(Object arg0) {
+		//${PO_FIRST_UPPER_NAME} ${PO_FIRST_LOWER_NAME} = (${PO_FIRST_UPPER_NAME})arg0;
+		//Validation.required("${PO_FIRST_LOWER_NAME}.${PO_FIELD_NAMES.get(0)}",${PO_FIRST_LOWER_NAME}.get${VmVarInfo.getJavaBeanFieldName(${PO_FIELD_NAMES.get(0)})}());
+		return true;
+	}
+}

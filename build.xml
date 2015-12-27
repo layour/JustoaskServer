@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="JustoaskServer" basedir="."> 
+  <!-- define property -->  
+  <property file="build.properties"/>  
+  <property name="web" value="WebApp"/>  
+  <property name="dist" value="dist"/>  
+  <property name="lib" value="lib"/>  
+  <property name="build.classes" value="${web}/WEB-INF/classes"/>  
+  <property name="compress.dir" value="${dist}/compress"/>  
+  <property name="pagecompressor" value="${lib}/ant/pagecompressor-0.1.jar"/>  
+  <!-- define path -->  
+  <path id="lib.path"> 
+    <fileset dir="${web}/WEB-INF/lib"> 
+      <include name="**/*.jar"/> 
+    </fileset> 
+  </path>  
+  <!-- define task -->  
+  <target name="init"> 
+    <!-- Taskdefs -->  
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" classpathref="lib.path"/>  
+    <!-- Ensure that Ant 1.6.2+ is being used -->  
+    <available classname="org.apache.tools.ant.DynamicAttribute" property="ant-1.6.2"/>  
+    <fail unless="ant-1.6.2" message="Requires Ant 1.6.2 for faster unit testing"/> 
+  </target>  
+  <!-- set war and zip name, time formate -->  
+  <target name="prepare" depends="init"> 
+    <tstamp> 
+      <format property="build.date" pattern="yyyyMMdd"/> 
+    </tstamp>  
+    <tstamp> 
+      <format property="build.year" pattern="yyyy"/> 
+    </tstamp>  
+    <property name="webapp.war" value="${webapp.name}-${webapp.version}-${build.date}.war"/>  
+    <property name="webapp.zip" value="${webapp.name}web-${webapp.version}-${build.date}.zip"/>  
+    <mkdir dir="${build.classes}"/>  
+    <mkdir dir="${dist}"/> 
+  </target>  
+  <!-- compile all src path code and xml,properites file -->  
+  <target name="all-compile" depends="clean,prepare"> 
+    <javac srcdir="${all.src.path}" destdir="${build.classes}" deprecation="${compile.deprecation}" optimize="${compile.optimize}" encoding="${compile.encoding}" debug="true" debuglevel="vars" classpathref="lib.path" fork="true" memoryinitialsize="64m" memorymaximumsize="128m" includeantruntime="false"/>  
+    <foreach target="compile-xml-properties" param="src.path" list="${all.src.path}" delimiter=";"/> 
+  </target>  
+  <!-- compile xml,properites file -->  
+  <target name="compile-xml-properties"> 
+    <copy todir="${build.classes}"> 
+      <fileset dir="${src.path}"> 
+        <include name="**/*.properties"/>  
+        <include name="**/*.xml"/>  
+        <include name="**/*.zip"/>  
+        <exclude name="*_zh_CN.properties"/>  
+        <exclude name="**/test-*.xml"/> 
+      </fileset> 
+    </copy>  
+    <native2ascii src="${src.path}" dest="${build.classes}" encoding="${compile.encoding}"> 
+      <include name="*_zh_CN.properties"/> 
+    </native2ascii> 
+  </target>  
+  <!-- package project jar file -->  
+  <target name="package-jar" depends="all-compile"> 
+    <!-- <buildnumber file="jar.buildnumber"/>   -->  
+    <jar destfile="dist/${webapp.name}.jar"> 
+      <manifest> 
+        <attribute name="Class-Path" value="${webapp.name}.jar"/>  
+        <attribute name="Implementation-Title" value="${webapp.name}"/>  
+        <attribute name="Implementation-Version" value="${webapp.version}"/> 
+      </manifest>  
+      <fileset dir="${build.classes}"/>  
+      <!-- <fileset dir="." file="${jar.buildnumber}"/>  --> 
+    </jar> 
+  </target>  
+  <!-- package project war file -->  
+  <target name="package-war" depends="package-jar" description="Package WAR"> 
+    <!--<buildnumber file="war.buildnumber"/>   -->  
+    <!-- webapp.war -->  
+    <war destfile="${dist}/${webapp.war}" duplicate="fail" webxml="${web}/WEB-INF/web.xml" compress="true"> 
+      <fileset dir="${web}"> 
+        <exclude name="**/web.xml"/>  
+        <exclude name="**/*.EXAMPLE"/>  
+        <exclude name="**/*.README"/> 
+      </fileset>  
+      <!--<fileset dir="." file="${war.buildnumber}"/>   -->  
+      <fileset dir="." file="*.txt"/> 
+    </war> 
+  </target>  
+  <!-- Remove generated files for clean build -->  
+  <target name="clean" description="Removes build artifacts"> 
+    <echo level="info">Cleaning build and distribution directories</echo>  
+    <delete dir="${build.classes}"/>  
+    <delete dir="${dist}"/>  
+    <delete file="${web}/WEB-INF/tld/${webapp.name}.tld"/> 
+  </target> 
+</project>

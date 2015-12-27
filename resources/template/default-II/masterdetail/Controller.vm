@@ -1,0 +1,175 @@
+package ${PACKAGE_NAME};
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.chinasofti.ro.bizframework.core.orm.Page;
+import com.chinasofti.ro.bizframework.core.orm.PageUtil;
+import com.chinasofti.ro.bizframework.core.mvc.Controller;
+import com.chinasofti.ro.bizframework.core.mvc.View;
+import com.chinasofti.ro.bizframework.core.orm.entity.Model;
+#if(${PO_IS_COMPOSITE_PK})
+import com.chinasofti.ro.bizframework.core.data.bind.CompositeKeyUtil;
+#end
+import com.chinasofti.ro.bizframework.core.data.validation.Validation;
+#if(${EXPORT_EXCEL})
+import com.chinasofti.ro.bizframework.modules.excel.ExcelExporter;
+import com.chinasofti.ro.bizframework.modules.json.JSONObject;
+import com.chinasofti.ro.bizframework.modules.json.JSONSerializer;
+#end
+#foreach( $type in $CLASS_IMPORT_TYPES)
+import $type;
+#end
+
+/**
+ * <p>Controller</p>
+ * 
+ * @author BizFoundation
+ * @version 1.0
+ * @since 1.0
+ */
+public class ${CLASS_FIRST_UPPER_NAME} extends Controller {
+	protected Logger logger = LoggerFactory.getLogger(getClass());
+	
+	/**
+	 * <p>打开查询列表页面</p>
+	 * 
+	 */
+	public void list(boolean restore) {
+		View view = new View(SUCCESS);
+		
+		this.render(view);
+	}
+
+	/**
+	 * <p>查询分页数据</p>
+	 * @param gridPage
+	 * @param ${PO_FIRST_LOWER_NAME}
+	 */
+	public void list${PO_FIRST_UPPER_NAME}(Page page,${PO_FIRST_UPPER_NAME} ${PO_FIRST_LOWER_NAME}) {
+		
+		page = ${PO_FIRST_LOWER_NAME}Service.findByPage(${PO_FIRST_LOWER_NAME}, page);
+		this.renderJSON(PageUtil.toJson4JqGrid(page, true));
+	}
+	#foreach($detail in $RELATION_ENTITY_INFO_LIST)
+
+	public void list$detail.getPoFirstUpperName()($detail.getPoFirstUpperName() $detail.getPoFirstLowerName(),Page page){
+		page = ${PO_FIRST_LOWER_NAME}Service.findByPage(${detail.getPoFirstLowerName()}, page);
+		this.renderJSON(PageUtil.toJson4JqGrid(page, true));
+	}
+	#end
+
+#if(${PO_IS_COMPOSITE_PK})
+	public void show(String id) throws Exception {
+		if(null == id){
+			throw new NullPointerException("主键为Null");
+		}
+		${PO_PK_FIRST_UPPER_NAME} ${PO_PK_FIRST_LOWER_NAME} = new ${PO_PK_FIRST_UPPER_NAME}();
+		CompositeKeyUtil.setCompositeKey(${PO_PK_FIRST_LOWER_NAME},id,Controller.request());
+		Model ${PO_FIRST_LOWER_NAME} = ${PO_FIRST_LOWER_NAME}Service.findById(${PO_PK_FIRST_LOWER_NAME});
+		View view = new View(SUCCESS);
+		view.bind("${PO_FIRST_LOWER_NAME}",${PO_FIRST_LOWER_NAME});
+		this.render(view);
+	}
+#else
+	public void show(${PO_PK_SIMPLE_TYPE} id) {
+		if(null == id){
+			throw new NullPointerException("主键为Null");
+		}
+		Model ${PO_FIRST_LOWER_NAME} = ${PO_FIRST_LOWER_NAME}Service.findById(id);
+		View view = new View(SUCCESS);
+		view.bind("${PO_FIRST_LOWER_NAME}",${PO_FIRST_LOWER_NAME});
+		this.render(view);
+	}
+#end
+	
+	public void add() {
+		this.render(SUCCESS);
+	}
+
+	 public void save(${PO_FIRST_UPPER_NAME} ${PO_FIRST_LOWER_NAME}#foreach($detail in $RELATION_ENTITY_INFO_LIST),String $detail.getPoFirstLowerName()#end) {
+		if (Validation.hasErrors()) {
+			View view = new View(FAILED);
+			view.bind("${PO_FIRST_LOWER_NAME}",${PO_FIRST_LOWER_NAME});
+			this.render(view);
+			return;
+		}
+		${PO_FIRST_LOWER_NAME}Service.save(${PO_FIRST_LOWER_NAME}#foreach($detail in $RELATION_ENTITY_INFO_LIST),$detail.getPoFirstLowerName()#end);
+		View view = new View(SUCCESS);
+		this.success("add.success");
+		redirect(view);
+	}
+	
+#if(${PO_IS_COMPOSITE_PK})
+	public void edit(String id) throws Exception{
+		if(null == id){
+			throw new NullPointerException("主键为Null");
+		}
+		${PO_PK_FIRST_UPPER_NAME} ${PO_PK_FIRST_LOWER_NAME} = new ${PO_PK_FIRST_UPPER_NAME}();
+		CompositeKeyUtil.setCompositeKey(${PO_PK_FIRST_LOWER_NAME},id,Controller.request());
+		Model ${PO_FIRST_LOWER_NAME} = ${PO_FIRST_LOWER_NAME}Service.findById(${PO_PK_FIRST_LOWER_NAME});
+		View view = new View(SUCCESS);
+		view.bind("${PO_FIRST_LOWER_NAME}",${PO_FIRST_LOWER_NAME});
+		this.render(view);
+	}
+#else
+	public void edit(${PO_PK_SIMPLE_TYPE} id) {
+		if(null == id){
+			throw new NullPointerException("主键为Null");
+		}
+		Model ${PO_FIRST_LOWER_NAME} = ${PO_FIRST_LOWER_NAME}Service.findById(id);
+		View view = new View(SUCCESS);
+		view.bind("${PO_FIRST_LOWER_NAME}",${PO_FIRST_LOWER_NAME});
+		this.render(view);
+	}
+#end
+
+	public void update(${PO_FIRST_UPPER_NAME} ${PO_FIRST_LOWER_NAME}#foreach($detail in $RELATION_ENTITY_INFO_LIST),String $detail.getPoFirstLowerName()#end) {
+		${PO_FIRST_LOWER_NAME}Service.update(${PO_FIRST_LOWER_NAME}#foreach($detail in $RELATION_ENTITY_INFO_LIST),$detail.getPoFirstLowerName()#end);
+		View view = new View(SUCCESS);
+		this.success("update.success");
+		this.redirect(view);
+	}
+
+	public void delete(String ids) {
+		this.${PO_FIRST_LOWER_NAME}Service.batchDelete(ids);
+		View view = new View(SUCCESS);
+		view.bind("restore", new Boolean(true));
+		this.success("delete.success");
+		this.redirect(view);
+	}
+
+#if(${EXPORT_EXCEL})
+	/**
+	 * 导出Excel
+	 * @param ${PO_FIRST_LOWER_NAME}
+	 * @param page
+	 * @param exportParams
+	 */
+	public void exportExcel(${PO_FIRST_UPPER_NAME} ${PO_FIRST_LOWER_NAME}, Page page, String exportParams) {
+		JSONObject json = (JSONObject) JSONSerializer.toJSON(exportParams);
+		ExcelExporter exporter = ExcelExporter.prepareBatchExport(json);
+
+		// 默认采用分页导出方式，从第一页开始分页导出，分页大小为5000
+		page.setPageNo(1);
+		page.setPageSize(5000);
+		int size;
+		do {
+			${PO_FIRST_LOWER_NAME}Service.findByPage(${PO_FIRST_LOWER_NAME}, page);
+			size = page.getResult().size();
+			exporter.batchAppendData(page.getResult());
+			page.setPageNo(page.getPageNo() + 1);
+		} while (size > 0);
+		renderExcel(exporter, "${PO_FIRST_UPPER_NAME}.xls");
+	}
+	
+#end	
+    /**
+     * <p>注入 ${PO_FIRST_LOWER_NAME}Service</p>
+     */
+    private ${PO_FIRST_UPPER_NAME}Service ${PO_FIRST_LOWER_NAME}Service;
+
+	public void set${PO_FIRST_UPPER_NAME}Service(${PO_FIRST_UPPER_NAME}Service ${PO_FIRST_LOWER_NAME}Service) {
+		this.${PO_FIRST_LOWER_NAME}Service = ${PO_FIRST_LOWER_NAME}Service;
+	}
+}

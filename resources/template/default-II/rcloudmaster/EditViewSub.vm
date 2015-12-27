@@ -1,0 +1,51 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/public/include/default.jsp" %>
+
+#set($entity = $viewInfo.getlowerFirstEntityName())
+#set($dot="$")
+#set($colon = "：")
+#set($pkId=$viewInfo.getPkName())
+<html>
+<head>
+	<title>$viewInfo.formTitle</title>
+	<script>
+		$(document).ready(function(){
+	        $('input.easyui-validatebox').validatebox("disableValidation");
+	        $("#cancel").bind("click",function(){
+	    		history.back();
+	    	});
+	        $("#save").bind("click",function(){
+	        	if($('input [name=plainPassword]').val() == $('input [name=plainPassword]').val()){
+			        $('input.easyui-validatebox').validatebox("enableValidation");
+			        if($("#inputForm").form("validate")){
+				        $('#inputForm').submit();
+			        }
+		        };
+	    	});
+		});
+	</script>
+</head>
+
+<body>
+	<form id="inputForm" action="${ctx}/${entity}/update" method="post">
+		<div class="easyui-panel" title="$viewInfo.formTitle" align="center">
+			<input type="hidden" name="$pkId" value="$dot{${entity}.${pkId}}"/>
+			<table cellpadding="5">
+#foreach( $field in $viewInfo.getNotPkFields())
+#set($fieldName=${viewInfo.getFieldName($field)})
+    			<tr>
+					<td>$viewInfo.getFieldDisplayName($field)${colon}</td>
+    				<td>$viewInfo.getFieldTagHtml($field)</td>
+    			</tr>
+#end
+    			<tr>
+    				<td colspan="2" align="center">
+						<a id="save" href="javascript:void(0)" class="easyui-linkbutton">保存</a>
+						<a id="cancel" href="javascript:void(0)" class="easyui-linkbutton">返回</a>
+					</td>
+    			</tr>
+            </table>
+        </div>
+	</form>
+</body>
+</html>

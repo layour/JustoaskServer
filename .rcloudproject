@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BizProject META_DEF_ID="com.icss.ro.studio.bizfoundation.module.BizFoundationProject">
+  <id>402881e951e39aa60151e39c882d004e</id>
+  <name>JustoaskServer</name>
+  <description>问一下服务端</description>
+  <alias>问一下</alias>
+  <version>6.0.1</version>
+  <location>\JustoaskServer</location>
+  <params/>
+  <ref-components/>
+  <ref-resources/>
+  <basepackage>com.yonyou.justoask</basepackage>
+</BizProject>

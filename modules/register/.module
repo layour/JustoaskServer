@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Component Id="402881e951e39aa60151e39d858c0062" Name="register">
+  <Version>1.0.0</Version>
+  <code>register</code>
+  <Mark>注册登录</Mark>
+  <Description></Description>
+  <NavigatorEntrance></NavigatorEntrance>
+  <ComplexAttribute Name="packageAndFolder">
+    <Package/>
+    <Folder/>
+  </ComplexAttribute>
+  <ComplexAttribute Name="objectRelation"/>
+  <ComplexAttribute Name="requirement"/>
+  <ComplexAttribute Name="humanProcess"/>
+  <ComplexAttribute Name="interface"/>
+  <ComplexAttribute Name="coverRequire"/>
+  <ComplexAttribute Name="designData"/>
+</Component>

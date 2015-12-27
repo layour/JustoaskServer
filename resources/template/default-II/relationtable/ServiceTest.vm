@@ -1,0 +1,39 @@
+package ${javaInfo.getServiceTestPackageName()};
+
+import com.chinasofti.ro.bizframework.core.Globals;
+import com.chinasofti.ro.bizframework.core.orm.Page;
+import com.chinasofti.ro.bizframework.core.test.service.BaseTest;
+
+import ${javaInfo.getPackageName()}.*;
+/**
+ * <p>Service Test</p>
+ * 
+ * @author BizFoundation
+ * @version 1.0
+ * @since 1.0
+ */
+public class ${javaInfo.getUpperServiceTestname()} extends BaseTest {
+	
+	/**
+	 * 注入 ${javaInfo.getUpperServicename()}
+	 */
+	private  ${javaInfo.getUpperServicename()} ${javaInfo.getServicename()};
+	public void set${javaInfo.getUpperServicename()}(${javaInfo.getUpperServicename()} ${javaInfo.getServicename()}) {
+		this.${javaInfo.getServicename()} = ${javaInfo.getServicename()};
+	}
+	
+	/**
+	 * 初始化
+	 */
+	protected void onSetUp(){
+		init(Globals.DATABASE_TYPE_H2);
+	}
+	
+	/**
+	 * 测试分页查询的方法
+	 */
+	public void testFindByPage() {
+		Page page = new Page(1,15);
+		${javaInfo.getServicename()}.findByPage(new ${javaInfo.getUpper_VEntityName()}(),page);
+	}
+}

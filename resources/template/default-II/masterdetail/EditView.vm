@@ -1,0 +1,270 @@
+<%@ page language="java" pageEncoding="${viewInfo.pageEncoding}" contentType="text/html; charset=${viewInfo.pageEncoding}" %>
+<%@ include file="/pages/inc/taglibs.jsp" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>$viewInfo.formTitle</title>
+<%@ include file="/pages/inc/header.jsp" %>
+</head>
+#set($dot="$")#set($cols = 2)#set($colon = "：")
+<body>
+<%@ include file="/pages/inc/common.jsp" %>
+<div id="container" class="main">
+    <div class="barTitle">
+		<div class="content"><a href="javascript:;" onfocus="this.blur();"></a> <span>$viewInfo.formTitle</span></div>
+	</div>
+    <hr class="barTitleHr"></hr>
+	<form id="$viewInfo.formId" action="<c:url value='/$viewInfo.getEntityName(true)/update'/>"  method="post" ${viewInfo.getFormEncType()}>
+    <div class="ui-table ui-widget ui-corner-all ui-border">
+#foreach($pkField in $viewInfo.getPKFields(null) )
+		<input type="hidden" id="$viewInfo.getFieldName($pkField)" name="$viewInfo.getFieldName($pkField)" type="text" value="$viewInfo.getCoutValue($pkField)"/>
+#end	
+
+		<table class="table">
+#set($index=1)#set($colspan = $cols*2 - ($viewInfo.fieldsLength*2 % ($cols*2)) + 1)
+#if(($viewInfo.fieldsLength*2 % ($cols*2)) == 0)#set($colspan = 0)#end
+#foreach( $field in $viewInfo.getFields())
+#if( $index % $cols == 1)
+			<tr>
+#end
+				<td class="inputLabelTd">$viewInfo.getFieldDisplayName($field)${colon}</td>
+				<td class="inputTd"#if($index == $viewInfo.fieldsLength) colspan="${colspan}"#end>
+					$viewInfo.getFieldTagHtml($field)
+				</td>
+
+#if( $index % $cols == 0 || $index == $viewInfo.fieldsLength)
+			</tr>
+#end
+#set( $index=$index+1)
+#end
+		</table>
+
+		<table class="table foottable">
+			<tfoot class="footTd">
+				<tr>
+					<td class="inputTd">
+						<button id="submit_button" type="button" onclick="addDetailData(this);">${viewInfo.getSubmitTitle()}</button>&nbsp;&nbsp;
+            			<button id="reset_button" type="reset">${viewInfo.getResetTitle()}</button>&nbsp;&nbsp;
+            			<button id="back_button" type="button" onclick="window.location = '<c:url value="/$viewInfo.getlowerFirstEntityName()"/>'">${viewInfo.getBackTitle()}</button>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+        </div>
+		</form>
+		<%-- 从表信息 --%>
+#if(${viewInfo.showType} == "tab")
+#parse("tab.vm")
+#else
+#parse("group.vm")
+#end
+
+</div>
+<!-- 引入尾文件-->
+<%@ include file="/pages/inc/footer.jsp" %>
+</body>
+</html>
+<script type="text/javascript" charset="UTF-8">
+#set($dot="$")#set($dot1="#")
+
+#if(${viewInfo.showType} == "tab")
+	${dot}("#${viewInfo.getEntityName(true)}Tabs").tabs({});
+#end
+
+#foreach($detail in ${viewInfo.getRelationEntityViewInfos()})
+	var ${detail.getEntityName(true)}Grid;
+#end
+	window.onload = function(){
+#foreach($detail in ${viewInfo.getRelationEntityViewInfos()})
+	
+		${detail.getEntityName(true)}Grid = new biz.grid({
+			id:"#${detail.getEntityName(true)}Table"	/*grid标签id*/,  
+			pager:"#${detail.getEntityName(true)}Page"	/*分页栏id*/, 
+			url:"<c:url value='/${viewInfo.getEntityName(true)}/list${detail.getEntityName(false)}'/>"	/*获取数据url*/, 
+			navtype:"top"	/*导航栏类型，包括none、top、bottom、both*/, 
+			navopt:{edit:false,view:false}	/*导航栏属性*/, 
+			editway:"cell"  /*编辑方式，包括popup、cell、row*/,  
+			caption:"${detail.formTitle}"	/*grid标题*/,   
+			colModel:[	/*列属性*/
+#set($columnMap = ${detail.getColumnMap()})
+#set ($row = ${columnMap.keySet().size()})
+#foreach($event in [1..$row]) 
+          	 	{#foreach($coulmnproperty in ${columnMap.get($event).keySet()}) 
+#if($coulmnproperty == "name")name:"${columnMap.get($event).get($coulmnproperty)}"#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "index")index:"${columnMap.get($event).get($coulmnproperty)}"#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "fixed")fixed:${columnMap.get($event).get($coulmnproperty)}#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "label")label:"${columnMap.get($event).get($coulmnproperty)}"#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "hidden")hidden:${columnMap.get($event).get($coulmnproperty)}#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "key")key:${columnMap.get($event).get($coulmnproperty)}#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "sortable")sortable:${columnMap.get($event).get($coulmnproperty)}#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "sorttype")sorttype:"${columnMap.get($event).get($coulmnproperty)}"#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "width")width:${columnMap.get($event).get($coulmnproperty)}#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "align")align:"${columnMap.get($event).get($coulmnproperty)}"#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "classes")classes:"${columnMap.get($event).get($coulmnproperty)}"#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "datefmt")datefmt:"${columnMap.get($event).get($coulmnproperty)}"#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "defval")defval:"${columnMap.get($event).get($coulmnproperty)}"#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "editable")editable:${columnMap.get($event).get($coulmnproperty)}#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+#if($coulmnproperty == "formatter")formatter:"${columnMap.get($event).get($coulmnproperty)}"#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end
+##格式化属性
+#if($coulmnproperty == "formatoptions")formatoptions:{#foreach($formatoptionsproperty in ${columnMap.get($event).get($coulmnproperty).keySet()})
+$formatoptionsproperty:${columnMap.get($event).get($coulmnproperty).get($formatoptionsproperty)}#if($velocityCount != ${columnMap.get($event).get($coulmnproperty).keySet().size()}),#end
+#end
+}#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end 
+##编辑类型开始
+#if($coulmnproperty == "edittype")edittype:"${columnMap.get($event).get($coulmnproperty)}"#if(${columnMap.get($event).get("editoptions")}),editoptions:{#set ($i = 0)
+##编辑类型为comboboxtree处理开始
+#if(${columnMap.get($event).get($coulmnproperty)}=="comboboxtree")
+#set ($n = 0)#set ($P = 0)#set ($q = 0)#set ($r = 0) #set ($s = 0)#set ($u = 0)
+#set ($comboboxtreeMap = ${columnMap.get($event).get("editoptions")})
+#if(${comboboxtreeMap.get("width")})#if($i==1),
+#end width:${comboboxtreeMap.get("width")}#set($i=1)
+#end #if(${comboboxtreeMap.get("height")} || ${comboboxtreeMap.get("zindex")})#if($i==1),#end
+ height:${comboboxtreeMap.get("height")}#set($i=1)
+#end
+#if(${comboboxtreeMap.get("nodes")} || ${comboboxtreeMap.get("zindex")})#if($i==1),#end
+ nodes:${comboboxtreeMap.get("nodes")}#set($i=1)#end
+#if(${comboboxtreeMap.get("zindex")})#if($i==1),#end
+ zindex:${comboboxtreeMap.get("zindex")}#set($i=1)#end
+#if(${comboboxtreeMap.get("enable")} || ${comboboxtreeMap.get("url")}||  ${comboboxtreeMap.get("dataType")}|| ${comboboxtreeMap.get("autoParam")}|| ${comboboxtreeMap.get("otherParam")})#if($i==1),#end 
+ async:{#if(${comboboxtreeMap.get("url")})#if($n==1),#end
+ url:"${comboboxtreeMap.get("url")}"#set($n=1)#end
+#if(${comboboxtreeMap.get("enable")})#if($n==1),#end
+ enable:${comboboxtreeMap.get("enable")}#set($n=1)#end
+#if(${comboboxtreeMap.get("dataType")})#if($n==1),#end
+ dataType:"${comboboxtreeMap.get("dataType")}"#set($n=1)#end
+#if(${comboboxtreeMap.get("autoParam")})#if($n==1),#end
+ autoParam:${comboboxtreeMap.get("autoParam")}#set($n=1)#end
+#if(${comboboxtreeMap.get("otherParam")})#if($n==1),#end
+ otherParam:${comboboxtreeMap.get("otherParam")}#set($n=1)#end
+ }#set($i=1)#end
+#if( (${comboboxtreeMap.get("chkStyle")}=="radio") || ${comboboxtreeMap.get("chkEnable")}|| ${comboboxtreeMap.get("chkboxType")} || (${comboboxtreeMap.get("radioType")}=="all") )#if($i==1),#end
+ check:{#if(${comboboxtreeMap.get("chkStyle")})#if($p==1),#end
+ chkStyle:"${comboboxtreeMap.get("chkStyle")}"#set($p=1)#end
+#if(${comboboxtreeMap.get("radioType")})#if($p==1),#end
+ radioType:"${comboboxtreeMap.get("radioType")}"#set($p=1)#end
+#if(${comboboxtreeMap.get("chkboxType")})#if($p==1),#end
+ chkboxType:${comboboxtreeMap.get("chkboxType")}#set($p=1)#end
+#if(${comboboxtreeMap.get("chkEnable")})#if($p==1),#end
+ chkEnable:${comboboxtreeMap.get("chkEnable")}#set($p=1)#end
+ }#set($i=1)#end
+#if(${comboboxtreeMap.get("isSimpleData")}=="true"  || ${comboboxtreeMap.get("valueName")}
+	|| (${comboboxtreeMap.get("idKey")} && ${comboboxtreeMap.get("idKey")}!="id")|| (${comboboxtreeMap.get("pIdKey")}&& ${comboboxtreeMap.get("pIdKey")}!="pId")|| (${comboboxtreeMap.get("rootPid")} && ${comboboxtreeMap.get("rootPid")}!=""))#if($i==1),#end
+ data:{#if(${comboboxtreeMap.get("isSimpleData")} || ${comboboxtreeMap.get("idKey")} || ${comboboxtreeMap.get("pIdKey")}|| ${comboboxtreeMap.get("rootPid")} )#if($q==1),#end
+ simpleData:{#if(${comboboxtreeMap.get("isSimpleData")})#if($r==1),#end
+ enable:${comboboxtreeMap.get("isSimpleData")}#set($r=1)#end
+#if(${comboboxtreeMap.get("rootPid")})#if($r==1),#end
+ rootPid:${comboboxtreeMap.get("rootPid")}#set($r=1)#end 
+#if(${comboboxtreeMap.get("idKey")})#if($r==1),#end
+ idKey:"${comboboxtreeMap.get("idKey")}"#set($r=1)#end
+#if(${comboboxtreeMap.get("pIdKey")})#if($r==1),#end
+ pIdKey:"${comboboxtreeMap.get("pIdKey")}"#set($r=1)#end     
+}#set($q=1)#end
+#if(${comboboxtreeMap.get("valueName")})#if($q==1),#end
+ key:{#if(${comboboxtreeMap.get("valueName")})#if($s==1),#end
+ name:"${comboboxtreeMap.get("valueName")}"#set($s=1)#end
+}#set($q=1)#end
+}#set($i=1)#end
+#if(${comboboxtreeMap.get("beforeClick")} || ${comboboxtreeMap.get("beforeRightClick")} || ${comboboxtreeMap.get("beforeExpand")} 
+|| ${comboboxtreeMap.get("beforeCollapse")} || ${comboboxtreeMap.get("onClick")} || ${comboboxtreeMap.get("onRightClick")} 
+|| $comboboxtreeMap.get("onExpand")|| $comboboxtreeMap.get("onCollapse"))#if($i==1),#end
+ callback:{#if(${comboboxtreeMap.get("beforeClick")})#if($u==1),#end
+ beforeClick:${comboboxtreeMap.get("beforeClick")}#set($u=1)#end
+#if(${comboboxtreeMap.get("beforeRightClick")})#if($u==1),#end
+ beforeRightClick:${comboboxtreeMap.get("beforeRightClick")}#set($u=1)#end 
+#if(${comboboxtreeMap.get("beforeExpand")})#if($u==1),#end
+ beforeExpand:${comboboxtreeMap.get("beforeExpand")}#set($u=1)#end
+#if(${comboboxtreeMap.get("beforeCollapse")})#if($u==1),#end
+ beforeCollapse:${comboboxtreeMap.get("beforeCollapse")}#set($u=1)#end
+#if(${comboboxtreeMap.get("onClick")})#if($u==1),#end
+ onClick:${comboboxtreeMap.get("onClick")}#set($u=1)#end
+#if(${comboboxtreeMap.get("onRightClick")})#if($u==1),#end
+ onRightClick:${comboboxtreeMap.get("onRightClick")}#set($u=1)#end
+#if(${comboboxtreeMap.get("onExpand")})#if($u==1),#end
+ onExpand:${comboboxtreeMap.get("onExpand")}#set($u=1)#end
+#if(${comboboxtreeMap.get("onCollapse")})#if($u==1),#end
+ onCollapse:${comboboxtreeMap.get("onCollapse")}#set($u=1)#end
+}#set($i=1)#end
+##编辑类型为comboboxtree处理结束
+#else
+#foreach($editoptionproperty in ${columnMap.get($event).get("editoptions").keySet()})
+#if($editoptionproperty!="required" && $editoptionproperty!="validateType"  && $editoptionproperty!="min" && 
+$editoptionproperty!="equalTo" && $editoptionproperty!="accept" && $editoptionproperty!="maxlength" && $editoptionproperty!="minlength" &&
+$editoptionproperty!="rangelength" && $editoptionproperty!="range"  && $editoptionproperty!="max")
+#if($i==1),#end #if($editoptionproperty=="id" ||$editoptionproperty=="data" || $editoptionproperty=="doubleCalendar" || $editoptionproperty=="enableKeyboard" || $editoptionproperty=="enableInputMask" || 
+$editoptionproperty=="autoUpdateOnChanged" || $editoptionproperty=="position" || $editoptionproperty=="firstDayOfWeek" || $editoptionproperty=="isShowWeek" || 
+$editoptionproperty=="highLineWeekDay" || $editoptionproperty=="isShowClear" || $editoptionproperty=="isShowToday" || $editoptionproperty=="isShowOthers" || 
+$editoptionproperty=="readOnly" || $editoptionproperty=="errDealMode" || $editoptionproperty=="autoPickDate" || $editoptionproperty=="qsEnabled" || 
+$editoptionproperty=="autoShowQS" || $editoptionproperty=="quickSel" || $editoptionproperty=="disabledDays" || $editoptionproperty=="disabledDates" || 
+$editoptionproperty=="opposite" || $editoptionproperty=="specialDates" || $editoptionproperty=="specialDays" || $editoptionproperty=="onpicking" || 
+$editoptionproperty=="onpicked" || $editoptionproperty=="onclearing" || $editoptionproperty=="oncleared" || $editoptionproperty=="minNum" || 
+$editoptionproperty=="maxNum" || $editoptionproperty=="fix" || $editoptionproperty=="precision" || $editoptionproperty=="ajaxOptions" ||
+$editoptionproperty=="columns" || $editoptionproperty=="maxchecked" || $editoptionproperty=="checkbox" || $editoptionproperty=="usinglimit" || 
+$editoptionproperty=="nodes" || $editoptionproperty=="enable" || $editoptionproperty=="autoParam" || $editoptionproperty=="otherParam" || 
+$editoptionproperty=="dataFilter" || $editoptionproperty=="autoCheckTrigger" || $editoptionproperty=="cheEnable" || $editoptionproperty=="children" ||
+$editoptionproperty=="nocheckInherit" || $editoptionproperty=="isSimpleData" || $editoptionproperty=="rootPid" || $editoptionproperty=="checked" ||  
+$editoptionproperty=="timeout")$editoptionproperty:${columnMap.get($event).get("editoptions").get($editoptionproperty)}#else 
+$editoptionproperty:"${columnMap.get($event).get("editoptions").get($editoptionproperty)}" #end#set($i=1)
+#end#end#end
+}##编辑类型与基础录入组件一致，校验类型要从editoptions里取出
+#set($n = 0) #set($m = 0)
+#foreach($editoptionproperty in ${columnMap.get($event).get("editoptions").keySet()})
+#if($editoptionproperty=="required" || $editoptionproperty=="validateType"  || $editoptionproperty=="min" || 
+$editoptionproperty=="equalTo" ||$editoptionproperty=="accept" ||$editoptionproperty=="maxlength" ||$editoptionproperty=="minlength" ||
+$editoptionproperty=="rangelength" ||$editoptionproperty=="range" || $editoptionproperty=="max")
+#if($n==1),#elseif($n==0)#set($m=1),editrules:{#end #set($validate = ${columnMap.get($event).get("editoptions").get($editoptionproperty)})
+#if($editoptionproperty=="validateType") #if($validate == "数字") number:true#elseif($validate == "整数")digits:true#elseif($validate == "自然数")
+naturalnum:true#elseif($validate == "网址")url:true#elseif($validate == "电子邮箱")email:true#elseif($validate == "字母")
+stringEN:true#elseif($validate == "字母数字")alnum:true#elseif($validate == "汉字")stringCH:true#elseif($validate == "IP地址")
+ip:true#elseif($validate == "端口号")port:true#elseif($validate == "身份证号码")idcardno:true#elseif($validate == "邮政编码")
+postalcode:true#end #elseif($editoptionproperty == "equalTo" || $editoptionproperty == "accept" || $editoptionproperty == "remote")
+$editoptionproperty:"$validate" #else $editoptionproperty:$validate#end
+#set($n=1)#end#end#if($m==1)}#end#end#if($velocityCount != ${columnMap.get($event).keySet().size()}),#end #end 
+##编辑类型结束
+#end
+} #if($velocityCount != ${columnMap.keySet().size()}),
+#end
+#end
+			],
+			serializeGridData:function(postData){//添加查询条件值
+				var obj = {};
+#foreach($pkField in ${viewInfo.getPKFields(null)})
+				obj["$viewInfo.getRelationTgtFieldName(${pkField.getFieldName()},$detail)"] = document.getElementById("${viewInfo.getFieldName($pkField)}").value;
+#end
+				${dot}.extend(true,obj,postData);//合并查询条件值与grid的默认传递参数
+				return obj;
+			}		
+		});
+#end	
+	}
+
+	/**
+	 * 添加从表数据
+	*/ 
+	function addDetailData(button){
+		form = button.form
+		if(!biz.validate("valid",form)){
+			showWarn("<fmt:message key='validation.object'/>",3000);
+			return;
+		}
+		
+#foreach($detail in ${viewInfo.getRelationEntityViewInfos()})	
+		var ${detail.getEntityName(true)}Data = ${detail.getEntityName(true)}Grid.getJsontosubmit();
+		if(${detail.getEntityName(true)}Data)
+			form.appendChild( biz.utils.createHidden("${detail.getEntityName(true)}", ${detail.getEntityName(true)}Data) );
+		else
+			return;
+#end
+	    form.submit();
+	}
+		
+	new biz.button({id:"#submit_button", icons: {primary:'ui-icon-disk'}});
+	new biz.button({id:"#reset_button", icons: {primary:'ui-icon-refresh'}});
+	new biz.button({id:"#back_button", icons: {primary:'ui-icon-arrowthick-1-w'}});
+
+#foreach( $queryField in $viewInfo.getFields())
+#set($fieldJS = $viewInfo.getFieldTagScript($queryField))
+#if($fieldJS != "")
+${fieldJS}
+#end
+#end
+</script>

@@ -1,0 +1,38 @@
+ #set($dot="$")#set($cols = 2)#set($colon = "：")
+   <div class="barTitle">
+		<div class="content"><a href="javascript:;" onfocus="this.blur();"></a> <span>$viewInfo.formTitle</span></div>
+	</div>
+    <hr class="barTitleHr"></hr>
+	<form id="$viewInfo.formId" action="<c:url value='/$viewInfo.getEntityName(true)/save'/>"  method="post" ${viewInfo.getFormEncType()}>
+    <div class="ui-table ui-widget ui-corner-all ui-border">
+		<table class="table">
+#set($index=1)#set($colspan = $cols*2 - ($viewInfo.fieldsLength*2 % ($cols*2)) + 1)
+#if(($viewInfo.fieldsLength*2 % ($cols*2)) == 0)#set($colspan = 0)#end
+#foreach( $field in $viewInfo.getFields())
+#if( $index % $cols == 1)
+			<tr>
+#end
+				<td class="inputLabelTd">$viewInfo.getFieldDisplayName($field)${colon}</td>
+				<td class="inputTd"#if($index == $viewInfo.fieldsLength) colspan="${colspan}"#end>
+					$viewInfo.getFieldTagHtml($field)
+				</td>
+
+#if( $index % $cols == 0 || $index == $viewInfo.fieldsLength)
+			</tr>
+#end
+#set( $index=$index+1)
+#end
+		</table>
+		<table class="table foottable">
+			<tfoot class="footTd">
+				<tr>
+					<td class="inputTd">
+						<button id="submit_button" type="button" onclick="save(this);">${viewInfo.getSubmitTitle()}</button>&nbsp;&nbsp;
+            			<button id="reset_button" type="reset">${viewInfo.getResetTitle()}</button>&nbsp;&nbsp;
+            			<button id="back_button" type="button" onclick="window.location = '<c:url value="/$viewInfo.getlowerFirstEntityName()"/>'">${viewInfo.getBackTitle()}</button>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	</form>

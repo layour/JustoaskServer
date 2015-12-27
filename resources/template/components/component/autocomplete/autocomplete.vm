@@ -1,0 +1,25 @@
+<input id="$id" #if($name)name="$name"#end class="text#if($styleClass) $styleClass#end" #if($value) value="$value"#end
+#if($size) size=$size#end
+#if($readonly == true) readonly="readonly"#end
+#if($title) title="$title"#end
+#if($accesskey) accesskey="$accesskey"#end
+#if($onload) onload="$onload"#end
+#if($onunload) onunload="$onunload"#end
+#if($onchange) onchange="$onchange"#end
+#if($onsubmit) onsubmit="$onsubmit"#end
+#if($onreset) onreset="$onreset"#end
+#if($onselect) onselect="$onselect"#end
+#if($onblur) onblur="$onblur"#end
+#if($onfocus) onfocus="$onfocus"#end
+#if($onabort) onabort="$onabort"#end
+#if($onkeydown) onkeydown="$onkeydown"#end
+#if($onkeypress) onkeypress="$onkeypress"#end
+#if($onkeyup) onkeyup="$onkeyup"#end
+#if($onclick) onclick="$onclick"#end
+#if($ondblclick) ondblclick="$ondblclick"#end
+#if($onmousedown) onmousedown="$onmousedown"#end
+#if($onmousemove) onmousemove="$onmousemove"#end
+#if($onmouseout) onmouseout="$onmouseout"#end
+#if($onmouseover) onmouseover="$onmouseover"#end
+#if($onmouseup) onmouseup="$onmouseup"#end
+/>

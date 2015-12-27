@@ -1,0 +1,17 @@
+		<div id = "${viewInfo.getEntityName(true)}Tabs">
+			<ul>
+#foreach($detail in ${viewInfo.getRelationEntityViewInfos()})
+				<li>
+					<a href="#${detail.getlowerFirstEntityName()}Tab">${detail.getFormTitle()}</a>
+				</li>
+#end
+			</ul>
+#foreach($detail in ${viewInfo.getRelationEntityViewInfos()})
+			<div id="${detail.getlowerFirstEntityName()}Tab">
+		    	 <div  class="ui-table ui-widget ui-corner-all ui-nomargin-bottom">
+					<table id="${detail.getlowerFirstEntityName()}Table"></table>
+					<div id="${detail.getlowerFirstEntityName()}Page"></div>
+				</div>			
+			</div>
+#end
+		</div>

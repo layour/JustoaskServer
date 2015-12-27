@@ -1,0 +1,12 @@
+	<frameset rows="10%,12%,80%">
+		<!--此为#logo页面-->
+		<frame src="logo.html" >
+		<!--此为#menu页面-->
+		<frame src="menu.html" >
+		<frameset cols="25%,75%">
+			<!--此为#info页面-->
+			<frame src="info.html">
+			<!--此为#content页面-->
+			<frame src="content.html">
+		</frameset>
+	</frameset>

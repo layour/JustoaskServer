@@ -1,0 +1,20 @@
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>
+<%@ include file="/pages/inc/taglibs.jsp" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<title>blank</title>
+	<%@ include file="/pages/inc/header.jsp" %>
+</head>
+
+<body>
+<%@ include file="/pages/inc/common.jsp" %>
+<div class="main">
+
+</div>
+<%@ include file="/pages/inc/footer.jsp" %>
+</body>
+</html>
+<script type="text/javascript">
+
+</script>

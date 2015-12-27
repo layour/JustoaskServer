@@ -1,0 +1,46 @@
+#set($entityClass = ${javaInfo.getEntityName(false)})
+#set($entityVar = ${javaInfo.getEntityName(true)})
+#set($module = "${javaInfo.getModule()}")
+<!--${entityVar}-CONTROLLER-START-->
+	<controller name="${javaInfo.basePackageName}.${javaInfo.module}.controller.${entityClass}Controller">
+#if(${javaInfo.hasList()})
+		<method name="list" uri="/${entityVar}">
+			<result name="success">${module}/${entityVar}/${entityVar}List.jsp</result>
+		</method>
+		<method name="list${entityClass}" uri="/${entityVar}/list${entityClass}"/>
+
+#end
+#if(${javaInfo.hasAddOrEdit()})
+		<method name="add" uri="/${entityVar}/add">
+			<result name="success">${module}/${entityVar}/${entityVar}New.jsp</result>
+		</method>
+		<method name="save" uri="/${entityVar}/save">
+			<result name="success" type="redirect">@list</result>
+			<result name="failed">${module}/${entityVar}/${entityVar}New.jsp</result>
+		</method>
+				
+		<method name="edit" uri="/${entityVar}/edit/{id}">
+			<result name="success">${module}/${entityVar}/${entityVar}Edit.jsp</result>
+		</method>
+		<method name="update" uri="/${entityVar}/update">
+			<result name="success" type="redirect">@list</result>
+		</method>
+
+#end
+#if(${javaInfo.hasShow()})		
+		<method name="show" uri="/${entityVar}/show">
+			<result name="success">${module}/${entityVar}/${entityVar}Show.jsp</result>
+		</method>
+
+#end
+#if(${javaInfo.hasAddOrEdit()})	
+		<method name="delete" uri="/${entityVar}/delete/{ids}">
+			<result name="success" type="redirect">@list</result>
+		</method>
+
+#end
+#if(${javaInfo.hasExport()})
+		<method name="exportExcel" uri="/${entityVar}/exportExcel" />
+#end
+	</controller>
+    <!--${entityVar}-CONTROLLER-END-->

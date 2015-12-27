@@ -1,0 +1,33 @@
+<input id="$id" #if($name)name="$name"#end type="text" class="Wdate#if($styleClass) $styleClass#end" #if($disabled == true)
+ disabled=$disabled#end
+#if($value)
+ value="$value"#end
+#if($size) size="$size"#end
+#if($readonly == true) readonly="readonly"#end
+#if($title) title="$title"#end
+#if($onchange) 
+ onchange="$onchange"#end 
+#if($onclick) 
+ onclick="$onclick"#end 
+#if($ondbclick) 
+ ondbclick="$ondbclick"#end 
+#if($onfocus) 
+ onfocus="$onfocus"#end 
+#if($onkeydown) 
+ onkeydown="$onkeydown"#end 
+#if($onkeypress) 
+ onkeypress="$onkeypress"#end 
+#if($onkeyup) 
+ onkeyup="$onkeyup"#end 
+#if($onmouseup) 
+ onmouseup="$onmouseup"#end 
+#if($onmousedown) 
+ onmousedown="$onmousedown"#end 
+#if($onmousemove) 
+ onmousemove="$onmousemove"#end 
+#if($onmouseout) 
+ onmouseout="$onmouseout"#end 
+#if($onmouseover) 
+ onmouseover="$onmouseover"#end
+#if($onselect) 
+ onselect="$onselect" #end/>

@@ -1,0 +1,34 @@
+package ${javaInfo.getPackageName()};
+
+import java.util.List;
+import java.util.Map;
+
+#foreach( $type in ${javaInfo.getImportTypes()})
+import $type;
+#end
+
+import core.mybatis.MyBatisRepository;
+
+/**
+ * 通过@MapperScannerConfigurer扫描目录中的所有接口, 动态在Spring Context中生成实现.
+ * 方法名称必须与Mapper.xml中保持一致.
+ * 
+ */
+@MyBatisRepository
+public interface ${javaInfo.getClassFirstUpperName()} {
+	
+	/**
+	 * 按条件分页查询记录
+	 * @param searchParams ：查询条件
+	 * @return List<${javaInfo.getPoFirstUpperName()}> ：查询结果集
+	 */
+	List<${javaInfo.getPoFirstUpperName()}> searchByPage(Map<String,Object> searchParams);
+
+	/**
+	 * 通过 ${javaInfo.getPoPKName()}获取一条记录
+	 * @param  ${javaInfo.getPoPKFirstLowerName()} ：记录主键
+	 * @return ${javaInfo.getPoFirstUpperName()} ：记录对象实体
+	 */
+	${javaInfo.getPoFirstUpperName()} findById(String ${javaInfo.getPoPKFirstLowerName()});
+	
+}

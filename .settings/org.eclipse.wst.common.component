@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+	<wb-module deploy-name="JustoaskServer">
+		<wb-resource deploy-path="/" source-path="/WebApp"/>
+		<wb-resource deploy-path="/WEB-INF/classes" source-path="/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/register/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/testcase/test-java/register/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/favorite/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/testcase/test-java/favorite/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/modules/mainask/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/testcase/test-java/mainask/java"/>
+		<property name="context-root" value="JustoaskServer"/>
+		<property name="java-output-path" value="target/classes"/>
+	</wb-module>
+</project-modules>

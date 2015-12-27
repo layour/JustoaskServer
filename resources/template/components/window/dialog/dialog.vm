@@ -1,0 +1,21 @@
+<div id="$id" #if($styleClass)class="$styleClass" #end 
+#if($onclick) 
+ onclick="$onclick"#end 
+#if($ondbclick) 
+ ondbclick="$ondbclick"#end 
+#if($onkeydown) 
+ onkeydown="$onkeydown"#end 
+#if($onkeypress) 
+ onkeypress="$onkeypress"#end 
+#if($onkeyup) 
+ onkeyup="$onkeyup"#end 
+#if($onmouseup) 
+ onmouseup="$onmouseup"#end 
+#if($onmousedown) 
+ onmousedown="$onmousedown"#end 
+#if($onmousemove) 
+ onmousemove="$onmousemove"#end 
+#if($onmouseout) 
+ onmouseout="$onmouseout"#end 
+#if($onmouseover) 
+ onmouseover="$onmouseover"#end><!--此处为对话框内容--></div>

@@ -1,0 +1,74 @@
+<%@ page language="java" pageEncoding="${viewInfo.pageEncoding}" contentType="text/html; charset=${viewInfo.pageEncoding}" %>
+<%@ include file="/pages/inc/taglibs.jsp" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>${viewInfo.title}</title>
+<%@ include file="/pages/inc/header.jsp" %>
+</head>
+#set($dot="$")#set($cols = 2)#set($colon = "：")
+<body>
+<%@ include file="/pages/inc/common.jsp" %>
+<div id="container" class="main">
+    <div class="barTitle">
+		<div class="content"><a href="javascript:;" onfocus="this.blur();"></a> <span>${viewInfo.title}</span></div>
+	</div>
+    <hr class="barTitleHr"></hr>
+	<form id="$viewInfo.formId" action="<c:url value='/$viewInfo.getEntityName(true)/update'/>"  method="post" ${viewInfo.getFormEncType()}>
+#if(${viewInfo.showType} == "common")
+    <div class="ui-table ui-widget ui-corner-all ui-border">
+#else
+	<div class="ui-table ui-widget ui-corner-all ui-noborder">
+#end
+#foreach($pkField in ${viewInfo.getHidePKFields()})
+		${viewInfo.buildHideFieldHtml($pkField)}
+#end		
+#set($viewType = "edit")
+#if(${viewInfo.showType} == "tab")
+#parse("tab.vm")
+#elseif(${viewInfo.showType} == "group")
+#parse("group.vm")
+#else
+#parse("common.vm")
+#end
+		<table class="table foottable">
+			<tfoot class="footTd">
+				<tr>
+					<td class="inputTd">
+						<button id="submit_button" type="button" onclick="update(this);">${viewInfo.getSubmitTitle()}</button>&nbsp;&nbsp;
+            			<button id="reset_button" type="reset">${viewInfo.getResetTitle()}</button>&nbsp;&nbsp;
+            			<button id="back_button" type="button" onclick="window.location = '<c:url value="/${viewInfo.getEntityName(true)}"/>'">${viewInfo.getBackTitle()}</button>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+        </div>
+	</form>
+</div>
+<%@ include file="/pages/inc/footer.jsp" %>
+</body>
+</html>
+<script type="text/javascript">
+	new biz.button({id:"#submit_button", icons: {primary:'ui-icon-disk'}});
+	new biz.button({id:"#reset_button", icons: {primary:'ui-icon-refresh'}});
+	new biz.button({id:"#back_button", icons: {primary:'ui-icon-arrowthick-1-w'}});
+#if(${viewInfo.showType} == "tab")
+	${dot}("#${viewInfo.getEntityName(true)}Tabs").tabs({});
+#end
+
+	function update(button){
+		form = button.form;
+		if(!biz.validate("valid",form)){
+			showWarn("<fmt:message key='validation.object'/>",3000);
+			return;
+		}
+		form.submit();
+	}
+	
+#foreach( $queryField in $viewInfo.getFields())
+#set($fieldJS = $viewInfo.getFieldTagScript($queryField))
+#if($fieldJS != "")
+${fieldJS}
+#end
+#end
+</script>

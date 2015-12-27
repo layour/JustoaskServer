@@ -1,0 +1,8 @@
+#foreach($detail in ${viewInfo.getRelationEntityViewInfos()})
+		 <div class="divspace_gray"></div> 
+    	 <div  class="ui-table ui-widget ui-corner-all ui-nomargin-bottom">
+			<table id="${detail.getlowerFirstEntityName()}Table"></table>
+			<div id="${detail.getlowerFirstEntityName()}Page"></div>
+		</div>
+		
+#end

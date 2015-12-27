@@ -1,0 +1,33 @@
+<div id="$id" #if($styleClass) class="$styleClass" #end 
+#if($onclick) 
+ onclick="$onclick"#end 
+#if($ondbclick) 
+ ondbclick="$ondbclick"#end 
+#if($onkeydown) 
+ onkeydown="$onkeydown"#end 
+#if($onkeypress) 
+ onkeypress="$onkeypress"#end 
+#if($onkeyup) 
+ onkeyup="$onkeyup"#end 
+#if($onmouseup) 
+ onmouseup="$onmouseup"#end 
+#if($onmousedown) 
+ onmousedown="$onmousedown"#end 
+#if($onmousemove) 
+ onmousemove="$onmousemove"#end 
+#if($onmouseout) 
+ onmouseout="$onmouseout"#end 
+#if($onmouseover) 
+ onmouseover="$onmouseover"#end>
+		<!--可以添加多对li，即多个tab标签页-->
+	<ul>
+		<!--此处href与后面id为${id}-tabs1的div对应 -->
+		<li><a  href="#${id}-tabs1"></a></li>
+		<li><a  href="#${id}-tabs2"></a></li>
+		<li><a  href="#${id}-tabs3"></a></li>
+	</ul>
+	<!--${id}-tabs1面板内容-->
+	<div id="${id}-tabs1"></div>
+	<div id="${id}-tabs2"></div>
+	<div id="${id}-tabs3"></div>      
+</div>

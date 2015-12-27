@@ -1,0 +1,23 @@
+<%@ page language="java" pageEncoding="${viewInfo.pageEncoding}" contentType="text/html; charset=${viewInfo.pageEncoding}" %>
+<%@ include file="/pages/inc/taglibs.jsp" %>
+#set($dot="$")#set($cols = 2)
+<div>
+	<div class="ui-table ui-widget ui-corner-all ui-border">
+		<table class="table forview">
+#set($index=1)#set($colspan = $cols*2 - ($viewInfo.fieldsLength*2 % ($cols*2)) + 1)
+#if(($viewInfo.fieldsLength*2 % ($cols*2)) == 0)#set($colspan = 0)#end
+#foreach( $field in $viewInfo.getFields())
+#if( $index % $cols == 1)
+			<tr>
+#end
+				<td class="inputLabelTd">$viewInfo.getFieldDisplayName($field)</td>
+				<td class="inputTd"#if($index == $viewInfo.fieldsLength) colspan="${colspan}"#end>$viewInfo.getCoutValue($field)</td>
+
+#if( $index % $cols == 0 || $index == $viewInfo.fieldsLength)
+			</tr>
+#end
+#set( $index=$index+1)
+#end
+		</table>
+	</div>
+</div>

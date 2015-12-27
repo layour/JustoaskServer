@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PaletteGroups>
+	<PaletteGroup id="custom_palettegroup1" name="用户自定义1"  desc="用户自定义1">
+		<PaletteItem id="custom_paletteitem1"  label="用户自定义组件1"   desc="用户自定义组件1" />
+		<PaletteItem id="custom_paletteitem2"  label="用户自定义组件2"   desc="用户自定义组件2" />
+		<PaletteItem id="custom_paletteitem3"  label="用户自定义组件3"   desc="用户自定义组件3" />
+	</PaletteGroup>
+	<PaletteGroup id="custom_palettegroup2" name="用户自定义2"  desc="用户自定义2">
+	</PaletteGroup>
+</PaletteGroups>

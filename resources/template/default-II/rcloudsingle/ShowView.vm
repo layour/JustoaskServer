@@ -1,0 +1,51 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/public/include/default.jsp" %>
+
+#set($entity = $viewInfo.getlowerFirstEntityName())
+#set($dot="$")
+#set($colon = "：")
+#set($index = 0)
+#set($count = $viewInfo.getNotPkFields().size())
+#set($result = ${count} % 3)
+<html>
+<head>
+	<title>$viewInfo.showTitle</title>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#cancel").bind("click",function(){
+				history.back();
+			});
+		});
+	</script>
+</head>
+
+<body style="margin: 0px;">
+	<div class="easyui-panel" data-options="fit:true,border:false" title="$viewInfo.showTitle" align="center" style="padding: 5px;">
+		<table class="view_table" border="1" cellpadding="0" cellspacing="0" bordercolor="#cccccc">
+#foreach( $field in $viewInfo.getNotPkFields())
+#set($fieldName=${viewInfo.getFieldName($field)})
+#set($index = ${index} + 1)
+#if(${index} == 4)
+#set($index = 1)
+#end
+#if(${index} == 1)
+    		<tr>
+#end
+    			<td align="right"><label>$viewInfo.getFieldDisplayName($field)${colon}</label></td>
+    			<td>$dot{${entity}.${fieldName}}</td>
+#if(${index} == 3)
+    		</tr>
+#end
+#end
+#if(${result} > 0)
+    		</tr>
+#end
+        	<tr>
+				<td colspan="6" align="center">
+					<a id="cancel" href="javascript:void(0)" class="easyui-linkbutton">&nbsp;&nbsp;返回&nbsp;&nbsp;</a>
+				</td>
+			</tr>
+        </table>
+	</div>
+</body>
+</html>
