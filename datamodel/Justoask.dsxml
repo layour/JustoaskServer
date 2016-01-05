@@ -1,66 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dataset author="Justoask.dsxml" displayName="" name="Justoask.dsxml">
-<entity author="" description="" displayName="用户" entityType="persistent" genStrategy="uuid" id="402881e951e39aa60151e3a6102c0440" isSetViewModel="false" name="User" schema="" tableName="JA_USER">
-<location height="98" wide="240" x="208" y="18"/>
-<fields>
-<field FK="false" PK="true" columnName="USER_ID" columnType="" default="" description="" displayName="用户ID" fieldName="userId" fieldType="java.lang.String" id="402881e951e39aa60151e3a6102c0434" length="" nullAble="true" persistent="true" precision="">
-<refVentityFields/>
-</field>
-<field FK="false" PK="false" columnName="USER_NAME" columnType="" default="" description="" displayName="用户姓名" fieldName="userName" fieldType="java.lang.String" id="402881e951e39aa60151e3a6102c0437" length="" nullAble="false" persistent="true" precision="">
-<refVentityFields/>
-</field>
-<field FK="false" PK="false" columnName="PASSWORD" columnType="" default="" description="" displayName="密码" fieldName="password" fieldType="java.lang.String" id="402881e951e39aa60151e3a6102c0436" length="" nullAble="false" persistent="true" precision="">
-<refVentityFields/>
-</field>
-</fields>
-<relations/>
-<refVentityFields/>
-<viewModel>
-<queryForm exportExcel="false" id="402881e951e39aa60151e3a6102a0382" isDistinct="false" isTotalRows="false" orderFields="phoneNo" orders="asc" pageSize="15" title=""/>
-<queryResult id="402881e951e39aa60151e3a6102a038a" rowSelectType="checkbox" title="用户查询">
-<listField displayName="密码" fieldId="402881e951e39aa60151e3a6102c0436" fieldName="password" fieldType="java.lang.String" index="0" width="">
-<tag type="text">
-<attr attrValue="password" defaultValue="" name="name" type="property"/>
-<attr attrValue="password" defaultValue="" name="id" type="property"/>
-</tag>
-</listField>
-<listField displayName="用户姓名" fieldId="402881e951e39aa60151e3a6102c0437" fieldName="userName" fieldType="java.lang.String" index="0" width="">
-<tag type="text">
-<attr attrValue="userName" defaultValue="" name="name" type="property"/>
-<attr attrValue="userName" defaultValue="" name="id" type="property"/>
-</tag>
-</listField>
-</queryResult>
-<detailInfo id="402881e951e39aa60151e3a6102b03fc" showType="" title="用户详细">
-<showField displayName="密码" fieldId="402881e951e39aa60151e3a6102c0436" fieldName="password" fieldType="java.lang.String" index="0">
-<tag type="text">
-<attr attrValue="password" defaultValue="" name="name" type="property"/>
-<attr attrValue="password" defaultValue="" name="id" type="property"/>
-</tag>
-</showField>
-<showField displayName="用户姓名" fieldId="402881e951e39aa60151e3a6102c0437" fieldName="userName" fieldType="java.lang.String" index="0">
-<tag type="text">
-<attr attrValue="userName" defaultValue="" name="name" type="property"/>
-<attr attrValue="userName" defaultValue="" name="id" type="property"/>
-</tag>
-</showField>
-</detailInfo>
-<form id="402881e951e39aa60151e3a6102b03c3" title="用户添加">
-<addField displayName="密码" fieldId="402881e951e39aa60151e3a6102c0436" fieldName="password" fieldType="java.lang.String" index="0" isDisplay="true">
-<tag type="text">
-<attr attrValue="password" defaultValue="" name="name" type="property"/>
-<attr attrValue="password" defaultValue="" name="id" type="property"/>
-</tag>
-</addField>
-<addField displayName="用户姓名" fieldId="402881e951e39aa60151e3a6102c0437" fieldName="userName" fieldType="java.lang.String" index="0" isDisplay="true">
-<tag type="text">
-<attr attrValue="userName" defaultValue="" name="name" type="property"/>
-<attr attrValue="userName" defaultValue="" name="id" type="property"/>
-</tag>
-</addField>
-</form>
-</viewModel>
-</entity>
 <entity author="" description="" displayName="收藏" entityType="persistent" genStrategy="uuid" id="402881e951e39aa60151e3a7aff30450" isSetViewModel="false" name="Collect" schema="" tableName="JA_COLLECT">
 <location height="96" wide="230" x="478" y="20"/>
 <fields>
@@ -80,10 +19,10 @@
 <queryForm exportExcel="false" id="402881e951e39aa60151e3a7aff30446" isDistinct="false" isTotalRows="false" orderFields="" orders="" pageSize="15" title=""/>
 <queryResult id="402881e951e39aa60151e3a7aff30448" rowSelectType="checkbox" title=""/>
 <detailInfo id="402881e951e39aa60151e3a7aff3044c" showType="" title=""/>
-<form id="402881e951e39aa60151e3a7aff3044a" title=""/>
+<form id="402881e951e39aa60151e3a7aff3044a" showType="" title=""/>
 </viewModel>
 </entity>
-<entity author="" description="" displayName="问题" entityType="persistent" genStrategy="uuid" id="402881e951e39aa60151e3ab683a04da" isSetViewModel="false" name="Problem" schema="" tableName="HS_PROBLEM">
+<entity author="" description="" displayName="问题" entityType="persistent" genStrategy="uuid" id="402881e951e39aa60151e3ab683a04da" isSetViewModel="true" name="Problem" schema="" tableName="HS_PROBLEM">
 <location height="97" wide="220" x="212" y="146"/>
 <fields>
 <field FK="false" PK="true" columnName="PROBLEM_ID" columnType="" default="" description="" displayName="问题ID" fieldName="problemId" fieldType="java.lang.String" id="402881e951e39aa60151e3ab683a04d2" length="" nullAble="true" persistent="true" precision="">
@@ -100,48 +39,26 @@
 <refVentityFields/>
 <viewModel>
 <queryForm exportExcel="false" id="402881e951e39aa60151e3ab6839045d" isDistinct="false" isTotalRows="false" orderFields="" orders="" pageSize="15" title=""/>
-<queryResult id="402881e951e39aa60151e3ab68390464" rowSelectType="checkbox" title="题目查询">
-<listField displayName="题目描述" fieldId="402881e951e39aa60151e3ab683a04d3" fieldName="problem" fieldType="java.lang.String" index="0" width="">
-<tag type="text">
-<attr attrValue="problem" defaultValue="" name="name" type="property"/>
-<attr attrValue="problem" defaultValue="" name="id" type="property"/>
-</tag>
-</listField>
-<listField displayName="答案描述" fieldId="402881e951e39aa60151e3ab683a04d4" fieldName="answer" fieldType="java.lang.String" index="0" width="">
-<tag type="text">
-<attr attrValue="answer" defaultValue="" name="name" type="property"/>
-<attr attrValue="answer" defaultValue="" name="id" type="property"/>
-</tag>
-</listField>
-</queryResult>
-<detailInfo id="402881e951e39aa60151e3ab683a04ae" showType="" title="题目详细">
-<showField displayName="题目描述" fieldId="402881e951e39aa60151e3ab683a04d3" fieldName="problem" fieldType="java.lang.String" index="0">
-<tag type="text">
-<attr attrValue="problem" defaultValue="" name="name" type="property"/>
-<attr attrValue="problem" defaultValue="" name="id" type="property"/>
-</tag>
-</showField>
-<showField displayName="答案描述" fieldId="402881e951e39aa60151e3ab683a04d4" fieldName="answer" fieldType="java.lang.String" index="0">
-<tag type="text">
-<attr attrValue="answer" defaultValue="" name="name" type="property"/>
-<attr attrValue="answer" defaultValue="" name="id" type="property"/>
-</tag>
-</showField>
-</detailInfo>
-<form id="402881e951e39aa60151e3ab68390489" title="添加题目">
-<addField displayName="题目描述" fieldId="402881e951e39aa60151e3ab683a04d3" fieldName="problem" fieldType="java.lang.String" index="0" isDisplay="true">
-<tag type="text">
-<attr attrValue="problem" defaultValue="" name="name" type="property"/>
-<attr attrValue="problem" defaultValue="" name="id" type="property"/>
-</tag>
-</addField>
-<addField displayName="答案描述" fieldId="402881e951e39aa60151e3ab683a04d4" fieldName="answer" fieldType="java.lang.String" index="0" isDisplay="true">
-<tag type="text">
-<attr attrValue="answer" defaultValue="" name="name" type="property"/>
-<attr attrValue="answer" defaultValue="" name="id" type="property"/>
-</tag>
-</addField>
-</form>
+<queryResult id="402881e951e39aa60151e3ab68390464" rowSelectType="checkbox" title=""/>
+<detailInfo id="402881e951e39aa60151e3ab683a04ae" showType="" title=""/>
+<form id="402881e951e39aa60151e3ab68390489" showType="" title=""/>
 </viewModel>
+</entity>
+<entity author="" description="" displayName="用户" entityType="persistent" genStrategy="uuid" id="8a82f0d652107156015210c018210192" isSetViewModel="false" name="User" schema="" tableName="JS_USER">
+<location height="88" wide="220" x="208" y="21"/>
+<fields>
+<field FK="false" PK="true" columnName="USER_ID" columnType="" default="" description="" displayName="用户ID" fieldName="userId" fieldType="java.lang.String" id="8a82f0d652107156015210c1fa3b0196" length="" nullAble="true" persistent="true" precision="">
+<refVentityFields/>
+</field>
+<field FK="false" PK="false" columnName="USER_NAME" columnType="" default="" description="" displayName="用户姓名" fieldName="userName" fieldType="java.lang.String" id="8a82f0d652107156015210c1fa3b0197" length="" nullAble="false" persistent="true" precision="">
+<refVentityFields/>
+</field>
+<field FK="false" PK="false" columnName="PASSWORD" columnType="" default="" description="" displayName="密码" fieldName="password" fieldType="java.lang.String" id="8a82f0d652107156015210c1fa3b0198" length="" nullAble="false" persistent="true" precision="">
+<refVentityFields/>
+</field>
+</fields>
+<relations/>
+<refVentityFields/>
+<viewModel/>
 </entity>
 </dataset>
