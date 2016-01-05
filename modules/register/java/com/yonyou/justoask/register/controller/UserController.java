@@ -6,8 +6,6 @@ import java.util.Map;
 import javax.servlet.ServletRequest;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,13 +40,13 @@ public class UserController {
 	@ResponseBody
 	public String login(Model model, ServletRequest request) {
 		
-		String loginName = request.getParameter("loginName");//获取用户登录账号
-		String loginPwd = request.getParameter("loginPwd");//获取用户登录密码
+		String userName = request.getParameter("userName");//获取用户登录账号
+		String password = request.getParameter("password");//获取用户登录密码
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		
-		User user = userService.findByUserName(loginName);
-		if(loginPwd.equals(user.getPassword())){
+		User user = userService.findByUserName(userName);
+		if(password.equals(user.getPassword())){
 			result.put("code", "0");
 			result.put("msg", "登录成功");
 			result.put("user", user);
@@ -70,9 +68,9 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMappingName(value = "移动保存")
-	@RequestMapping(value="mobileSave", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json; charset=utf-8")  
+	@RequestMapping(value="save", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json; charset=utf-8")  
 	@ResponseBody
-	public String mobileSave(@Valid User user, Model model) {
+	public String save(@Valid User user, Model model) {
 		userService.save(user);
 		
 		Map<String, Object> result = new HashMap<String, Object>();
