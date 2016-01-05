@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <BizProject META_DEF_ID="com.icss.ro.studio.bizfoundation.module.BizFoundationProject">
-  <id>402881e951e39aa60151e39c882d004e</id>
+  <id>8a82f0d652107156015210797a9f0046</id>
   <name>JustoaskServer</name>
-  <description>问一下服务端</description>
+  <description></description>
   <alias>问一下</alias>
+  <parent>8a82f0d6521071560152107156730000</parent>
   <version>6.0.1</version>
   <location>\JustoaskServer</location>
   <params/>

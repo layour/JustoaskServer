@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Component Id="402881e951e39aa60151e39d858c0062" Name="register">
+<Component Id="8a82f0d6521071560152107cebbc0072" Name="register">
   <Version>1.0.0</Version>
   <code>register</code>
   <Mark>注册登录</Mark>
-  <Description></Description>
+  <Description>注册登录</Description>
   <NavigatorEntrance></NavigatorEntrance>
   <ComplexAttribute Name="packageAndFolder">
     <Package/>

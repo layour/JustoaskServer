@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Component Id="402881e951e39aa60151e39e86520071" Name="favorite">
+<Component Id="8a82f0d6521071560152107d82040081" Name="favorite">
   <Version>1.0.0</Version>
   <code>favorite</code>
   <Mark>个人收藏</Mark>
-  <Description></Description>
+  <Description>个人收藏</Description>
   <NavigatorEntrance></NavigatorEntrance>
   <ComplexAttribute Name="packageAndFolder">
     <Package/>
