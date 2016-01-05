@@ -4,20 +4,10 @@
 <mapper namespace="com.yonyou.justoask.register.dao.mybatis.UserDao">
   <!--查询一条记录-->
   <select id="findById" resultMap="UserMap">SELECT <include refid="columns"/> FROM JS_USER WHERE USER_ID=#{userId}</select>
-  <!--查询所有记录-->
-  <select id="findAll" resultMap="UserMap">SELECT <include refid="columns"/> FROM JS_USER</select>
-  <!--按条件查询-->
-  <select id="search" parameterType="map" resultMap="UserMap">SELECT <include refid="columns"/> FROM JS_USER
-    <where/>
-  </select>
-  <!--分页查询-->
-  <select id="searchByPage" parameterType="map" resultMap="UserMap">SELECT <include refid="columns"/> FROM JS_USER
-    <where/>
-  </select>
+  <!--查询一条记录-->
+  <select id="findByUserName" resultMap="UserMap">SELECT <include refid="columns"/> FROM HS_USER WHERE USER_NAME=#{userName}</select>
   <!--插入记录-->
   <insert id="save" parameterType="User">INSERT INTO JS_USER (<include refid="columns"/>) VALUES (#{userId},#{userName},#{password})</insert>
-  <!--删除记录-->
-  <delete id="delete">DELETE FROM JS_USER WHERE USER_ID=#{userId}</delete>
   <!--修改记录-->
   <update id="update" parameterType="User">UPDATE JS_USER
     <set>

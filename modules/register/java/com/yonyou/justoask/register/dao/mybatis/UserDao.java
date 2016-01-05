@@ -1,9 +1,6 @@
 package com.yonyou.justoask.register.dao.mybatis;
 
-import java.util.List;
-import java.util.Map;
-
-import com.yonyou.justoask.register.domain.*;
+import com.yonyou.justoask.register.domain.User;
 
 import core.mybatis.MyBatisRepository;
 
@@ -16,13 +13,6 @@ import core.mybatis.MyBatisRepository;
 public interface UserDao {
 	
 	/**
-	 * 按条件分页查询记录
-	 * @param searchParams ：查询条件
-	 * @return List<User> ：查询结果集
-	 */
-	List<User> searchByPage(Map<String,Object> searchParams);
-	
-	/**
 	 * 通过 userId获取一条记录
 	 * @param  userId ：记录主键
 	 * @return User ：记录对象实体
@@ -30,16 +20,17 @@ public interface UserDao {
 	User findById(String userId);
 	
 	/**
+	 * 通过 userName 获取一条记录
+	 * @param userName 主键
+	 * @return
+	 */
+	User findByUserName(String userName);
+	
+	/**
 	 * 保存一条记录
 	 * @param user ：记录对象实体
 	 */
 	void save(User user);
-	
-	/**
-	 * 通过user删除一条记录
-	 * @param user ：记录主键ID
-	 */
-	void delete(String userId);
 	
 	/**
 	 * 修改记录
