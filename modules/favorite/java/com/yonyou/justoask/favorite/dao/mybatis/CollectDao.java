@@ -23,13 +23,6 @@ public interface CollectDao {
 	List<Collect> searchByPage(Map<String,Object> searchParams);
 	
 	/**
-	 * 通过 collectId获取一条记录
-	 * @param  collectId ：记录主键
-	 * @return Collect ：记录对象实体
-	 */
-	Collect findById(String collectId);
-	
-	/**
 	 * 保存一条记录
 	 * @param collect ：记录对象实体
 	 */
@@ -40,10 +33,4 @@ public interface CollectDao {
 	 * @param collect ：记录主键ID
 	 */
 	void delete(String collectId);
-	
-	/**
-	 * 修改记录
-	 * @param collect ：记录对象实体
-	 */
-	void update(Collect collect);
 }

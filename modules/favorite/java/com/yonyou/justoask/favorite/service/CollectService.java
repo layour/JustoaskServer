@@ -27,15 +27,6 @@ public class CollectService {
 	public List<Collect> searchByPage(Map<String,Object> searchParams) {
 		return (List<Collect>) collectDao.searchByPage(searchParams);
 	}
-	
-	/**
-	 * 通过collectId获取一条记录
-	 * @param collectId ：记录主键
-	 * @return Collect ：记录对象实体
-	 */
-	public Collect findById(String collectId) {
-		return collectDao.findById(collectId);
-	}
 
 	/**
 	 * 保存一条记录
@@ -54,13 +45,5 @@ public class CollectService {
 		for(String collectId:collectIds.split(",")){
 			collectDao.delete(collectId);
 		}
-	}
-	
-	/**
-	 * 修改记录
-	 * @param collect ：记录对象实体
-	 */
-	public void update(Collect collect) {
-		collectDao.update(collect);
 	}
 }

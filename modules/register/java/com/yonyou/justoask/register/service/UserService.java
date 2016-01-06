@@ -17,15 +17,6 @@ public class UserService {
 	private UserDao userDao;
 	
 	/**
-	 * 通过userId获取一条记录
-	 * @param userId ：记录主键
-	 * @return User ：记录对象实体
-	 */
-	public User findById(String userId) {
-		return userDao.findById(userId);
-	}
-	
-	/**
 	 * 通过phoneNo获取一条记录
 	 * @param userName 唯一约束
 	 * @return

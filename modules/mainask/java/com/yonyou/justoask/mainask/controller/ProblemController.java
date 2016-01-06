@@ -11,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springside.modules.web.Servlets;
 
-import com.yonyou.justoask.mainask.domain.*;
-import com.yonyou.justoask.mainask.service.*;
+import com.yonyou.justoask.mainask.domain.Problem;
+import com.yonyou.justoask.mainask.service.ProblemService;
 
 import core.mybatis.PageParameter;
 import core.spring.RequestMappingName;
@@ -35,16 +33,6 @@ public class ProblemController {
 	
 	@Autowired
 	private ProblemService problemService;
-	
-	/**
-	 * 跳转到管理页面
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "跳转到管理页面")
-	@RequestMapping(value = "toManagerPage", method = RequestMethod.GET)
-	public String toManagerPage() {
-		return "mainask/problem/problemList";
-	}
 	
 	/**
 	 * 执行查询列表操作（分布查询）
@@ -76,16 +64,6 @@ public class ProblemController {
 	}
 	
 	/**
-	 * 跳转到增加页面
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "跳转到增加页面")
-	@RequestMapping(value = "toAddPage", method = RequestMethod.GET)
-	public String toAddPage() {
-		return "mainask/problem/problemAdd";
-	}
-	
-	/**
 	 * 执行保存操作
 	 * @param problem ：pojo对象
 	 * @param redirectAttributes ：跳转参数设置对象
@@ -95,60 +73,6 @@ public class ProblemController {
 	@RequestMapping(value = "save", method = RequestMethod.POST)
 	public String save(@Valid Problem problem, RedirectAttributes redirectAttributes) {
 		problemService.save(problem);
-		return "mainask/problem/problemList";
-	}
-	
-	/**
-	 * 跳转到修改页面
-	 * @param problemId ：记录ID键值
-	 * @param model ：视图对象（参数传递）
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "跳转到修改页面")
-	@RequestMapping(value = "toUpdatePage/{problemId}", method = RequestMethod.GET)
-	public String toUpdatePage(@PathVariable("problemId") String problemId, Model model) {
-		model.addAttribute("problem", problemService.findById(problemId));
-		return "mainask/problem/problemUpdate";
-	}
-	
-	/**
-	 * 执行修改操作
-	 * @param problem ：pojo对象
-	 * @param redirectAttributes ：跳转参数设置对象
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "执行修改操作")
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("problem") Problem problem, RedirectAttributes redirectAttributes) {
-		problemService.update(problem);
-		redirectAttributes.addFlashAttribute("message", "更新成功");
-		return "mainask/problem/problemList";
-	}
-	
-	/**
-	 * 跳转到详细页面
-	 * @param problemId ：记录ID键值
-	 * @param model  ：视图对象（参数传递）
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "跳转到详细页面")
-	@RequestMapping(value = "toDetailPage/{problemId}", method = RequestMethod.GET)
-	public String toDetailPage(@PathVariable("problemId") String problemId, Model model) {
-		model.addAttribute("problem", problemService.findById(problemId));
-		return "mainask/problem/problemDetail";
-	}
-	 
-	/**
-	 * 执行删除操作
-	 * @param problemId ：记录ID键值
-	 * @param redirectAttributes ：跳转参数设置对象
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "删除")
-	@RequestMapping(value = "delete/{problemId}")
-	public String delete(@PathVariable("problemId") String problemId, RedirectAttributes redirectAttributes) {
-		problemService.delete(problemId);
-		redirectAttributes.addFlashAttribute("message", "删除成功");
 		return "mainask/problem/problemList";
 	}
 }

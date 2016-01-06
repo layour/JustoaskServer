@@ -23,27 +23,8 @@ public interface ProblemDao {
 	List<Problem> searchByPage(Map<String,Object> searchParams);
 	
 	/**
-	 * 通过 problemId获取一条记录
-	 * @param  problemId ：记录主键
-	 * @return Problem ：记录对象实体
-	 */
-	Problem findById(String problemId);
-	
-	/**
 	 * 保存一条记录
 	 * @param problem ：记录对象实体
 	 */
 	void save(Problem problem);
-	
-	/**
-	 * 通过problem删除一条记录
-	 * @param problem ：记录主键ID
-	 */
-	void delete(String problemId);
-	
-	/**
-	 * 修改记录
-	 * @param problem ：记录对象实体
-	 */
-	void update(Problem problem);
 }

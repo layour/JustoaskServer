@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,8 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springside.modules.web.Servlets;
 
-import com.yonyou.justoask.favorite.domain.*;
-import com.yonyou.justoask.favorite.service.*;
+import com.yonyou.justoask.favorite.domain.Collect;
+import com.yonyou.justoask.favorite.service.CollectService;
 
 import core.mybatis.PageParameter;
 import core.spring.RequestMappingName;
@@ -35,16 +34,6 @@ public class CollectController {
 	
 	@Autowired
 	private CollectService collectService;
-	
-	/**
-	 * 跳转到管理页面
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "跳转到管理页面")
-	@RequestMapping(value = "toManagerPage", method = RequestMethod.GET)
-	public String toManagerPage() {
-		return "favorite/collect/collectList";
-	}
 	
 	/**
 	 * 执行查询列表操作（分布查询）
@@ -76,16 +65,6 @@ public class CollectController {
 	}
 	
 	/**
-	 * 跳转到增加页面
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "跳转到增加页面")
-	@RequestMapping(value = "toAddPage", method = RequestMethod.GET)
-	public String toAddPage() {
-		return "favorite/collect/collectAdd";
-	}
-	
-	/**
 	 * 执行保存操作
 	 * @param collect ：pojo对象
 	 * @param redirectAttributes ：跳转参数设置对象
@@ -96,46 +75,6 @@ public class CollectController {
 	public String save(@Valid Collect collect, RedirectAttributes redirectAttributes) {
 		collectService.save(collect);
 		return "favorite/collect/collectList";
-	}
-	
-	/**
-	 * 跳转到修改页面
-	 * @param collectId ：记录ID键值
-	 * @param model ：视图对象（参数传递）
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "跳转到修改页面")
-	@RequestMapping(value = "toUpdatePage/{collectId}", method = RequestMethod.GET)
-	public String toUpdatePage(@PathVariable("collectId") String collectId, Model model) {
-		model.addAttribute("collect", collectService.findById(collectId));
-		return "favorite/collect/collectUpdate";
-	}
-	
-	/**
-	 * 执行修改操作
-	 * @param collect ：pojo对象
-	 * @param redirectAttributes ：跳转参数设置对象
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "执行修改操作")
-	@RequestMapping(value = "update", method = RequestMethod.POST)
-	public String update(@Valid @ModelAttribute("collect") Collect collect, RedirectAttributes redirectAttributes) {
-		collectService.update(collect);
-		redirectAttributes.addFlashAttribute("message", "更新成功");
-		return "favorite/collect/collectList";
-	}
-	
-	/**
-	 * 跳转到详细页面
-	 * @param collectId ：记录ID键值
-	 * @param model  ：视图对象（参数传递）
-	 * @return String ：跳转路径
-	 */
-	@RequestMappingName(value = "跳转到详细页面")
-	@RequestMapping(value = "toDetailPage/{collectId}", method = RequestMethod.GET)
-	public String toDetailPage(@PathVariable("collectId") String collectId, Model model) {
-		model.addAttribute("collect", collectService.findById(collectId));
-		return "favorite/collect/collectDetail";
 	}
 	 
 	/**

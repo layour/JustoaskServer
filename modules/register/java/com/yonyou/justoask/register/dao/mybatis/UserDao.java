@@ -13,13 +13,6 @@ import core.mybatis.MyBatisRepository;
 public interface UserDao {
 	
 	/**
-	 * 通过 userId获取一条记录
-	 * @param  userId ：记录主键
-	 * @return User ：记录对象实体
-	 */
-	User findById(String userId);
-	
-	/**
 	 * 通过 userName 获取一条记录
 	 * @param userName 主键
 	 * @return
