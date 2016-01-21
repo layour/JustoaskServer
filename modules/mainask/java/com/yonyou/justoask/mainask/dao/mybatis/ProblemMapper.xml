@@ -3,11 +3,11 @@
 
 <mapper namespace="com.yonyou.justoask.mainask.dao.mybatis.ProblemDao">
   <!--分页查询-->
-  <select id="searchByPage" parameterType="map" resultMap="ProblemMap">SELECT <include refid="columns"/> FROM HS_PROBLEM
+  <select id="searchByPage" parameterType="map" resultMap="ProblemMap">SELECT <include refid="columns"/> FROM JA_PROBLEM
     <where/>
   </select>
   <!--插入记录-->
-  <insert id="save" parameterType="Problem">INSERT INTO HS_PROBLEM (<include refid="columns"/>) VALUES (#{problemId},#{problem},#{answer})</insert>
+  <insert id="save" parameterType="Problem">INSERT INTO JA_PROBLEM (<include refid="columns"/>) VALUES (#{problemId},#{problem},#{answer})</insert>
   <!--结果映射-->
   <resultMap type="Problem" id="ProblemMap">
     <result column="PROBLEM_ID" property="problemId"/>

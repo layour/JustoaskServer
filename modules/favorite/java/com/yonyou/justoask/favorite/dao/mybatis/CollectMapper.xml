@@ -4,10 +4,12 @@
 <mapper namespace="com.yonyou.justoask.favorite.dao.mybatis.CollectDao">
   <!--分页查询-->
   <select id="searchByPage" parameterType="map" resultMap="CollectMap">SELECT <include refid="columns"/> FROM JA_COLLECT
-    <where/>
+    <where>
+      <if test="userId != null and userId != ''">USER_ID = #{userId}</if>
+    </where>
   </select>
   <!--插入记录-->
-  <insert id="save" parameterType="Collect">INSERT INTO JA_COLLECT (<include refid="columns"/>) VALUES (#{collectId},#{problemId},#{userId})</insert>
+  <insert id="save" parameterType="Collect">INSERT INTO JA_COLLECT (<include refid="columns"/>) VALUES (#{collectId},#{problemId},#{userId},#{collectTime})</insert>
   <!--删除记录-->
   <delete id="delete">DELETE FROM JA_COLLECT WHERE COLLECT_ID=#{collectId}</delete>
   <!--结果映射-->
@@ -15,7 +17,8 @@
     <result column="COLLECT_ID" property="collectId"/>
     <result column="PROBLEM_ID" property="problemId"/>
     <result column="USER_ID" property="userId"/>
+    <result column="COLLECT_TIME" property="collectTime"/>
   </resultMap>
   <!--查询字段-->
-  <sql id="columns">COLLECT_ID,PROBLEM_ID,USER_ID</sql>
+  <sql id="columns">COLLECT_ID,PROBLEM_ID,USER_ID,COLLECT_TIME</sql>
 </mapper>

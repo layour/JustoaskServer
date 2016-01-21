@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dataset author="Justoask.dsxml" displayName="" name="Justoask.dsxml">
 <entity author="" description="" displayName="收藏" entityType="persistent" genStrategy="uuid" id="402881e951e39aa60151e3a7aff30450" isSetViewModel="false" name="Collect" schema="" tableName="JA_COLLECT">
-<location height="96" wide="230" x="478" y="20"/>
+<location height="108" wide="230" x="478" y="20"/>
 <fields>
 <field FK="false" PK="true" columnName="COLLECT_ID" columnType="" default="" description="" displayName="收藏ID" fieldName="collectId" fieldType="java.lang.String" id="402881e951e39aa60151e3a7aff3044d" length="" nullAble="true" persistent="true" precision="">
 <refVentityFields/>
@@ -10,6 +10,9 @@
 <refVentityFields/>
 </field>
 <field FK="false" PK="false" columnName="USER_ID" columnType="" default="" description="" displayName="用户ID" fieldName="userId" fieldType="java.lang.String" id="402881e951e39aa60151e3a7aff3044f" length="" nullAble="false" persistent="true" precision="">
+<refVentityFields/>
+</field>
+<field FK="false" PK="false" columnName="COLLECT_TIME" columnType="" default="" description="" displayName="收藏时间" fieldName="collectTime" fieldType="java.lang.String" id="8a82f08e5261f3c9015262beff0600fd" length="" nullAble="false" persistent="true" precision="">
 <refVentityFields/>
 </field>
 </fields>
@@ -22,7 +25,7 @@
 <form id="402881e951e39aa60151e3a7aff3044a" showType="" title=""/>
 </viewModel>
 </entity>
-<entity author="" description="" displayName="问题" entityType="persistent" genStrategy="uuid" id="402881e951e39aa60151e3ab683a04da" isSetViewModel="true" name="Problem" schema="" tableName="HS_PROBLEM">
+<entity author="" description="" displayName="问题" entityType="persistent" genStrategy="uuid" id="402881e951e39aa60151e3ab683a04da" isSetViewModel="true" name="Problem" schema="" tableName="JA_PROBLEM">
 <location height="97" wide="220" x="212" y="146"/>
 <fields>
 <field FK="false" PK="true" columnName="PROBLEM_ID" columnType="" default="" description="" displayName="问题ID" fieldName="problemId" fieldType="java.lang.String" id="402881e951e39aa60151e3ab683a04d2" length="" nullAble="true" persistent="true" precision="">
@@ -44,7 +47,7 @@
 <form id="402881e951e39aa60151e3ab68390489" showType="" title=""/>
 </viewModel>
 </entity>
-<entity author="" description="" displayName="用户" entityType="persistent" genStrategy="uuid" id="8a82f0d652107156015210c018210192" isSetViewModel="false" name="User" schema="" tableName="JS_USER">
+<entity author="" description="" displayName="用户" entityType="persistent" genStrategy="uuid" id="8a82f0d652107156015210c018210192" isSetViewModel="false" name="User" schema="" tableName="JA_USER">
 <location height="88" wide="220" x="208" y="21"/>
 <fields>
 <field FK="false" PK="true" columnName="USER_ID" columnType="" default="" description="" displayName="用户ID" fieldName="userId" fieldType="java.lang.String" id="8a82f0d652107156015210c1fa3b0196" length="" nullAble="true" persistent="true" precision="">
@@ -59,6 +62,11 @@
 </fields>
 <relations/>
 <refVentityFields/>
-<viewModel/>
+<viewModel>
+<queryForm exportExcel="false" id="8a82f08e5261f3c9015262bf02ff00fe" isDistinct="false" isTotalRows="false" orderFields="" orders="" pageSize="15" title=""/>
+<queryResult id="8a82f08e5261f3c9015262bf030000ff" rowSelectType="checkbox" title=""/>
+<detailInfo id="8a82f08e5261f3c9015262bf03000101" showType="" title=""/>
+<form id="8a82f08e5261f3c9015262bf03000100" showType="" title=""/>
+</viewModel>
 </entity>
 </dataset>

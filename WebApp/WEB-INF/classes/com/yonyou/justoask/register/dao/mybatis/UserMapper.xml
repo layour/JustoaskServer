@@ -3,11 +3,11 @@
 
 <mapper namespace="com.yonyou.justoask.register.dao.mybatis.UserDao">
   <!--查询一条记录-->
-  <select id="findByUserName" resultMap="UserMap">SELECT <include refid="columns"/> FROM JS_USER WHERE USER_NAME=#{userName}</select>
+  <select id="findByUserName" resultMap="UserMap">SELECT <include refid="columns"/> FROM JA_USER WHERE USER_NAME=#{userName}</select>
   <!--插入记录-->
-  <insert id="save" parameterType="User">INSERT INTO JS_USER (<include refid="columns"/>) VALUES (#{userId},#{userName},#{password})</insert>
+  <insert id="save" parameterType="User">INSERT INTO JA_USER (<include refid="columns"/>) VALUES (#{userId},#{userName},#{password})</insert>
   <!--修改记录-->
-  <update id="update" parameterType="User">UPDATE JS_USER
+  <update id="update" parameterType="User">UPDATE JA_USER
     <set>
       <if test="userName != null">USER_NAME = #{userName}, </if>
       <if test="password != null">PASSWORD = #{password}, </if>

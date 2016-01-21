@@ -15,6 +15,7 @@ public class Collect extends DomainBase implements Serializable{
 	private String collectId;
 	private String problemId;
 	private String userId;
+	private String collectTime;
 
 	public Collect() {
 		super();
@@ -42,6 +43,14 @@ public class Collect extends DomainBase implements Serializable{
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getCollectTime() {
+		return collectTime;
+	}
+
+	public void setCollectTime(String collectTime) {
+		this.collectTime = collectTime;
 	}
 
 	@Override

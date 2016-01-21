@@ -41,7 +41,7 @@ public class JSoupBaiduSearcher extends AbstractBaiduSearcher{
     }
     @Override
     public SearchResult search(String keyword, int page) {
-        int pageSize = 10;
+        int pageSize = 3;
         //百度搜索结果每页大小为10，pn参数代表的不是页数，而是返回结果的开始数
         //如获取第一页则pn=0，第二页则pn=10，第三页则pn=20，以此类推，抽象出模式：(page-1)*pageSize
         String url = "http://www.baidu.com/s?pn="+(page-1)*pageSize+"&wd="+keyword;
@@ -55,15 +55,14 @@ public class JSoupBaiduSearcher extends AbstractBaiduSearcher{
             //获取搜索结果数目
             int total = getBaiduSearchResultCount(document);
             searchResult.setTotal(total);
-            int len = 10;
             if (total < 1) {
                 return null;
             }
             //如果搜索到的结果不足一页
-            if (total < 10) {
-                len = total;
+            if (total < pageSize) {
+            	pageSize = total;
             }
-            for (int i = 0; i < len; i++) {
+            for (int i = 0; i < pageSize; i++) {
                 String titleCssQuery = "html body div div div div#content_left div#" + (i + 1 + (page-1)*pageSize) + ".result.c-container h3.t a";
                 String summaryCssQuery = "html body div div div div#content_left div#" + (i + 1 + (page-1)*pageSize) + ".result.c-container div.c-abstract";
                 LOG.debug("titleCssQuery:" + titleCssQuery);
