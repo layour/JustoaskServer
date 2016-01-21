@@ -28,9 +28,6 @@ public class UserController {
 	
 	/**
 	 * 登录验证
-	 * @param pageNumber
-	 * @param pageSize
-	 * @param sortType
 	 * @param model
 	 * @param request
 	 * @return

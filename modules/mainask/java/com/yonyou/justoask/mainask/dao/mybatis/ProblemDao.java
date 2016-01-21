@@ -23,6 +23,13 @@ public interface ProblemDao {
 	List<Problem> searchByPage(Map<String,Object> searchParams);
 	
 	/**
+	 * 问题搜索
+	 * @param keyword ：问题
+	 * @return List<Problem> ：查询结果集
+	 */
+	List<Problem> search(String keyword);
+	
+	/**
 	 * 保存一条记录
 	 * @param problem ：记录对象实体
 	 */

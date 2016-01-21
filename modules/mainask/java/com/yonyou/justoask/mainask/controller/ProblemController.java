@@ -1,5 +1,6 @@
 package com.yonyou.justoask.mainask.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,11 @@ import org.springside.modules.web.Servlets;
 
 import com.yonyou.justoask.mainask.domain.Problem;
 import com.yonyou.justoask.mainask.service.ProblemService;
+import com.yonyou.justoask.mainask.util.JSoupBaiduSearcher;
+import com.yonyou.justoask.mainask.util.SearchResult;
+import com.yonyou.justoask.mainask.util.Searcher;
+import com.yonyou.justoask.mainask.util.Webpage;
+import com.yonyou.justoask.register.domain.User;
 
 import core.mybatis.PageParameter;
 import core.spring.RequestMappingName;
@@ -29,38 +35,59 @@ import core.utils.jackson.JacksonUtil;
 @RequestMapping(value = "/problem")
 public class ProblemController {
 
-	private static Logger logger = LoggerFactory.getLogger(ProblemController.class);
-	
 	@Autowired
 	private ProblemService problemService;
 	
 	/**
-	 * 执行查询列表操作（分布查询）
-	 * @param pageNumber ：当前页号（默认为常量）
-	 * @param pageSize ：页记录数（默认为常量）
-	 * @param model ：视图对象（参数传递）
-	 * @param request ：请求对象（收集客户端参数）
-	 * @return @ResponseBody ：列表json格式文本串
+	 * 问题搜索
+	 * @param model
+	 * @param request
+	 * @return
 	 */
-	@RequestMappingName(value = "执行查询列表操作")
-	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public @ResponseBody String list(@RequestParam(value = "page", defaultValue = "1") int pageNumber,
-			@RequestParam(value = "rows", defaultValue = PageParameter.DEFAULT_PAGE_SIZE+"") int pageSize, 
-			Model model, ServletRequest request) {
-		logger.info("处理查询条件值，并放入Map对象中...");
-		Map<String, Object> searchParams = Servlets.getParametersStartingWith(request, "search_");
+	@RequestMappingName(value = "问题搜索")
+	@RequestMapping(value="search", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String search(Model model, ServletRequest request) {
 		
-		PageParameter page = new PageParameter();
-		page.setCurrentPage(pageNumber);
-		page.setPageSize(pageSize);
-		searchParams.put("page", page);
+		String keyword = request.getParameter("keyword");//获取用户登录账号
 		
-		List<Problem> problems = problemService.searchByPage(searchParams);
+		Map<String, Object> result = new HashMap<String, Object>();
 		
-		model.addAttribute("total", page.getTotalCount());
-		model.addAttribute("rows", problems);
+		Searcher searcher = new JSoupBaiduSearcher();
+        SearchResult searchResult = searcher.search(keyword, 1);
+        List<Webpage> webpages = searchResult.getWebpages();
+        if (webpages != null) {
+        	int i = 1;
+        	StringBuffer askStr = new StringBuffer();
+        	askStr.append("搜索结果 当前第 " + searchResult.getPage() + " 页，页面大小为：" + searchResult.getPageSize() + " 共有结果数：" + searchResult.getTotal());
+            for (Webpage webpage : webpages) {
+            	askStr.append("搜索结果 " + (i++) + " ：");
+            	askStr.append("标题：" + webpage.getTitle());
+            	askStr.append("摘要：" + webpage.getSummary());
+            }
+            result.put("code", "1");
+            result.put("msg", "登录成功");
+            result.put("keyword", keyword);
+            result.put("result", askStr.toString());
+        } else {
+        	result.put("code", "0");
+        	result.put("msg", "没有搜索到结果");
+        }
 		
-		return new JacksonUtil().getJson(model);
+//		SearchResult user = problemService.findByKeyWord(keyword);
+//		if(password.equals(user.getPassword())){
+//			result.put("code", "0");
+//			result.put("msg", "登录成功");
+//			result.put("user", user);
+//		} else if(user.getUserId() == null){
+//			result.put("code", "1");
+//			result.put("msg", "无此用户");
+//		} else {
+//			result.put("code", "2");
+//			result.put("msg", "用户名或密码错误");
+//		}
+		
+		return new JacksonUtil().getJson(result);
 	}
 	
 	/**

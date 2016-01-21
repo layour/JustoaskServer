@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yonyou.justoask.favorite.dao.mybatis.CollectDao">
+  <!--分页查询-->
+  <select id="searchByPage" parameterType="map" resultMap="CollectMap">SELECT <include refid="columns"/> FROM JA_COLLECT
+    <where/>
+  </select>
+  <!--插入记录-->
+  <insert id="save" parameterType="Collect">INSERT INTO JA_COLLECT (<include refid="columns"/>) VALUES (#{collectId},#{problemId},#{userId})</insert>
+  <!--删除记录-->
+  <delete id="delete">DELETE FROM JA_COLLECT WHERE COLLECT_ID=#{collectId}</delete>
+  <!--结果映射-->
+  <resultMap type="Collect" id="CollectMap">
+    <result column="COLLECT_ID" property="collectId"/>
+    <result column="PROBLEM_ID" property="problemId"/>
+    <result column="USER_ID" property="userId"/>
+  </resultMap>
+  <!--查询字段-->
+  <sql id="columns">COLLECT_ID,PROBLEM_ID,USER_ID</sql>
+</mapper>
