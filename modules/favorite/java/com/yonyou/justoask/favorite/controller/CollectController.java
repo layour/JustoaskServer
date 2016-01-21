@@ -90,8 +90,8 @@ public class CollectController {
 		problem.setAnswer(answer);
 		problemService.save(problem);
 		
-		String userId = request.getParameter("userId");
 		collect.setCollectTime(dateTime);
+		collect.setProblemId(problem.getProblemId());
 		collectService.save(collect);
 		
 		Map<String, Object> result = new HashMap<String, Object>();
