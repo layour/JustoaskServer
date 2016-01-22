@@ -3,7 +3,10 @@
 
 <mapper namespace="com.yonyou.justoask.favorite.dao.mybatis.CollectDao">
   <!--分页查询-->
+  <!-- 
   <select id="searchByPage" parameterType="map" resultMap="CollectProblemMap">SELECT JCL.COLLECT_ID collectId, JCL.USER_ID userId, JCL.COLLECT_TIME collectTime, JPB.PROBLEM problem, JPB.ANSWER answer FROM JA_COLLECT JCL LEFT JOIN JA_PROBLEM JPB ON JCL.PROBLEM_ID = JPB.PROBLEM_ID AND USER_ID = #{userId}</select>
+  -->
+  <select id="searchByPage" parameterType="map" resultMap="CollectProblemMap">SELECT <include refid="columns"/> FROM JA_COLLECT WHERE USER_ID = #{userId}</select>
   <!--插入记录-->
   <insert id="save" parameterType="Collect">INSERT INTO JA_COLLECT (<include refid="columns"/>) VALUES (#{collectId},#{problemId},#{userId},#{collectTime})</insert>
   <!--删除记录-->
