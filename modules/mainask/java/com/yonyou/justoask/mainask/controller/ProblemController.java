@@ -43,7 +43,7 @@ public class ProblemController {
 	@ResponseBody
 	public String search(Model model, ServletRequest request) {
 		
-		String keyword = request.getParameter("keyword");
+		String keyword = request.getParameter("keyword");//获取用户登录账号
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		

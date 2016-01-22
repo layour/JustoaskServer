@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.yonyou.justoask.mainask.domain.Problem;
+
 import core.domain.DomainBase;
 import core.mybatis.MyBatisDomain;
 
@@ -16,6 +18,8 @@ public class Collect extends DomainBase implements Serializable{
 	private String problemId;
 	private String userId;
 	private String collectTime;
+	
+	private Problem problem;
 
 	public Collect() {
 		super();
@@ -51,6 +55,14 @@ public class Collect extends DomainBase implements Serializable{
 
 	public void setCollectTime(String collectTime) {
 		this.collectTime = collectTime;
+	}
+
+	public Problem getProblem() {
+		return problem;
+	}
+
+	public void setProblem(Problem problem) {
+		this.problem = problem;
 	}
 
 	@Override

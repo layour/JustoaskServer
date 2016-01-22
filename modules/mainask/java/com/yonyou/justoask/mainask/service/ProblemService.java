@@ -29,12 +29,12 @@ public class ProblemService {
 	}
 	
 	/**
-	 * 问题搜索
-	 * @param keyword ：问题
-	 * @return List<Problem> ：查询结果集
+	 * 通过problemId获取一条记录
+	 * @param problemId ：记录主键
+	 * @return Problem ：记录对象实体
 	 */
-	public List<Problem> search(String keyword) {
-		return (List<Problem>) problemDao.search(keyword);
+	public Problem findById(String problemId) {
+		return problemDao.findById(problemId);
 	}
 
 	/**
