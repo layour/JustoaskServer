@@ -25,7 +25,7 @@
     <result column="USER_ID" property="userId"/>
     <result column="COLLECT_TIME" property="collectTime"/>
     
-    <association property="problem" column="problemId" select="dao.ProblemDao.findById"/>
+    <association property="problem" column="problemId" select="com.yonyou.justoask.mainask.dao.mybatis.ProblemDao.findById"/>
   </resultMap>
   <!--查询字段-->
   <sql id="columns">COLLECT_ID,PROBLEM_ID,USER_ID,COLLECT_TIME</sql>
