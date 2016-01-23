@@ -83,10 +83,10 @@ public class CollectController {
 	public String save(@Valid Collect collect, RedirectAttributes redirectAttributes, ServletRequest request) {
 		String dateTime = DateTimeUtil.getDateTime();
 		
-		String problemDesc = request.getParameter("problem");
+		String problemDesc = request.getParameter("problemDesc");
 		String answer = request.getParameter("answer");
 		Problem problem = new Problem();
-		problem.setProblem(problemDesc);
+		problem.setProblemDesc(problemDesc);
 		problem.setAnswer(answer);
 		problemService.save(problem);
 		

@@ -13,7 +13,7 @@ public class Problem extends DomainBase implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private String problemId;
-	private String problem;
+	private String problemDesc;
 	private String answer;
 
 	public Problem() {
@@ -28,12 +28,12 @@ public class Problem extends DomainBase implements Serializable{
 		this.problemId = problemId;
 	}
 
-	public String getProblem() {
-		return this.problem;
+	public String getProblemDesc() {
+		return this.problemDesc;
 	}
 
-	public void setProblem(String problem) {
-		this.problem = problem;
+	public void setProblemDesc(String problemDesc) {
+		this.problemDesc = problemDesc;
 	}
 
 	public String getAnswer() {

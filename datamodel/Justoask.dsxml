@@ -31,7 +31,7 @@
 <field FK="false" PK="true" columnName="PROBLEM_ID" columnType="" default="" description="" displayName="问题ID" fieldName="problemId" fieldType="java.lang.String" id="402881e951e39aa60151e3ab683a04d2" length="" nullAble="true" persistent="true" precision="">
 <refVentityFields/>
 </field>
-<field FK="false" PK="false" columnName="PROBLEM" columnType="" default="" description="" displayName="问题描述" fieldName="problem" fieldType="java.lang.String" id="402881e951e39aa60151e3ab683a04d3" length="" nullAble="false" persistent="true" precision="">
+<field FK="false" PK="false" columnName="PROBLEM_DESC" columnType="" default="" description="" displayName="问题描述" fieldName="problemDesc" fieldType="java.lang.String" id="402881e951e39aa60151e3ab683a04d3" length="" nullAble="false" persistent="true" precision="">
 <refVentityFields/>
 </field>
 <field FK="false" PK="false" columnName="ANSWER" columnType="" default="" description="" displayName="答案描述" fieldName="answer" fieldType="java.lang.String" id="402881e951e39aa60151e3ab683a04d4" length="" nullAble="false" persistent="true" precision="">

@@ -3,10 +3,10 @@
 
 <mapper namespace="com.yonyou.justoask.favorite.dao.mybatis.CollectDao">
   <!--分页查询-->
+  <select id="searchByPage" parameterType="map" resultMap="CollectProblemMap">SELECT JCL.COLLECT_ID COLLECT_ID, JCL.USER_ID USER_ID, JCL.COLLECT_TIME COLLECT_TIME, JCL.PROBLEM_ID PROBLEM_ID, JPB.PROBLEM_DESC PROBLEM_DESC, JPB.ANSWER ANSWER FROM JA_COLLECT JCL LEFT JOIN JA_PROBLEM JPB ON JCL.PROBLEM_ID = JPB.PROBLEM_ID AND USER_ID = #{userId}</select>
   <!-- 
-  <select id="searchByPage" parameterType="map" resultMap="CollectProblemMap">SELECT JCL.COLLECT_ID collectId, JCL.USER_ID userId, JCL.COLLECT_TIME collectTime, JPB.PROBLEM problem, JPB.ANSWER answer FROM JA_COLLECT JCL LEFT JOIN JA_PROBLEM JPB ON JCL.PROBLEM_ID = JPB.PROBLEM_ID AND USER_ID = #{userId}</select>
-  -->
   <select id="searchByPage" parameterType="map" resultMap="CollectProblemMap">SELECT <include refid="columns"/> FROM JA_COLLECT WHERE USER_ID = #{userId}</select>
+  -->
   <!--插入记录-->
   <insert id="save" parameterType="Collect">INSERT INTO JA_COLLECT (<include refid="columns"/>) VALUES (#{collectId},#{problemId},#{userId},#{collectTime})</insert>
   <!--删除记录-->
@@ -18,14 +18,18 @@
     <result column="USER_ID" property="userId"/>
     <result column="COLLECT_TIME" property="collectTime"/>
   </resultMap>
-  <!--结果映射-->
   <resultMap type="Collect" id="CollectProblemMap">
     <result column="COLLECT_ID" property="collectId"/>
     <result column="PROBLEM_ID" property="problemId"/>
     <result column="USER_ID" property="userId"/>
     <result column="COLLECT_TIME" property="collectTime"/>
     
-    <association property="problem" column="problemId" select="com.yonyou.justoask.mainask.dao.mybatis.ProblemDao.findById"/>
+    <association property="problem" column="PROBLEM_ID" javaType="Problem" resultMap="ProblemResult"/>
+  </resultMap>
+  <resultMap type="Problem" id="ProblemResult">
+    <result column="PROBLEM_ID" property="problemId"/>
+    <result column="PROBLEM_DESC" property="problemDesc"/>
+    <result column="ANSWER" property="answer"/>
   </resultMap>
   <!--查询字段-->
   <sql id="columns">COLLECT_ID,PROBLEM_ID,USER_ID,COLLECT_TIME</sql>

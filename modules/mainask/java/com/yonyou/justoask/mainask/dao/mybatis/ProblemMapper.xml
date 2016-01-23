@@ -9,13 +9,13 @@
     <where/>
   </select>
   <!--插入记录-->
-  <insert id="save" parameterType="Problem">INSERT INTO JA_PROBLEM (<include refid="columns"/>) VALUES (#{problemId},#{problem},#{answer})</insert>
+  <insert id="save" parameterType="Problem">INSERT INTO JA_PROBLEM (<include refid="columns"/>) VALUES (#{problemId},#{problemDesc},#{answer})</insert>
   <!--结果映射-->
   <resultMap type="Problem" id="ProblemMap">
     <result column="PROBLEM_ID" property="problemId"/>
-    <result column="PROBLEM" property="problem"/>
+    <result column="PROBLEM_DESC" property="problemDesc"/>
     <result column="ANSWER" property="answer"/>
   </resultMap>
   <!--查询字段-->
-  <sql id="columns">PROBLEM_ID,PROBLEM,ANSWER</sql>
+  <sql id="columns">PROBLEM_ID,PROBLEM_DESC,ANSWER</sql>
 </mapper>
