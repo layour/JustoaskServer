@@ -15,7 +15,7 @@
   </update>
   <!--结果映射-->
   <resultMap type="User" id="UserMap">
-    <result column="USER_ID" property="userId"/>
+    <id column="USER_ID" property="userId"/>
     <result column="USER_NAME" property="userName"/>
     <result column="PASSWORD" property="password"/>
   </resultMap>

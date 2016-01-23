@@ -53,11 +53,12 @@ public class ProblemController {
         if (webpages != null) {
         	int i = 1;
         	StringBuffer askStr = new StringBuffer();
-        	askStr.append("共有搜索到" + searchResult.getTotal() + "条结果，已为您挑选出3条结果。");
+        	askStr.append("共搜索到" + searchResult.getTotal() + "条结果，已为您挑选出3条结果。");
             for (Webpage webpage : webpages) {
             	askStr.append("结果" + (i++) + "：");
-            	askStr.append("标题：" + webpage.getTitle());
-            	askStr.append("摘要：" + webpage.getSummary());
+            	//askStr.append("标题：" + webpage.getTitle());
+            	//askStr.append("摘要：" + webpage.getSummary());
+            	askStr.append("内容：" + webpage.getContent());
             }
             result.put("code", "0");
             result.put("msg", "搜索成功");

@@ -3,7 +3,7 @@
 
 <mapper namespace="com.yonyou.justoask.favorite.dao.mybatis.CollectDao">
   <!--分页查询-->
-  <select id="searchByPage" parameterType="map" resultMap="CollectProblemMap">SELECT JCL.COLLECT_ID COLLECT_ID, JCL.USER_ID USER_ID, JCL.COLLECT_TIME COLLECT_TIME, JCL.PROBLEM_ID PROBLEM_ID, JPB.PROBLEM_DESC PROBLEM_DESC, JPB.ANSWER ANSWER FROM JA_COLLECT JCL LEFT JOIN JA_PROBLEM JPB ON JCL.PROBLEM_ID = JPB.PROBLEM_ID AND USER_ID = #{userId}</select>
+  <select id="searchByPage" parameterType="map" resultMap="CollectProblemMap">SELECT JCL.COLLECT_ID COLLECT_ID, JCL.USER_ID USER_ID, JCL.COLLECT_TIME COLLECT_TIME, JPB.PROBLEM_ID PROBLEM_ID, JPB.PROBLEM_DESC PROBLEM_DESC, JPB.ANSWER ANSWER FROM JA_COLLECT JCL LEFT JOIN JA_PROBLEM JPB ON JCL.PROBLEM_ID = JPB.PROBLEM_ID AND JCL.USER_ID = #{userId}</select>
   <!-- 
   <select id="searchByPage" parameterType="map" resultMap="CollectProblemMap">SELECT <include refid="columns"/> FROM JA_COLLECT WHERE USER_ID = #{userId}</select>
   -->
@@ -13,21 +13,20 @@
   <delete id="delete">DELETE FROM JA_COLLECT WHERE COLLECT_ID=#{collectId}</delete>
   <!--结果映射-->
   <resultMap type="Collect" id="CollectMap">
-    <result column="COLLECT_ID" property="collectId"/>
+    <id column="COLLECT_ID" property="collectId"/>
     <result column="PROBLEM_ID" property="problemId"/>
     <result column="USER_ID" property="userId"/>
     <result column="COLLECT_TIME" property="collectTime"/>
   </resultMap>
   <resultMap type="Collect" id="CollectProblemMap">
-    <result column="COLLECT_ID" property="collectId"/>
-    <result column="PROBLEM_ID" property="problemId"/>
+    <id column="COLLECT_ID" property="collectId"/>
+    <result column="PROBLEM_ID" property="problem.problemId"/>
     <result column="USER_ID" property="userId"/>
     <result column="COLLECT_TIME" property="collectTime"/>
-    
     <association property="problem" column="PROBLEM_ID" javaType="Problem" resultMap="ProblemResult"/>
   </resultMap>
   <resultMap type="Problem" id="ProblemResult">
-    <result column="PROBLEM_ID" property="problemId"/>
+    <id column="PROBLEM_ID" property="problemId"/>
     <result column="PROBLEM_DESC" property="problemDesc"/>
     <result column="ANSWER" property="answer"/>
   </resultMap>
