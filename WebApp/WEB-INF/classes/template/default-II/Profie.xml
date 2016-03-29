@@ -1,0 +1,19 @@
+<templates>
+	<type>wizard</type>
+	<comment>编辑方式采取跳转新页面方式</comment>
+	<template>
+		<name>relationtable</name>
+		<comment>关联表向导模版</comment>
+		<className></className>
+	</template>
+	<template>
+		<name>single</name>
+		<comment>单表向导模版</comment>
+		<className></className>
+	</template>
+	<template>
+		<name>masterdetail</name>
+		<comment>主从表向导模版</comment>
+		<className></className>
+	</template>
+</templates>

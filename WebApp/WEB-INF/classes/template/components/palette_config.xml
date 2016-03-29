@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<PaletteGroups>
+	<PaletteGroup id="layout" name="布局组件"  desc="常用页面布局元素">
+		<PaletteItem id="custom_container" label="自定义布局" type="custom" desc="自定义布局" />
+		<PaletteItem id="twocolumn_equal"  label="横排对称两栏布局(绝对值)"   desc="页面为左右对称两栏" />
+		<PaletteItem id="twocolumn_classic"  label="横排两栏布局(绝对值)"   desc="页面为左右三七分两栏" />
+		<PaletteItem id="twocolumn_frameset"  label="横排两栏布局(frameset绝对值)"   desc="页面为左右三七分两栏（frameset）" />
+		<PaletteItem id="twocolumn_equal_percent" label="横排对称两栏布局(百分比)" desc="页面为左右对称两栏，百分比" />
+		<PaletteItem id="twocolumn_classic_percent" label="横排两栏布局(百分比)" desc="页面为左右三七分两栏，百分比" />
+		<PaletteItem id="threecolumn"  label="横排三栏布局(绝对值)"   desc="页面为左中右三栏" />
+		<PaletteItem id="threecolumn_percent" label="横排三栏布局(百分比)" desc="页面为左中右三栏，百分比" />
+	</PaletteGroup>
+	<PaletteGroup id="component" name="基础页面组件" desc="基础页面组件">
+	 	<!--  <PaletteItem id="form" label="表单" type="common" desc="表单组件" />-->
+	 	<PaletteItem id="formscene" label="表单(FormScene)" type="custom" desc="根据实体生成Form表单页面" /> 
+		<PaletteItem id="label" label="文本标签(label)" desc="label标签" />
+		<PaletteItem id="text" label="文本框(text)" type="common" desc="表单文本框" />
+		<PaletteItem id="textarea" label="文本域(textarea)" type="common" desc="表单文本域" />
+		<PaletteItem id="autocomplete" label="自动提示框(autocomplete)" type="common" desc="表单自动提示输入框" />
+		<PaletteItem id="password" label="密码框(password)" type="common" desc="表单密码框" />
+		<PaletteItem id="file" label="上传文件框(file)" type="common" desc="表单文件框" />
+		<PaletteItem id="number" label="数字输入框(number)" type="common" desc="数字输入框，限制只能输入数字。" />
+		<PaletteItem id="checkbox" label="复选框(checkbox)" type="common" desc="复选框" />
+		<PaletteItem id="radio" label="单选框(radio)" type="common" desc="单选框" />
+		<PaletteItem id="datepicker" label="日期输入框(datepicker)" type="common" desc="日期输入框" />
+		<PaletteItem id="button" label="按钮(button)" type="common" desc="按钮组件" />
+		<PaletteItem id="select" label="下拉框(select)" type="common" desc="下拉框" />
+		<PaletteItem id="comboboxlist" label="下拉列表(comboboxlist)" type="common" desc="下拉列表" />	
+	</PaletteGroup>
+	<PaletteGroup id="tab" name="Tab组件" desc="Tab组件">
+		<PaletteItem id="tabs" label="标签页(Tabs)" type="common" desc="存放tab页的容器" />
+	</PaletteGroup>
+	<PaletteGroup id="window" name="Windows组件" desc="windows组件">
+		<PaletteItem id="dialog" label="通用对话框(Dialog)" type="common" desc="对话框" />
+		<PaletteItem id="doubleselect" label="双向选择器" type="common" desc="双向选择器" />	
+	</PaletteGroup>
+    <PaletteGroup id="Grid" name="Grid组件" desc="Grid组件">
+		<PaletteItem id="jqgrid" label="可编辑Grid" type="custom" desc="可编辑grid组件" />
+		<PaletteItem id="gridscene" label="GridScene" type="custom" desc="带查询form的Grid,类似CRUD的查询页面" />
+	</PaletteGroup>	
+	<PaletteGroup id="tree" name="树组件" desc="树组件">
+		<PaletteItem id="tree" label="树组件(tree)" type="common" desc="树组件" />
+		<PaletteItem id="comboboxtree" label="下拉树(comboboxtree)" type="common" desc="下拉框树" />
+	</PaletteGroup>
+</PaletteGroups>
