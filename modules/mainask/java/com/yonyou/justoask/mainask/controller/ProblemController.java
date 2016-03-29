@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.yonyou.justoask.mainask.domain.Problem;
 import com.yonyou.justoask.mainask.service.ProblemService;
 import com.yonyou.justoask.mainask.util.JSoupBaiduSearcher;
+import com.yonyou.justoask.mainask.util.PoweredByTuringUtil;
 import com.yonyou.justoask.mainask.util.SearchResult;
 import com.yonyou.justoask.mainask.util.Searcher;
 import com.yonyou.justoask.mainask.util.Webpage;
@@ -42,8 +43,8 @@ public class ProblemController {
 	@RequestMapping(value="search", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String search(Model model, ServletRequest request) {
-		
-		String keyword = request.getParameter("keyword");//获取用户登录账号
+		//百度搜索
+		/*String keyword = request.getParameter("keyword");//获取
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -68,18 +69,22 @@ public class ProblemController {
         	result.put("msg", "没有搜索到结果");
         }
 		
-//		SearchResult user = problemService.findByKeyWord(keyword);
-//		if(password.equals(user.getPassword())){
-//			result.put("code", "0");
-//			result.put("msg", "登录成功");
-//			result.put("user", user);
-//		} else if(user.getUserId() == null){
-//			result.put("code", "1");
-//			result.put("msg", "无此用户");
-//		} else {
-//			result.put("code", "2");
-//			result.put("msg", "用户名或密码错误");
-//		}
+		return new JacksonUtil().getJson(result);*/
+		
+		//图灵机器人接口
+		String keyword = request.getParameter("keyword");//获取
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		String askStr = PoweredByTuringUtil.searchByToring(keyword);
+        if (askStr != null) {
+            result.put("code", "0");
+            result.put("msg", "搜索成功");
+            result.put("result", askStr);
+        } else {
+        	result.put("code", "1");
+        	result.put("msg", "没有搜索到结果");
+        }
 		
 		return new JacksonUtil().getJson(result);
 	}

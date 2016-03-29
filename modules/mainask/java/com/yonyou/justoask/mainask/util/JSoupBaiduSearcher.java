@@ -45,6 +45,7 @@ public class JSoupBaiduSearcher extends AbstractBaiduSearcher{
         //百度搜索结果每页大小为10，pn参数代表的不是页数，而是返回结果的开始数
         //如获取第一页则pn=0，第二页则pn=10，第三页则pn=20，以此类推，抽象出模式：(page-1)*pageSize
         String url = "http://www.baidu.com/s?pn="+(page-1)*pageSize+"&wd="+keyword;
+        //String url = "http://zhidao.baidu.com/search?pn="+(page-1)*pageSize+"&word="+keyword;
         
         SearchResult searchResult = new SearchResult();
         searchResult.setPage(page);
