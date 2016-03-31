@@ -76,11 +76,12 @@ public class CollectController {
 	 * @param collect ：pojo对象
 	 * @param redirectAttributes ：跳转参数设置对象
 	 * @param request ：请求对象（收集客户端参数）
-	 * @return String ：跳转路径
+	 * @return String ：返回参数
 	 */
 	@RequestMappingName(value = "执行保存操作")
 	@RequestMapping(value="save", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json; charset=utf-8")
-	public String save(@Valid Collect collect, RedirectAttributes redirectAttributes, ServletRequest request) {
+	@ResponseBody
+	public String save(Collect collect, ServletRequest request) {
 		String dateTime = DateTimeUtil.getDateTime();
 		
 		String problemDesc = request.getParameter("problemDesc");
