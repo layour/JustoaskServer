@@ -18,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.yonyou.justoask.mainask.domain.Problem;
 import com.yonyou.justoask.mainask.service.ProblemService;
 import com.yonyou.justoask.mainask.util.JSoupBaiduSearcher;
-import com.yonyou.justoask.mainask.util.PoweredByTuringUtil;
 import com.yonyou.justoask.mainask.util.SearchResult;
 import com.yonyou.justoask.mainask.util.Searcher;
 import com.yonyou.justoask.mainask.util.Webpage;
@@ -43,44 +42,32 @@ public class ProblemController {
 	@RequestMapping(value="search", method = { RequestMethod.GET, RequestMethod.POST }, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String search(Model model, ServletRequest request) {
-		//百度搜索
-		/*String keyword = request.getParameter("keyword");//获取
-		
 		Map<String, Object> result = new HashMap<String, Object>();
+		StringBuffer askStr = new StringBuffer();
 		
+		String keyword = request.getParameter("keyword");//获取
+		
+		//百度搜索
 		Searcher searcher = new JSoupBaiduSearcher();
         SearchResult searchResult = searcher.search(keyword, 1);
         List<Webpage> webpages = searchResult.getWebpages();
         if (webpages != null) {
         	int i = 1;
-        	StringBuffer askStr = new StringBuffer();
-        	askStr.append("共搜索到" + searchResult.getTotal() + "条结果，现在为您播报前" + webpages.size() + "条结果。");
+        	askStr.append("共搜索到" + searchResult.getTotal() + "条结果，现在为您播报前" + (webpages.size()+1) + "条结果。");
             for (Webpage webpage : webpages) {
             	askStr.append("结果" + (i++) + "：");
             	//askStr.append("标题：" + webpage.getTitle());
-            	askStr.append("摘要：" + webpage.getSummary());
+            	//askStr.append("摘要：" + webpage.getSummary());
             	//askStr.append("内容：" + webpage.getContent());
+            	askStr.append(webpage.getSummary());
             }
-            result.put("code", "0");
-            result.put("msg", "搜索成功");
-            result.put("result", askStr.toString());
-        } else {
-        	result.put("code", "1");
-        	result.put("msg", "没有搜索到结果");
         }
 		
-		return new JacksonUtil().getJson(result);*/
-		
-		//图灵机器人接口
-		String keyword = request.getParameter("keyword");//获取
-		
-		Map<String, Object> result = new HashMap<String, Object>();
-		
-		String askStr = PoweredByTuringUtil.searchByToring(keyword);
-        if (askStr != null) {
+        if(askStr.toString() != null){
             result.put("code", "0");
             result.put("msg", "搜索成功");
             result.put("result", askStr);
+            result.put("conut", webpages.size());
         } else {
         	result.put("code", "1");
         	result.put("msg", "没有搜索到结果");
