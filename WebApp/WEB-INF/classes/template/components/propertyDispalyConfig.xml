@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<display>
+	<!-- 基础页面组件 -->
+	<tag name="form">
+		<type id="property" name="属性">
+			<attr name="name"  control="Text" desc="表单名称"/>		 
+			<attr name="method" defaultValue="post" control="Combo" controlValue=";post;get" desc="提交类型"/>
+			<attr name="action"  validation="required" control="Text" desc="表单处理程序地址"/>
+			<attr name="title"  control="Text"/>
+			<!-- 以下为扩展属性 -->
+			<attr name="isResize" defaultValue="false" control="Combo" controlValue=";true;false" desc="是否可以调整大小，默认为false"/>
+			<attr name="isBreak" defaultValue="false" control="Combo" controlValue=";true;false" desc="是否根据宽度自动换行，默认为false"/>
+			<attr name="inputWidth" defaultValue="100" control="Text" desc="录入框的宽度，默认为100" />
+			<attr name="commonClass" defaultValue="ui-corner-all" control="Text" desc="录入框的通用样式，默认为“ui-corner-all”"/>
+			<attr name="labelSize" defaultValue="6" control="Text" desc="文本标签的宽度，默认为6"/>
+			<attr name="fontSize" defaultValue="14" control="Text" desc="文本标签的字体大小，默认为14"/>
+			<attr name="appendColon" defaultValue="false" control="Combo" controlValue=";true;false" desc="是否在文本标签后自动添加“：”，默认为false"/>
+			<attr name="asterisk" defaultValue="false" control="Combo" controlValue=";true;false" desc="是否对必填项添加“*”标注，默认为false"/>
+			<!-- table属性 -->
+			<attr name="rows" defaultValue="5" defaultDisplay="true" control="Text" desc="行数"/>
+			<attr name="cols" defaultValue="4" defaultDisplay="true" control="Text" desc="列数"/>
+			<attr name="width" defaultValue="200" defaultDisplay="true" control="Text" desc="表格宽度"/>
+			<attr name="height" defaultValue="100" defaultDisplay="true" control="Text" desc="表格高度"/>
+			<attr name="border" defaultValue="1" defaultDisplay="true" control="Text" desc="边框粗细"/>
+			<attr name="cellpadding" defaultValue="0" defaultDisplay="true" control="Text" desc="单元格边框"/>
+			<attr name="cellspacing" defaultValue="0" defaultDisplay="true" control="Text" desc="单元格间距"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="onsubmit" control="Text" desc="提交表单事件"/>
+		</type>
+	</tag>
+	<tag name="text">
+		<type id="property" name="属性">
+			<attr name="name" defaultValue="" validation="required" control="Text" desc="字段名称"/>
+			<attr name="maxlength" control="Text"  desc="最长长度"/>
+			<attr name="minlength" control="Text" desc="最短长度"/>
+			<attr name="rangelength"  control="Text" desc="长度范围，例如：[3,4]"/>
+			<attr name="max" control="Text"  desc="最大值"/>
+			<attr name="min" control="Text" desc="最小值"/>
+			<attr name="range"  control="Text" desc="值范围"/>
+			<attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+			<attr name="validateType" defaultValue="" control="Combo" controlValue=";数字;整数;自然数;网址;电子邮箱;字母;字母数字;汉字;IP地址;端口号;身份证号码;邮政编码;"  desc="校验类型"/>
+			<attr name="value" control="Text" desc="文本值"/>
+			<!-- 以下为基本属性 -->
+			<attr name="size" control="Text" desc="字段的宽度"/>
+			<attr name="title" control="Text" desc="提示显示信息"/>
+			<attr name="disabled" control="Combo" controlValue=";true;false" desc="禁用此元素"/>
+			<attr name="readonly" control="Combo" controlValue=";true;false" desc="输入字段为只读"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="onchange" control="Text" desc="当元素改变时执行脚本"/>
+			<attr name="onsubmit" control="Text" desc="当表单被提交时执行脚本"/>
+			<attr name="onreset" control="Text" desc="当表单被重置时执行脚本"/>
+			<attr name="onselect" control="Text" desc="当元素被选取时执行脚本"/>
+			<attr name="onblur" control="Text" desc="当元素失去焦点时执行脚本"/>
+			<attr name="onfocus" control="Text" desc="当元素获得焦点时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>
+	<tag name="textarea">
+		<type id="property" name="属性">
+			<attr name="name" defaultValue="" validation="required" control="Text" desc="字段名称"/>
+			<attr name="maxlength" control="Text"  desc="最长长度"/>
+			<attr name="minlength" control="Text" desc="最短长度"/>
+			<attr name="rangelength"  control="Text" desc="长度范围，例如：[3,4]"/>
+			<attr name="max" control="Text"  desc="最大值"/>
+			<attr name="min" control="Text" desc="最小值"/>
+			<attr name="range"  control="Text" desc="值范围"/>
+			<attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+			<attr name="validateType" defaultValue="" control="Combo" controlValue=";数字;整数;自然数;网址;电子邮箱;字母;字母数字;汉字;IP地址;端口号;身份证号码;邮政编码;"   desc="校验类型"/>
+			<attr name="value" control="Text" desc="文本值"/>
+			<!-- 以下为基本属性 
+			<attr name="cols" control="Text" desc="文本区内的可见宽度"/>
+			<attr name="rows" control="Text" desc="文本区内的可见行数"/>-->
+			<attr name="disabled" control="Combo" controlValue=";true;false" desc="禁用此元素"/>
+			<attr name="readonly" control="Combo" controlValue=";true;false" desc="输入字段为只读"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="onchange" control="Text" desc="当元素改变时执行脚本"/>
+			<attr name="onsubmit" control="Text" desc="当表单被提交时执行脚本"/>
+			<attr name="onreset" control="Text" desc="当表单被重置时执行脚本"/>
+			<attr name="onselect" control="Text" desc="当元素被选取时执行脚本"/>
+			<attr name="onblur" control="Text" desc="当元素失去焦点时执行脚本"/>
+			<attr name="onfocus" control="Text" desc="当元素获得焦点时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名,宽度和高度的默认设置是228px和85px，自定义要设置组件的style中的width和height属性"/>
+		</type>
+	</tag>
+	<tag name="autocomplete">
+		<type id="property" name="属性">
+			<attr name="name" defaultValue="" validation="required" control="Text" desc="字段名称"/>
+            <attr name="source" control="Text" validation="required" desc="自动提示数据源"/>
+			<attr name="appendTo" defaultValue="body" control="Text" desc="自动提示标签父元素"/>
+			<attr name="delay" defaultValue="300" control="Text" desc="一次输入后激活自动完成延迟毫秒数"/>
+			<attr name="minLength" defaultValue="1" control="Text" desc="自动提示时输入框最小长度"/>
+			<attr name="autoFocus" defaultValue="false" control="Combo" controlValue=";true;false" desc="是否自动聚焦到提示信息"/>
+			<attr name="disabled" control="Combo" controlValue=";true;false" desc="是否可用"/>
+			<attr name="position" defaultValue="{my:'left top',at:'left bottom',collision:'none'}" control="Text" desc="提示框与input位置关系,my和at属性的可选值：left、right|top、bottom"/>
+			<attr name="value" control="Text" desc="文本值"/>
+			<attr name="multiselect"  defaultValue="false"         control="Combo"   controlValue=";true;false"     desc="是否可多选"/>
+			<attr name="separator"  defaultValue="," control="Text"     desc="多选分隔符"/>
+			<attr name="category"  defaultValue="false"         control="Combo"   controlValue=";true;false"     desc="是否分组显示，数据源格式：[{ name: '横栏布局', category: '布局控件' }]"/>
+			<!-- 以下为基本属性 -->
+			<attr name="size" control="Text" desc="字段的宽度"/>
+			<attr name="title" control="Text" desc="提示显示信息"/>
+			<attr name="readonly" control="Combo" controlValue=";true;false" desc="输入字段为只读"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="onchange" control="Text" desc="当元素改变时执行脚本"/>
+			<attr name="onsubmit" control="Text" desc="当表单被提交时执行脚本"/>
+			<attr name="onreset" control="Text" desc="当表单被重置时执行脚本"/>
+			<attr name="onselect" control="Text" desc="当元素被选取时执行脚本"/>
+			<attr name="onblur" control="Text" desc="当元素失去焦点时执行脚本"/>
+			<attr name="onfocus" control="Text" desc="当元素获得焦点时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="validate" name="校验">
+		    <attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+			<attr name="validateType" defaultValue="" control="Combo" controlValue=";数字;整数;自然数;网址;电子邮箱;字母;字母数字;汉字;IP地址;端口号;身份证号码;邮政编码;" />
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>
+	<tag name="password">
+		<type id="property" name="属性">
+			<attr name="name" defaultValue="" validation="required" control="Text" desc="字段名称"/>
+			<attr name="equalTo" defaultValue="" control="Text" desc="输入值必须与另一密码框一致,例如id为password1的密码框：password1"/>
+			<attr name="maxlength" control="Text"  desc="密码最长长度"/>
+			<attr name="minlength" control="Text" desc="密码最短长度"/>
+			<attr name="rangelength"  control="Text" desc="密码长度范围，例如：[3,4]"/>
+			<attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+			<attr name="validateType" defaultValue="" control="Combo" controlValue=";数字;整数;自然数;网址;电子邮箱;字母;字母数字;汉字;IP地址;端口号;身份证号码;邮政编码;"   desc="校验类型"/>
+			<!-- 以下为基本属性 -->
+			<attr name="value" control="Text" desc="文本值"/>
+			<attr name="size" control="Text" desc="字段的宽度"/>
+			<attr name="title" control="Text" desc="提示显示信息"/>
+			<attr name="disabled" control="Combo" controlValue=";true;false" desc="禁用此元素"/>
+			<attr name="readonly" control="Combo" controlValue=";true;false" desc="输入字段为只读"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="onchange" control="Text" desc="当元素改变时执行脚本"/>
+			<attr name="onsubmit" control="Text" desc="当表单被提交时执行脚本"/>
+			<attr name="onreset" control="Text" desc="当表单被重置时执行脚本"/>
+			<attr name="onselect" control="Text" desc="当元素被选取时执行脚本"/>
+			<attr name="onblur" control="Text" desc="当元素失去焦点时执行脚本"/>
+			<attr name="onfocus" control="Text" desc="当元素获得焦点时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>
+	<tag name="file">
+		<type id="property" name="属性">
+			<attr name="name" defaultValue="" validation="required" control="Text" desc="字段名称"/>
+			<attr name="buttonText" defaultValue="浏览" control="Text" desc="按钮上显示的文字，默认为“浏览”"/>
+			<attr name="inputText" defaultValue="" control="Text" desc="文件框初始内容"/>
+			<attr name="accept" defaultValue="" control="Text" desc="可以上传的文件类型，填写后缀名，以“|”分割，如“jpg|gif|png”"/>
+			<attr name="filename" defaultValue="" control="Text" desc="限定上传文件的文件名称，如只能上传名为“file.zip”的文件"/>
+			<attr name="denied" defaultValue="" control="Text" desc="文件类型错误提示信息"/>
+			<attr name="wrongname" defaultValue="" control="Text" desc="文件名称错误提示信息"/>
+			<!-- 以下为扩展属性 -->
+			<attr name="size" control="Text" desc="宽度"/>
+			<attr name="title" control="Text" desc="提示显示信息"/>
+			<attr name="disabled" control="Combo" controlValue=";true;false" desc="禁用此元素"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="onchange" control="Text" desc="当元素改变时执行脚本"/>
+			<attr name="onsubmit" control="Text" desc="当表单被提交时执行脚本"/>
+			<attr name="onreset" control="Text" desc="当表单被重置时执行脚本"/>
+			<attr name="onselect" control="Text" desc="当元素被选取时执行脚本"/>
+			<attr name="onblur" control="Text" desc="当元素失去焦点时执行脚本"/>
+			<attr name="onfocus" control="Text" desc="当元素获得焦点时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="validate" name="校验">
+			<attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>
+	<tag name="number">
+		<type id="property" name="属性">
+			<attr name="name" defaultValue="" validation="required" control="Text" desc="字段名称"/>
+			<attr name="fix" control="Combo" defaultValue="true" controlValue=";true;false" desc="是否自动更正输入框的值，默认为ture"/>
+			<attr name="minNum"  control="Text" desc="能输入的最小值，若小于该值，当fix设置为true，不合法的输入将自动更正为该值。"/>
+			<attr name="maxNum"  control="Text" desc="能输入的最大值，若大于该值，当fix设置为true，不合法的输入将自动更正为该值。"/>
+			<attr name="precision"  control="Text" desc="精确度，即小数点后几位,当fix设置为true，不合法的输入将自动更正。"/>
+			<attr name="value" control="Text" desc="文本值"/>
+			<!-- 以下为基本属性 -->
+			<attr name="size" control="Text" desc="字段的宽度"/>
+			<attr name="title" control="Text" desc="提示显示信息"/>
+			<attr name="disabled" control="Combo" controlValue=";true;false" desc="禁用此元素"/>
+			<attr name="readonly" control="Combo" controlValue=";true;false" desc="输入字段为只读"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="onchange" control="Text" desc="当元素改变时执行脚本"/>
+			<attr name="onsubmit" control="Text" desc="当表单被提交时执行脚本"/>
+			<attr name="onreset" control="Text" desc="当表单被重置时执行脚本"/>
+			<attr name="onselect" control="Text" desc="当元素被选取时执行脚本"/>
+			<attr name="onblur" control="Text" desc="当元素失去焦点时执行脚本"/>
+			<attr name="onfocus" control="Text" desc="当元素获得焦点时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="validate" name="校验">
+			<attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>
+	<tag name="checkbox">
+		<type id="property" name="属性">
+			<attr name="name" defaultValue="" validation="required" control="Text" desc="字段名称，对应生成input的name"/>
+			<attr name="data" control="Text" desc="复选框数据JavaScript对象，格式如：[{&quot;name&quot;:&quot;养老&quot;,&quot;value&quot;:&quot;0&quot;},{&quot;name&quot;:&quot;医疗&quot;,&quot;value&quot;:&quot;1&quot;}]"/>
+			<attr name="url"  control="Text" desc="复选框数据来源链接，返回JSON格式数据，例如:[{&quot;name&quot;:&quot;养老&quot;,&quot;value&quot;:&quot;0&quot;},{&quot;name&quot;:&quot;医疗&quot;,&quot;value&quot;:&quot;1&quot;}]"/>
+			<attr name="value" control="Text" desc="设置多选框默认值，格式为字符串例如：&quot;0,1&quot;"/>
+			<attr name="separator" defaultValue="," control="Text"  desc="设置data或url时有效，value为多个值时的分隔符"/>
+		</type>
+		<type id="validate" name="校验">
+			<attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+		</type>
+	</tag>
+	<tag name="radio">
+		<type id="property" name="属性">
+			<attr name="name" defaultValue="" validation="required" control="Text" desc="字段名称，对应生成input的name"/>
+			<attr name="data" defaultValue="" control="Text" desc="单选框JSON格式数据，格式如：[{&quot;name&quot;:&quot;男&quot;,&quot;value&quot;:&quot;0&quot;},{&quot;name&quot;:&quot;女&quot;,&quot;value&quot;:&quot;1&quot;}]"/>
+			<attr name="url" defaultValue="" control="Text" desc="单选框数据来源链接，返回JSON格式数据，例如：[{&quot;name&quot;:&quot;男&quot;,&quot;value&quot;:&quot;0&quot;},{&quot;name&quot;:&quot;女&quot;,&quot;value&quot;:&quot;1&quot;}]"/>
+			<attr name="value" control="Text" desc="单选框值，如设置data或url此属性为默认值，格式为字符串"/>
+		</type>
+		<type id="validate" name="校验">
+			<attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+		</type>
+	</tag>
+	<tag name="datepicker">
+		<type id="property" name="属性" >
+			<!-- TODO -->
+			<attr name="name"     validation="required"      control="Text" desc="字段名称"/>	
+			<!-- 以下为扩展属性 -->
+            <attr name="dateFmt"          defaultValue="yyyy-MM-dd"     control="Text"      desc="日期显示格式"/>
+            <attr name="realDateFmt"      defaultValue="yyyy-MM-dd"    control="Text"      desc="真正的日期格式"/>     
+            <attr name="realTimeFmt"      defaultValue="HH:mm:ss"   control="Text"     desc="真正的时间格式"/>    
+            <attr name="realFullFmt"      defaultValue="%Date %Time"   control="Text"    desc="真正的日期时间格式"/>     
+            <attr name="minDate"          defaultValue="1900-01-01 00:00:00"  control="Text"   desc="最小日期(注意要与上面的real日期相匹配)"/>     
+            <attr name="maxDate"          defaultValue="2099-12-31 23:59:59"  control="Text"   desc="最大日期(注意要与上面的real日期相匹配)"/>           
+            <attr name="doubleCalendar"   defaultValue="false"   control="Combo"     controlValue=";true;false" desc="是否是双月模式"/>  
+            <attr name="autoUpdateOnChanged"      defaultValue="null"   control="Combo"     controlValue=";true;false;null" desc="是否修改年月日时分秒等元素时自动更新"/>     
+            <attr name="position"         control="Text"      desc="日期选择框显示位置，例如{left:100,top:50}表示固定坐标[100,50]"/>
+            <attr name="startDate"        control="Text"      desc="起始日期"/>     
+            <attr name="firstDayOfWeek"   control="Text"      desc="周的第一天 0表示星期日 1表示星期一,默认0"/>     
+            <attr name="isShowWeek"       control="Combo"     controlValue=";true;false"    desc="是否显示周，默认false"/>          
+            <attr name="highLineWeekDay"  control="Combo"     controlValue=";true;false"    desc="是否高亮显示 周六 周日，默认true"/>     
+            <attr name="isShowClear"      control="Combo"     controlValue=";true;false"    desc="是否显示清空按钮，默认true"/>     
+            <attr name="isShowToday"      control="Combo"     controlValue=";true;false"    desc="是否显示今天按钮，默认true"/>     
+            <attr name="isShowOthers"     control="Combo"     controlValue=";true;false"    desc="是否显示其他月份，默认true"/>        
+            <attr name="readOnly"         control="Combo"     controlValue=";true;false"    desc="是否只读，默认false"/>                    
+            <!-- 以下为基本属性 -->
+            <attr name="value" control="Text" desc="默认值"/>
+            <attr name="size" control="Text" desc="字段的宽度"/>
+			<attr name="title" control="Text" desc="提示显示信息"/>
+			<attr name="disabled" control="Combo" controlValue=";true;false" desc="禁用此元素"/>
+			<attr name="readonly" control="Combo" controlValue=";true;false" desc="输入字段为只读"/>
+		</type>
+		<type id="event" name="事件">	       
+			<!-- 以下为基本事件 -->
+			<attr name="onchange" control="Text" desc="当元素改变时执行脚本"/>
+			<attr name="onsubmit" control="Text" desc="当表单被提交时执行脚本"/>
+			<attr name="onreset" control="Text" desc="当表单被重置时执行脚本"/>
+			<attr name="onselect" control="Text" desc="当元素被选取时执行脚本"/>
+			<attr name="onblur" control="Text" desc="当元素失去焦点时执行脚本"/>
+			<attr name="onfocus" control="Text" desc="当元素获得焦点时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="validate" name="校验">
+			<attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+			<attr name="isvalidateType" defaultValue="false" control="Combo" controlValue=";true;false" desc="是否校验日期类型"/>
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>	
+	<tag name="button">
+		<type id="property" name="属性">
+			<attr name="primary"  control="Text" desc="文字左侧按钮图标样式，例如设置向上箭头：ui-icon-arrow-1-n,图标资源请参考示例中心附录"/>
+			<attr name="secondary"  control="Text" desc="文字右侧按钮图标样式，例如设置向下箭头：ui-icon-arrow-1-s,图标资源请参考示例中心附录"/>
+			<attr name="label"    control="Text"  desc="按钮文字"/>
+			<!--<attr name="isButtonset" defaultValue="false" control="Combo" controlValue=";true;false" desc="是否按钮组"/>-->
+			<!-- 以下为基本属性 -->
+			<attr name="type" defaultValue="button" control="Combo" controlValue=";button;submit;reset" desc="按钮类型"/>
+			<attr name="value" control="Text" desc="按钮值"/>
+			<attr name="size" control="Text" desc="字段的宽度"/>
+			<attr name="title" control="Text" desc="提示显示信息"/>
+			<attr name="disabled" control="Combo" controlValue=";true;false" desc="禁用此元素"/>
+			<attr name="readonly" control="Combo" controlValue=";true;false" desc="输入字段为只读"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="onchange" control="Text" desc="当元素改变时执行脚本"/>
+			<attr name="onsubmit" control="Text" desc="当表单被提交时执行脚本"/>
+			<attr name="onreset" control="Text" desc="当表单被重置时执行脚本"/>
+			<attr name="onselect" control="Text" desc="当元素被选取时执行脚本"/>
+			<attr name="onblur" control="Text" desc="当元素失去焦点时执行脚本"/>
+			<attr name="onfocus" control="Text" desc="当元素获得焦点时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>
+	<tag name="select">
+		<type id="property" name="属性">
+			<attr name="name" validation="required"  control="Text" desc="字段名称"/>
+			<attr name="isCascade" defaultValue="false" control="Combo" controlValue=";true;false" desc="是否为级联下拉"/>
+			<attr name="parent"   control="Text" desc="isCascade为true是有效，此下拉框级联的父下拉框ID"/>
+			<attr name="data"  control="Text" desc="下拉框显示项目，例如：[{&quot;name&quot;:&quot;福建&quot;,&quot;value&quot;:&quot;fujian&quot;},{&quot;name&quot;:&quot;广东&quot;,&quot;value&quot;:&quot;guandong&quot;}] isCascade为true时格式：[{&quot;first&quot;:&quot;A&quot;,&quot;value&quot;:&quot;A1&quot;,&quot;name&quot;:&quot;A1&quot;}]"/>
+			<attr name="url"  control="Text" desc="下拉框数据来源，返回json格式的数据，例如：[{&quot;name&quot;:&quot;福建&quot;,&quot;value&quot;:&quot;fujian&quot;},{&quot;name&quot;:&quot;广东&quot;,&quot;value&quot;:&quot;guandong&quot;}] isCascade为true时格式：[{&quot;first&quot;:&quot;A&quot;,&quot;value&quot;:&quot;A1&quot;,&quot;name&quot;:&quot;A1&quot;}]"/>
+			<attr name="ajaxOptions"  control="Text" desc="ajax请求数据属性（包含$.ajax()所有参数），例如设置ajax请求为同步：{async:false}"/>
+			<attr name="value"  control="Text" desc="默认选择值，填数据源的value值"/>
+			<attr name="timeout"  control="Text" desc="isCascade为true是有效，超时时间，单位为毫秒"/>
+			<attr name="event"  control="Text" desc="isCascade为true是有效，触发事件，定义当何种事件被发生时触发级联操作。默认为change"/>
+			<attr name="size"  control="Text" desc="规定下拉列表中可见选项的数目。"/>
+			<!-- 以下为基本属性 -->
+			<attr name="title" control="Text" desc="提示显示信息"/>
+			<attr name="disabled" control="Combo" controlValue=";true;false" desc="禁用此元素"/>
+			<!--<attr name="multiple" control="Combo" controlValue=";true;false" desc="可选择多个选项"/>-->
+		</type>
+		<type id="event" name="事件">
+			<attr name="onchange" control="Text" desc="当元素改变时执行脚本"/>
+			<attr name="onsubmit" control="Text" desc="当表单被提交时执行脚本"/>
+			<attr name="onreset" control="Text" desc="当表单被重置时执行脚本"/>
+			<attr name="onselect" control="Text" desc="当元素被选取时执行脚本"/>
+			<attr name="onblur" control="Text" desc="当元素失去焦点时执行脚本"/>
+			<attr name="onfocus" control="Text" desc="当元素获得焦点时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="validate" name="校验">
+			<attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>
+    <!-- Tab 组件-->
+    <tag name="tabs">
+		<type id="property" name="属性" >
+			<!-- 以下为扩展属性 -->
+			<attr name="disabled"     defaultValue="[]" control="Text"  desc="tab组件指定禁用选项，例如：disabled:[0,2]"/>		 
+			<attr name="collapsible"  defaultValue="false" control="Combo"   controlValue=";true;false" desc="tab页是否可折叠"/>
+			<attr name="event"        defaultValue="click" control="Combo"   controlValue=";click;mouseover" desc="触发tab页的事件"/>
+			<attr name="position"     defaultValue="top" control="Combo"   controlValue=";top;bottom;left" desc="tab标签页位置"/>
+			<attr name="cookie"       control="Text"    desc="cookie相关属性"/>
+			<attr name="ajaxOptions"  control="Text"    desc="ajax请求数据属性（包含$.ajax()所有参数），例如设置ajax请求为同步：{async：false}"/>
+			<attr name="cache"        control="Text"    desc="是否启用缓存"/>
+			<attr name="fx"           control="Text"    desc="切换选项卡时的动画效果"/>
+			<attr name="idPrefix"     control="Text"    desc="在使用ajax时，idPrefix选项可以为其添加一个唯一的id，默认:ui-tabs-"/>
+			<attr name="selected"     control="Text"    desc="定义初始化选中的tab页"/>	
+			<attr name="spinner"      control="Text"    desc="当远程内容加载显示在选项卡的标题上的内容，默认:&lt;em&gt;Loading&#8230;&lt;/em &gt;"/>
+			<attr name="panelTemplate" control="Text"   desc="tab面板模板内容，默认:&lt;div&gt; &lt;/div &gt;"/>
+			<attr name="tabTemplate"  control="Text"    desc="tab标签模板内容,默认:&lt;li&gt;&lt;a href='#{href}'&gt;&lt;span&gt;'#{label}'&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;"/>
+		</type>
+		<type id="event" name="事件">	
+			<!-- 以下为扩展事件 -->
+			<attr name="select"   control="Text" desc="点击选项卡时触发该事件"/>
+			<attr name="load"     control="Text" desc="ajax选项卡的内容被加载完成后触发该事件"/>        
+			<attr name="show"     control="Text" desc="当选项卡显示后触发该事件"/>        
+			<attr name="add"      control="Text" desc="当一个选项卡被添加后触发"/>        
+			<attr name="remove"   control="Text" desc="当一个选项卡被删除后触发"/>        
+			<attr name="enable"   control="Text" desc="当一个选项卡可用时触发"/>        
+			<attr name="disable"  control="Text" desc="当一个选项卡不可用时触发"/> 
+			<!-- 以下为基本事件 -->
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>    
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>
+	<!-- window组件 -->
+	<tag name="dialog">
+		<type id="property" name="属性" >
+			<!-- 以下为扩展属性 -->
+			<attr name="title"            defaultValue=""      control="Text"    desc="设置对话框标题"/>
+			<attr name="width"            defaultValue="300"   control="Text"    desc="设定对话框宽度(像素单位)"/>
+			<attr name="autoOpen"         defaultValue="false"  control="Combo"   controlValue=";true;false" desc="初始时是否打开dialog"/>		 
+			<attr name="disabled"         defaultValue="true"  control="Combo"   controlValue=";true;false"    desc="组件是否可用"/>
+			<attr name="closeText"        defaultValue="关闭" control="Text"    desc="设定关闭按钮显示文本"/>	   
+			<attr name="draggable"        defaultValue="true"  control="Combo"   controlValue=";true;false" desc="设定对话框是否可拖动"/>
+			<attr name="height"           defaultValue="auto"  control="Text"    desc="设定对话框高度（像素单位）"/>
+			<attr name="maxHeight"        control="Text"    desc="调整对话框大小时最大高度"/>
+			<attr name="maxWidth"         control="Text"    desc="调整对话框大小时最大宽度"/>
+			<attr name="minHeight"        defaultValue="150"  control="Text"    desc="调整对话框大小时最小高度"/>
+			<attr name="minWidth"         defaultValue="150"  control="Text"    desc="调整对话框大小时最小宽度"/>
+			<attr name="isDescription"    defaultValue="false"  control="Combo"   controlValue=";true;false" desc="是否显示描述信息"/>
+			<attr name="desTitle"         control="Text"    desc="描述信息标题"/>
+			<attr name="desContent"       control="Text"    desc="描述信息内容"/>
+			<attr name="titleIco"         defaultValue="true"  control="Combo"   controlValue=";true;false" desc="是否在标题处显示图标"/>
+			<attr name="position"         control="Text"    desc="设置对话框显示位置，默认'center'，可选择'center', 'left', 'right', 'top', 'bottom'或者[200,100]"/>
+		    <attr name="resizable"        control="Combo"   controlValue=";true;false" desc="设定对话框是否可以调整大小，默认true"/>
+			<attr name="show"             control="Combo"   controlValue=";blind;bounce;clip;drop;explode;fold;highlight;puff;pulsate;scale;shake;size;slide"   desc="显示对话框时使用的特效：blind(百叶窗)、bounce(弹跳)、clip（回形）、drop（退出）、explode（分解）、fold（折叠）、highlight(高亮)、puff（膨胀）、pulsate（脉冲）、scale（以中心缩放）、shake（摇晃）、size（以左上角缩放）、slide（滑动）"/>	
+			<attr name="stack"            control="Combo"   controlValue=";true;false"  desc="是否可覆盖其它对话框，默认true"/>
+			<attr name="zIndex"           control="Text"    desc="设置对话框CSS z-index值，默认1000"/>
+			<attr name="modal"            control="Combo"   controlValue=";true;false" desc="是否为模态窗口，默认false"/>
+			<attr name="hide"             control="Combo"   controlValue=";blind;bounce;clip;drop;explode;fold;highlight;puff;pulsate;scale;shake;size;slide"   desc="关闭对话框时使用的特效：blind(百叶窗)、bounce(弹跳)、clip（回形）、drop（退出）、explode（分解）、fold（折叠）、highlight(高亮)、puff（膨胀）、pulsate（脉冲）、scale（以中心缩放）、shake（摇晃）、size（以左上角缩放）、slide（滑动）"/>	
+			<attr name="closeOnEscape"    control="Combo"   controlValue=";true;false" desc="是否在按 ESC 键时关闭对话框，默认true"/>	
+			<attr name="dialogClass"      control="Text"    desc="添加对话框CSS Class"/>
+			<attr name="buttons"          control="Text"    desc="设置对话框底部按钮，例如{ &quot;Ok&quot;: function() { $(this).dialog(&quot;close&quot;); }},ok为按钮文字，function内容为单击回调函数"/>
+		</type>
+		<type id="event" name="事件">	
+			<!-- 以下为扩展事件 -->   
+			<attr name="create"        control="Text" desc="创建对话框时执行"/>  
+			<attr name="beforeclose"   control="Text" desc="对话框关闭前执行"/>
+			<attr name="open"          control="Text" desc="打开对话框时执行"/>        
+			<attr name="focus"         control="Text" desc="对话框获得焦点时执行"/>        
+			<attr name="dragStart"     control="Text" desc="开始对话框拖动时执行"/>        
+			<attr name="drag"          control="Text" desc="拖动对话框时执行"/>        
+			<attr name="dragStop"      control="Text" desc="结束对话框拖动时执行"/>        
+			<attr name="resizeStart"   control="Text" desc="开始调整对话框大小时执行"/>    
+			<attr name="resize"        control="Text" desc="调整对话框大小时执行"/>        
+			<attr name="resizeStop"    control="Text" desc="结束调整对话框大小时执行"/>        
+			<attr name="close"         control="Text" desc="关闭对话框时执行"/>
+			<!-- 以下为基本事件 -->  
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>
+	<!-- doubleselect组件 -->
+	<tag name="doubleselect">
+		<type id="property" name="属性" >
+			<!-- 以下为扩展属性 -->
+			<attr name="data"            control="Text"     desc="静态数据源，例如：[[&quot;21&quot;,&quot;测试管理&quot;,true,&quot;200&quot;,1],[&quot;22&quot;,&quot;测试单表&quot;,false,&quot;200001&quot;,2]"/>
+			<attr name="url"             control="Text"     desc="url数据源，返回数据格式同data"/>
+			<attr name="width"            defaultValue="auto"   control="Text"    desc="设定宽度(像素单位)"/>
+			<attr name="height"           defaultValue="auto"  control="Text"    desc="设定对话框高度（像素单位）"/>
+			<attr name="size"             control="Text"    desc="选择框长度"/>
+			<attr name="isTreeStyle"      control="Combo"   controlValue=";true;false"   desc="是否用树状形式显示数据"/>
+			<attr name="isShowCode"       control="Combo"   controlValue=";true;false"  desc="是否显示层次码"/>
+			<attr name="ctrlStyle"        control="Text"    desc="按钮样式"/>
+			<attr name="ajaxOptions"      control="Text"    desc="ajax请求数据属性（包含$.ajax()所有参数），例如设置ajax请求为同步：{async：false}"/>
+		</type>
+		<type id="event" name="事件">	
+			<!-- 以下为基本事件 -->  
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="style" name="样式">
+			<attr name="styleClass" defaultValue="" control="Text" desc="CSS类名"/>
+		</type>
+	</tag>
+	<!-- Grid 组件 -->
+	<tag name="jqgrid">
+		<type id="property" name="属性" >
+			<!-- 以下为扩展属性 -->
+			<attr name="id"                 defaultValue=""              validation="required"  control="Text"    desc="id(必填)"/>	
+			<attr name="pager"              defaultValue=""              validation="required" control="Text"    desc="导航栏id(必填)"/>
+			<attr name="url"                defaultValue=""              validation="required"  control="Text"    desc="加载数据地址(必填)"/>
+			<attr name="mtype"              defaultValue="post"           control="Combo"   controlValue=";get;post"      desc="定义请求数据方式"/>
+			<attr name="datatype"           defaultValue="json"           control="Combo"   controlValue=";json;local"    desc="交互使用的数据类型，local为本地数据"/>
+			<attr name="editurl"            defaultValue=""              control="Text"    desc="更新数据地址"/>
+			<attr name="editway"            defaultValue="popup"         control="Combo"   controlValue=";popup;cell;row" desc="编辑数据方式"/>
+			<attr name="navtype"            defaultValue="top"           control="Combo"   controlValue=";none;top;bottom;both;topRight"  desc="导航栏类型"/>			
+			<attr name="caption"            defaultValue=""              control="Text"    desc="grid名称"/>
+			<attr name="width"              defaultValue="auto"            control="Text"      desc="设置grid的宽度"/> 		 			
+			<attr name="height"             defaultValue="auto"           control="Text"    desc="设定grid高度，可填百分比"/>
+			<attr name="multiselect"        defaultValue="true"         control="Combo"   controlValue=";true;false"     desc="是否显示多选框"/>
+			<attr name="singleselect"       defaultValue="false"         control="Combo"   controlValue=";true;false"     desc="是否显示单选框,如设置为true，multiselect属性设置无效"/>
+			<attr name="autoencode"         defaultValue="true"           control="Combo"   controlValue=";true;false"     desc="是否对单元格内容进行编码"/>
+			<attr name="altRows"            defaultValue="true"          control="Combo"   controlValue=";true;false" desc="是否显示斑马纹样式"/>
+			<attr name="rowNum"             defaultValue="10"            control="Text"    desc="设置grid中显示的数据条数"/>
+			<attr name="rowList"            defaultValue="[10,15,50,100]"            control="Text"    desc="设置下拉选择框数据，用来改变显示记录数，例如：[10,20,30]"/>
+			<attr name="sortname"           control="Text"    desc="排序列的名称，默认空"/>
+			<attr name="sortorder"          control="Combo"   controlValue=";asc;desc"      desc="指定字段排序顺序，默认:asc"/> 
+			<attr name="editCellFlag"       defaultValue="true"           control="Combo"   controlValue=";true;false"     desc="是否对编辑过的单元格进行标识"/>	
+		</type>
+		<type id="event" name="事件">	
+			<!-- 以下为扩展事件 -->
+			<attr name="gridComplete"       control="Text"   desc="当表格所有数据都加载完成触发"/>
+			<attr name="loadComplete"       control="Text"   desc="当从服务器返回响应时执行"/>
+			<attr name="ondblClickRow"      control="Text"   desc="双击行时触发"/>
+			<attr name="onHeaderClick"     control="Text"   desc="当点击显示/隐藏表格的那个按钮时触发"/>    
+			<attr name="onRightClickRow"    control="Text"   desc="在行上右击鼠标时触发此事件"/>
+			<attr name="onSelectRow"       control="Text"   desc="当选择行时触发此事件"/> 
+		</type>
+	</tag>
+	<tag name="jqgrid_column">
+		<type id="property" name="属性" >
+			<attr name="name"         defaultValue=""     validation="required" control="Text"   desc="表格列的名称(必填)"/>
+			<attr name="title"        control="Text"      desc="表格列标题"/>
+			<attr name="index"        defaultValue=""     control="Text"         desc="排序时定义排序字段名称的索引"/>
+			<attr name="fixed"        control="Combo"   controlValue=";true;false"   desc="列宽度是否要固定不可变"/>
+			<attr name="key"          control="Combo"   controlValue=";true;false"           desc="是否作为唯一rowid使用"/>
+			<attr name="editable"     control="Combo"   controlValue=";true;false"  desc="设定是否可以对单元格进行编辑"/>
+			<attr name="sortable"     control="Combo"   controlValue=";true;false"        desc="是否可排序"/>
+			<attr name="width"        control="Text"     desc="默认列的宽度，只能是象素值"/>
+			<attr name="edittype"     defaultValue="text"     control="Combo"   controlValue=";text;textarea;select;checkbox;password;button;image;file;datepicker;timepicker"    desc="编辑的类型" />
+		    <attr name="sorttype"     control="Text"    desc="排序类型，默认空"/>
+		    <attr name="label"        control="Text"    desc="如果colNames为空则用此值来作为列的显示名称，如果都没有设置则使用name值，默认空"/>
+			<attr name="hidden"       control="Combo"   controlValue=";true;false"  desc="在初始化表格时是否要隐藏此列，默认:false"/>
+			<attr name="align"        control="Combo"   controlValue=";left;center;right"  desc="定义单元格对齐方式,默认:left"/>
+			<attr name="classes"      control="Text"    desc="列的css,多个class之间用空格分隔"/>
+			<attr name="datefmt"      control="Text"    desc="当sorttype为date和编辑规则的date为true是有效,默认:y-m-d"/>
+			<attr name="editoptions"  control="Text"          desc="编辑相关属性"/>
+			<attr name="editrules"    control="Text"          desc="设定用来渲染列函数"/>
+		</type>
+	</tag>
+	<!-- tree -->
+	<tag name="tree">
+		<type id="property" name="属性">
+			<attr name="enable" defaultValue="false" control="Combo" controlValue=";true;false" desc="是否需要采用异步方式获取子节点数据，默认为false"/>
+			<attr name="nodes" defaultValue="" control="Text" desc="树节点数据，用于展现树。若不填写亦可通过异步方式加载。"/>
+			<attr name="url" control="Text" desc="当async为true时，设置异步获取节点的 URL 地址"/>
+			<attr name="type" defaultValue="post" control="Combo" controlValue=";post;get" desc="当async为true时，ajax请求数据模式"/>
+			<attr name="autoParam"  control="Text" desc="当async为true，且访问asyncUrl指定的地址时，提交的与节点数据相关的必需属性。例如：[&quot;id&quot;,&quot;name&quot;]"/>
+			<attr name="otherParam"  control="Text" desc="当async为true，且访问 asyncUrl 时，提交的固定键值对。例如：{ &quot;key1&quot;:&quot;value1&quot;, &quot;key2&quot;:&quot;value2&quot; }"/>
+			<attr name="isSimpleData" defaultValue="false" control="Combo" controlValue=";true;false" desc="节点数据是否采用简单Array格式"/>
+			<attr name="rootPid" defaultValue="" control="Text" desc="当 isSimpleData 设置为 true，需要在增加、移动节点时修正其 treeNodeParentKey 对应属性值。"/>
+			<attr name="idKey" defaultValue="id" control="Text" desc="设置节点唯一标识属性名称，转换数据格式时使用"/>
+			<attr name="pIdKey" defaultValue="pId" control="Text" desc="设置节点的父节点唯一标识属性名称"/>
+			<attr name="chkEnable" defaultValue="false" control="Combo" controlValue=";true;false" desc="节点上是否显示 CheckBox"/>
+			<attr name="chkboxType" defaultValue="{ 'Y': 'ps', 'N': 'ps' }" control="Text" desc="当chkEnable为true时，chkboxType 配置点击 CheckBox 后，对于父子节点的影响规则。规则说明：Y 表明 CheckBox 被选中后的情况；N 表明 CheckBox 取消选中后的情况；p 表示选择会影响父级节点；s 表明会影响子级节点。默认值：{ 'Y': 'ps', 'N': 'ps' }"/>
+			<attr name="chkStyle" defaultValue="checkbox" control="Combo" controlValue=";checkbox;radio" desc="当 chkEnable = true 时，chkStyle配置选择框类型为 checkbox 还是 radio。"/>
+			<attr name="radioType" defaultValue="level" control="Combo" controlValue=";level;all" desc="当 chkEnable=true且chkStyle为radio时，radioType 配置 radio 的分组范围。level:在每一级节点范围内当做一个分组;all:在整棵树范围内当做一个分组"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="beforeClick" control="Text" desc="点击动作触发事件前执行"/>
+			<attr name="beforeRightClick" control="Text" desc="右键点击动作触发事件前执行"/>
+			<attr name="beforeExpand" control="Text" desc="展开动作触发事件前执行"/>
+			<attr name="beforeCollapse" control="Text" desc="收缩动作触发事件前执行"/>	
+			<attr name="onClick" control="Text" desc="单击事件"/>
+			<attr name="onRightClick" control="Text" desc="右击事件"/>
+			<attr name="onExpand" control="Text" desc="展开事件"/>
+			<attr name="onCollapse" control="Text" desc="收缩事件"/>
+		</type>
+	</tag>
+	<tag name="comboboxtree">
+		<type id="property" name="属性">
+			<attr name="name" validation="required"  control="Text" desc="字段名称"/>
+		    <attr name="width"  control="Text" desc="选项框宽度"/>
+			<attr name="height" control="Text"  desc="选项框高度"/>
+			<attr name="selected" control="Text"  desc="默认选中节点值，多值通过逗号分隔，支持数组和字符串两种格式，例如'42,43'或['42','43']"/>
+			<attr name="valueName" control="Text"  desc="指定value值字段name，即树节点对象中作为value的字段名；"/>
+			<attr name="zindex" control="Text"  desc="下拉框zindex属性值，默认：2000"/>
+			<attr name="enable" defaultValue="false" control="Combo" controlValue=";true;false" desc="是否需要采用异步方式获取子节点数据，默认为false"/>
+			<attr name="nodes" defaultValue="" control="Text" desc="树节点数据，用于展现树。若不填写亦可通过异步方式加载。"/>
+			<attr name="url" control="Text" desc="当async为true时，设置异步获取节点的 URL 地址"/>
+			<attr name="type" defaultValue="post" control="Combo" controlValue=";post;get" desc="当async为true时，ajax请求数据模式"/>
+			<attr name="autoParam"  control="Text" desc="当async为true，且访问asyncUrl指定的地址时，提交的与节点数据相关的必需属性。例如：[&quot;id&quot;,&quot;name&quot;]"/>
+			<attr name="otherParam"  control="Text" desc="当async为true，且访问 asyncUrl 时，提交的固定键值对。例如：{ &quot;key1&quot;:&quot;value1&quot;, &quot;key2&quot;:&quot;value2&quot; }"/>
+			<attr name="isSimpleData" defaultValue="false" control="Combo" controlValue=";true;false" desc="节点数据是否采用简单Array格式"/>
+			<attr name="rootPid" defaultValue="" control="Text" desc="当 isSimpleData 设置为 true，需要在增加、移动节点时修正其 treeNodeParentKey 对应属性值。"/>
+			<attr name="idKey" defaultValue="id" control="Text" desc="设置节点唯一标识属性名称，转换数据格式时使用"/>
+			<attr name="pIdKey" defaultValue="pId" control="Text" desc="设置节点的父节点唯一标识属性名称"/>
+			<attr name="chkEnable" defaultValue="false" control="Combo" controlValue=";true;false" desc="节点上是否显示 CheckBox"/>
+			<attr name="chkboxType" defaultValue="{ 'Y': 'ps', 'N': 'ps' }" control="Text" desc="当chkEnable为true时，chkboxType 配置点击 CheckBox 后，对于父子节点的影响规则。规则说明：Y 表明 CheckBox 被选中后的情况；N 表明 CheckBox 取消选中后的情况；p 表示选择会影响父级节点；s 表明会影响子级节点。默认值：{ 'Y': 'ps', 'N': 'ps' }"/>
+			<attr name="chkStyle" defaultValue="checkbox" control="Combo" controlValue=";checkbox;radio" desc="当 chkEnable = true 时，chkStyle配置选择框类型为 checkbox 还是 radio。"/>
+			<attr name="radioType" defaultValue="level" control="Combo" controlValue=";level;all" desc="当 chkEnable=true且chkStyle为radio时，radioType 配置 radio 的分组范围。level:在每一级节点范围内当做一个分组;all:在整棵树范围内当做一个分组"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="beforeClick" control="Text" desc="点击动作触发事件前执行"/>
+			<attr name="beforeRightClick" control="Text" desc="右键点击动作触发事件前执行"/>
+			<attr name="beforeExpand" control="Text" desc="展开动作触发事件前执行"/>
+			<attr name="beforeCollapse" control="Text" desc="收缩动作触发事件前执行"/>	
+			<attr name="onClick" control="Text" desc="单击事件"/>
+			<attr name="onRightClick" control="Text" desc="右击事件"/>
+			<attr name="onExpand" control="Text" desc="展开事件"/>
+			<attr name="onCollapse" control="Text" desc="收缩事件"/>
+		</type>
+	</tag>
+	<tag name="comboboxlist">
+		<type id="property" name="属性">
+		    <attr name="name" validation="required"  control="Text" desc="字段名称"/>
+			<attr name="columns" defaultValue="" control="Text" desc="列表数据列数"/>
+			<attr name="checkbox" defaultValue="true" control="Combo" controlValue=";true;false" desc="是否以checkbox方式显示选项"/>
+			<attr name="valuedway" defaultValue="click" control="Combo" controlValue=";click;button" desc="触发下拉列表值填充到输入框方式"/>
+			<attr name="maxchecked"  control="Text" desc="当checkbox为true时最多选择项，为0时不限制"/>
+			<attr name="selected"  control="Text" desc="默认选中值，为数据源中的value值，例如:&quot;beijing,shanghai&quot;"/>
+			<attr name="width"  control="Text" desc="选项框宽度"/>
+			<attr name="height" control="Text"  desc="选项框高度"/>
+			<attr name="url"  control="Text" desc="数据源地址，返回数据格式如下：[{&quot;name&quot;:&quot;北京&quot;,&quot;value&quot;:&quot;beijing&quot;},{&quot;name&quot;:&quot;上海&quot;,&quot;value&quot;:&quot;shanghai&quot;}]"/>
+			<attr name="data"  control="Text" desc="数据源，例如：[{&quot;name&quot;:&quot;北京&quot;,&quot;value&quot;:&quot;beijing&quot;},{&quot;name&quot;:&quot;上海&quot;,&quot;value&quot;:&quot;shanghai&quot;}]"/>
+		</type>
+		<type id="event" name="事件">
+			<attr name="onchange" control="Text" desc="当元素改变时执行脚本"/>
+			<attr name="onsubmit" control="Text" desc="当表单被提交时执行脚本"/>
+			<attr name="onreset" control="Text" desc="当表单被重置时执行脚本"/>
+			<attr name="onselect" control="Text" desc="当元素被选取时执行脚本"/>
+			<attr name="onblur" control="Text" desc="当元素失去焦点时执行脚本"/>
+			<attr name="onfocus" control="Text" desc="当元素获得焦点时执行脚本"/>
+			<attr name="onkeydown" control="Text" desc="当键盘被按下时执行脚本"/>
+			<attr name="onkeypress" control="Text" desc="当键盘被按下后又松开时执行脚本"/>
+			<attr name="onkeyup" control="Text" desc="当键盘被松开时执行脚本"/>
+			<attr name="onclick" control="Text" desc="当鼠标被单击时执行脚本"/>
+			<attr name="ondblclick" control="Text" desc="当鼠标被双击时执行脚本"/>		
+			<attr name="onmousedown" control="Text" desc="当鼠标按钮被按下时执行脚本"/>
+			<attr name="onmousemove" control="Text" desc="当鼠标指针移动时执行脚本"/>
+			<attr name="onmouseout" control="Text" desc="当鼠标指针移出某元素时执行脚本"/>
+			<attr name="onmouseover" control="Text" desc="当鼠标指针悬停于某元素之上时执行脚本"/>
+			<attr name="onmouseup" control="Text" desc="当鼠标按钮被松开时执行脚本"/>
+		</type>
+		<type id="validate" name="校验">
+			<attr name="required" defaultValue="false" control="Combo" controlValue=";true;false;" desc="是否为必填项"/>
+			<attr name="validateType" defaultValue="" control="Combo" controlValue=";数字;整数;自然数;网址;电子邮箱;字母;字母数字;汉字;IP地址;端口号;身份证号码;邮政编码;" />
+		</type>
+	</tag> 
+</display>
