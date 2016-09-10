@@ -86,6 +86,7 @@ public class ProblemController {
 			conut = searchByPage.size();
 			for (Problem problem : searchByPage) {
 				askStr.append(problem.getAnswer());
+				askStr.append("&&");
 			}
 		}
 		
