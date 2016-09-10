@@ -6,7 +6,9 @@
   <select id="findById" resultMap="ProblemMap">SELECT <include refid="columns"/> FROM JA_PROBLEM WHERE PROBLEM_ID=#{problemId}</select>
   <!--分页查询-->
   <select id="searchByPage" parameterType="map" resultMap="ProblemMap">SELECT <include refid="columns"/> FROM JA_PROBLEM
-    <where/>
+    <where>
+      <if test="problemDesc != null and problemDesc != ''">PROBLEM_DESC LIKE CONCAT('%',#{problemDesc},'%')</if>
+    </where>
   </select>
   <!--插入记录-->
   <insert id="save" parameterType="Problem">INSERT INTO JA_PROBLEM (<include refid="columns"/>) VALUES (#{problemId},#{problemDesc},#{answer})</insert>
